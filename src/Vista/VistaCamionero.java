@@ -48,9 +48,10 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
         txtSalario = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
-        cbxPoblacion = new javax.swing.JComboBox<>();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtIdPoblacion = new javax.swing.JTextField();
+        btnElegirPoblacion = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -79,11 +80,11 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
 
         jLabel10.setText("POBLACION:");
 
-        cbxPoblacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnAceptar.setText("ACEPTAR");
 
         btnCancelar.setText("CANCELAR");
+
+        btnElegirPoblacion.setText("ELEGIR");
 
         javax.swing.GroupLayout DigCamioneroLayout = new javax.swing.GroupLayout(DigCamionero.getContentPane());
         DigCamionero.getContentPane().setLayout(DigCamioneroLayout);
@@ -119,12 +120,16 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
                                         .addComponent(txtApellido)
                                         .addComponent(txtSalario)
                                         .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
-                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(DigCamioneroLayout.createSequentialGroup()
                                         .addComponent(btnAceptar)
                                         .addGap(108, 108, 108)
-                                        .addComponent(btnCancelar)))))))
+                                        .addComponent(btnCancelar))
+                                    .addGroup(DigCamioneroLayout.createSequentialGroup()
+                                        .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtIdPoblacion, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                                        .addGap(27, 27, 27)
+                                        .addComponent(btnElegirPoblacion)))))))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
         DigCamioneroLayout.setVerticalGroup(
@@ -157,10 +162,11 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(cbxPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addComponent(txtIdPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnElegirPoblacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -263,6 +269,22 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
         return DigCamionero;
     }
 
+    public JButton getBtnElegirPoblacion() {
+        return btnElegirPoblacion;
+    }
+
+    public void setBtnElegirPoblacion(JButton btnElegirPoblacion) {
+        this.btnElegirPoblacion = btnElegirPoblacion;
+    }
+
+    public JTextField getTxtIdPoblacion() {
+        return txtIdPoblacion;
+    }
+
+    public void setTxtIdPoblacion(JTextField txtIdPoblacion) {
+        this.txtIdPoblacion = txtIdPoblacion;
+    }
+
     public void setDigCamionero(JDialog DigCamionero) {
         this.DigCamionero = DigCamionero;
     }
@@ -321,14 +343,6 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
 
     public void setBtnImprimir(JButton btnImprimir) {
         this.btnImprimir = btnImprimir;
-    }
-
-    public JComboBox<String> getCbxPoblacion() {
-        return cbxPoblacion;
-    }
-
-    public void setCbxPoblacion(JComboBox<String> cbxPoblacion) {
-        this.cbxPoblacion = cbxPoblacion;
     }
 
     public JTable getTblCamionero() {
@@ -402,9 +416,9 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnElegirPoblacion;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnImprimir;
-    private javax.swing.JComboBox<String> cbxPoblacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -422,6 +436,7 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtIdPoblacion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
     private javax.swing.JTextField txtTelefono;

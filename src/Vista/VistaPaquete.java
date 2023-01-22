@@ -23,6 +23,38 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    public JTextField getTxtIdCliente() {
+        return txtIdCliente;
+    }
+
+    public void setTxtIdCliente(JTextField txtIdCliente) {
+        this.txtIdCliente = txtIdCliente;
+    }
+
+    public JButton getBtnElegirCliente() {
+        return btnElegirCliente;
+    }
+
+    public void setBtnElegirCliente(JButton btnElegirCliente) {
+        this.btnElegirCliente = btnElegirCliente;
+    }
+
+    public JButton getBtnElegirEnvio() {
+        return btnElegirEnvio;
+    }
+
+    public void setBtnElegirEnvio(JButton btnElegirEnvio) {
+        this.btnElegirEnvio = btnElegirEnvio;
+    }
+
+    public JTextField getTxtIdEnvio() {
+        return txtIdEnvio;
+    }
+
+    public void setTxtIdEnvio(JTextField txtIdEnvio) {
+        this.txtIdEnvio = txtIdEnvio;
+    }
+
     public JDialog getDigPaquete() {
         return DigPaquete;
     }
@@ -69,14 +101,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     public void setBtnEditar(JButton btnEditar) {
         this.btnEditar = btnEditar;
-    }
-
-    public JButton getBtnElegirCamionero() {
-        return btnElegirCamionero;
-    }
-
-    public void setBtnElegirCamionero(JButton btnElegirCamionero) {
-        this.btnElegirCamionero = btnElegirCamionero;
     }
 
     public JButton getBtnEliminar() {
@@ -143,13 +167,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         this.txtDireccion = txtDireccion;
     }
 
-    public JTextField getTxtIdCamionero() {
-        return txtIdCamionero;
-    }
-
-    public void setTxtIdCamionero(JTextField txtIdCamionero) {
-        this.txtIdCamionero = txtIdCamionero;
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,10 +189,13 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         txtDescripcion = new javax.swing.JTextField();
         txtDestinatario = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
-        txtIdCamionero = new javax.swing.JTextField();
+        txtIdEnvio = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnElegirCamionero = new javax.swing.JButton();
+        btnElegirEnvio = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtIdCliente = new javax.swing.JTextField();
+        btnElegirCliente = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -197,13 +218,17 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         jLabel7.setText("DIRECCION:");
 
-        jLabel8.setText("ID CAMIONERO:");
+        jLabel8.setText("ID ENVIO:");
 
         btnAceptar.setText("ACEPTAR");
 
         btnCancelar.setText("CANCELAR");
 
-        btnElegirCamionero.setText("ELEGIR");
+        btnElegirEnvio.setText("ELEGIR");
+
+        jLabel9.setText("ID CLIENTE:");
+
+        btnElegirCliente.setText("ELEGIR");
 
         javax.swing.GroupLayout DigPaqueteLayout = new javax.swing.GroupLayout(DigPaquete.getContentPane());
         DigPaquete.getContentPane().setLayout(DigPaqueteLayout);
@@ -217,6 +242,10 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                     .addGroup(DigPaqueteLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(DigPaqueteLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtIdCliente))
                             .addGroup(DigPaqueteLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -236,10 +265,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                             .addGroup(DigPaqueteLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdCamionero)))
+                                .addComponent(txtIdEnvio)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnElegirCamionero)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnElegirEnvio)
+                            .addComponent(btnElegirCliente))))
+                .addContainerGap(210, Short.MAX_VALUE))
             .addGroup(DigPaqueteLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(btnAceptar)
@@ -271,9 +302,14 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtIdCamionero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnElegirCamionero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                    .addComponent(txtIdEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnElegirEnvio))
+                .addGap(18, 18, 18)
+                .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnElegirCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -294,13 +330,13 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         tblPaquete.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "DESTINATARIO", "DIRECCION", "ID CAMIONERO"
+                "CODIGO", "DESCRIPCION", "DESTINATARIO", "DIRECCION", "ID ENVIO", "ID CLIENTE"
             }
         ));
         jScrollPane.setViewportView(tblPaquete);
@@ -380,7 +416,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnElegirCamionero;
+    private javax.swing.JButton btnElegirCliente;
+    private javax.swing.JButton btnElegirEnvio;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JLabel jLabel1;
@@ -391,6 +428,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable tblPaquete;
@@ -399,6 +437,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDestinatario;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtIdCamionero;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtIdEnvio;
     // End of variables declaration//GEN-END:variables
 }
