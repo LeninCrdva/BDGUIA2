@@ -8,12 +8,12 @@ package Vista;
  *
  * @author Lenin
  */
-public class asd extends javax.swing.JFrame {
+public class Vista_Camion_Camionero extends javax.swing.JFrame {
 
     /**
      * Creates new form asd
      */
-    public asd() {
+    public Vista_Camion_Camionero() {
         initComponents();
     }
 
