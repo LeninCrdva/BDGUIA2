@@ -27,7 +27,6 @@ public class ConnectionG2 {
         try {
             Statement st = con.createStatement();
             return st.executeQuery(sql);
-            
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionG2.class.getName()).log(Level.SEVERE, null, ex);
             return null;

@@ -26,7 +26,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopMain = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
         btnCamion = new javax.swing.JButton();
         btnPersona = new javax.swing.JButton();
@@ -41,7 +41,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(desktopMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 820, 430));
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 820, 430));
 
         jToolBar1.setRollover(true);
 
@@ -101,6 +101,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JDesktopPane getEscritorio() {
+        return escritorio;
+    }
+
+    public void setEscritorio(JDesktopPane escritorio) {
+        this.escritorio = escritorio;
+    }
+
     public JButton getBtnCamion() {
         return btnCamion;
     }
@@ -142,11 +150,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     public JDesktopPane getjDesktopPane1() {
-        return desktopMain;
+        return escritorio;
     }
 
     public void setjDesktopPane1(JDesktopPane jDesktopPane1) {
-        this.desktopMain = jDesktopPane1;
+        this.escritorio = jDesktopPane1;
     }
 
     public JToolBar getjToolBar1() {
@@ -164,7 +172,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPersona;
     private javax.swing.JButton btnProvincia;
     private javax.swing.JButton btnViaje;
-    private javax.swing.JDesktopPane desktopMain;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

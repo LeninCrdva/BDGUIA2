@@ -4,6 +4,9 @@
  */
 package MVC_Main;
 
+import Controlador.ControladorPrincipal;
+import Vista.VistaPrincipal;
+
 /**
  *
  * @author Lenin
@@ -14,7 +17,11 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        VistaPrincipal vista=new VistaPrincipal();
+        ControladorPrincipal control=new ControladorPrincipal(vista);
+        control.iniciaControl();
+        
+        
     }
     
 }
