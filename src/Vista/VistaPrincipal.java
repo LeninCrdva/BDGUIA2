@@ -1,5 +1,9 @@
 package Vista;
 
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import javax.swing.JToolBar;
+
 /**
  *
  * @author Lenin
@@ -22,14 +26,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        desktopMain = new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnCamion = new javax.swing.JButton();
+        btnPersona = new javax.swing.JButton();
+        btnProvincia = new javax.swing.JButton();
+        btnViaje = new javax.swing.JButton();
+        btnPaquete = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -38,49 +41,43 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 790, 430));
+        getContentPane().add(desktopMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 820, 430));
 
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/camion.png"))); // NOI18N
-        jButton1.setToolTipText("Camiones");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        btnCamion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/camion.png"))); // NOI18N
+        btnCamion.setToolTipText("Camiones");
+        btnCamion.setFocusable(false);
+        btnCamion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCamion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnCamion);
 
-        jButton2.setToolTipText("Clientes");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        btnPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grupo-de-chat.png"))); // NOI18N
+        btnPersona.setFocusable(false);
+        btnPersona.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPersona.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnPersona);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grupo-de-chat.png"))); // NOI18N
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        btnProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ecuador.png"))); // NOI18N
+        btnProvincia.setToolTipText("Provincias");
+        btnProvincia.setFocusable(false);
+        btnProvincia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProvincia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnProvincia);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ecuador.png"))); // NOI18N
-        jButton4.setToolTipText("Provincias");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        btnViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/destino.png"))); // NOI18N
+        btnViaje.setToolTipText("Viajes");
+        btnViaje.setFocusable(false);
+        btnViaje.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnViaje.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnViaje);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/destino.png"))); // NOI18N
-        jButton5.setToolTipText("Viajes");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton5);
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/caja.png"))); // NOI18N
-        jButton6.setToolTipText("Paquetes");
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton6);
+        btnPaquete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/caja.png"))); // NOI18N
+        btnPaquete.setToolTipText("Paquetes");
+        btnPaquete.setFocusable(false);
+        btnPaquete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPaquete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnPaquete);
 
         getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 25));
 
@@ -104,15 +101,70 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnCamion() {
+        return btnCamion;
+    }
 
+    public void setBtnCamion(JButton btnCamion) {
+        this.btnCamion = btnCamion;
+    }
+
+    public JButton getBtnPaquete() {
+        return btnPaquete;
+    }
+
+    public void setBtnPaquete(JButton btnPaquete) {
+        this.btnPaquete = btnPaquete;
+    }
+
+    public JButton getBtnPersona() {
+        return btnPersona;
+    }
+
+    public void setBtnPersona(JButton btnPersona) {
+        this.btnPersona = btnPersona;
+    }
+
+    public JButton getBtnProvincia() {
+        return btnProvincia;
+    }
+
+    public void setBtnProvincia(JButton btnProvincia) {
+        this.btnProvincia = btnProvincia;
+    }
+
+    public JButton getBtnViaje() {
+        return btnViaje;
+    }
+
+    public void setBtnViaje(JButton btnViaje) {
+        this.btnViaje = btnViaje;
+    }
+
+    public JDesktopPane getjDesktopPane1() {
+        return desktopMain;
+    }
+
+    public void setjDesktopPane1(JDesktopPane jDesktopPane1) {
+        this.desktopMain = jDesktopPane1;
+    }
+
+    public JToolBar getjToolBar1() {
+        return jToolBar1;
+    }
+
+    public void setjToolBar1(JToolBar jToolBar1) {
+        this.jToolBar1 = jToolBar1;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JButton btnCamion;
+    private javax.swing.JButton btnPaquete;
+    private javax.swing.JButton btnPersona;
+    private javax.swing.JButton btnProvincia;
+    private javax.swing.JButton btnViaje;
+    private javax.swing.JDesktopPane desktopMain;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
