@@ -15,12 +15,12 @@ import javax.swing.JTextField;
  *
  * @author Lenin
  */
-public class Vista_Camion_Camionero extends javax.swing.JFrame {
+public class VistaViaje extends javax.swing.JFrame {
 
     /**
      * Creates new form asd
      */
-    public Vista_Camion_Camionero() {
+    public VistaViaje() {
         initComponents();
         
     }
