@@ -15,12 +15,12 @@ import javax.swing.JTextField;
  *
  * @author Andrea
  */
-public class VistaCamionero extends javax.swing.JInternalFrame {
+public class VistaPersona extends javax.swing.JFrame {
 
     /**
      * Creates new form VistaCrudPaquetes
      */
-    public VistaCamionero() {
+    public VistaPersona() {
         initComponents();
     }
 
@@ -33,7 +33,7 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        DigCamionero = new javax.swing.JDialog();
+        DlgPersona = new javax.swing.JDialog();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -47,10 +47,10 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
         txtApellido = new javax.swing.JTextField();
         txtSalario = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
-        cbxPoblacion = new javax.swing.JComboBox<>();
+        txtPoblacion = new javax.swing.JComboBox<>();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtDireccion = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -79,89 +79,87 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
 
         jLabel10.setText("POBLACION:");
 
-        cbxPoblacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtPoblacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnAceptar.setText("ACEPTAR");
 
         btnCancelar.setText("CANCELAR");
 
-        javax.swing.GroupLayout DigCamioneroLayout = new javax.swing.GroupLayout(DigCamionero.getContentPane());
-        DigCamionero.getContentPane().setLayout(DigCamioneroLayout);
-        DigCamioneroLayout.setHorizontalGroup(
-            DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DigCamioneroLayout.createSequentialGroup()
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DigCamioneroLayout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(jLabel4))
-                    .addGroup(DigCamioneroLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(DigCamioneroLayout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(DigCamioneroLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNombre)))
-                            .addGroup(DigCamioneroLayout.createSequentialGroup()
-                                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtApellido)
-                                        .addComponent(txtSalario)
-                                        .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
-                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(DigCamioneroLayout.createSequentialGroup()
-                                        .addComponent(btnAceptar)
-                                        .addGap(108, 108, 108)
-                                        .addComponent(btnCancelar)))))))
-                .addContainerGap(121, Short.MAX_VALUE))
+        txtDireccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout DlgPersonaLayout = new javax.swing.GroupLayout(DlgPersona.getContentPane());
+        DlgPersona.getContentPane().setLayout(DlgPersonaLayout);
+        DlgPersonaLayout.setHorizontalGroup(
+            DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DlgPersonaLayout.createSequentialGroup()
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DlgPersonaLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(btnAceptar)
+                        .addGap(108, 108, 108)
+                        .addComponent(btnCancelar))
+                    .addGroup(DlgPersonaLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DlgPersonaLayout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(DlgPersonaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDni)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtTelefono)
+                                    .addComponent(txtApellido)
+                                    .addComponent(txtSalario)
+                                    .addComponent(txtDireccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPoblacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(121, 121, 121))
         );
-        DigCamioneroLayout.setVerticalGroup(
-            DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DigCamioneroLayout.createSequentialGroup()
+        DlgPersonaLayout.setVerticalGroup(
+            DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DlgPersonaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addGap(25, 25, 25)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(cbxPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addGroup(DigCamioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
                 .addGap(45, 45, 45))
@@ -179,6 +177,11 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
 
         btnImprimir.setText("Imprimir");
 
+        tblCamionero = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tblCamionero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -187,9 +190,10 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "NOMBRE", "APELLIDO", "SALARIO", "TELEFONO", "DIRECCION", "ID POBLACION"
+                "DNI", "NOMBRE", "APELLIDO", "SALARIO", "TELEFONO", "DIRECCION", "POBLACION"
             }
         ));
+        tblCamionero.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setViewportView(tblCamionero);
 
         jLabel2.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
@@ -260,11 +264,11 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public JDialog getDigCamionero() {
-        return DigCamionero;
+        return DlgPersona;
     }
 
     public void setDigCamionero(JDialog DigCamionero) {
-        this.DigCamionero = DigCamionero;
+        this.DlgPersona = DigCamionero;
     }
 
     public JButton getBtnAceptar() {
@@ -322,15 +326,7 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
     public void setBtnImprimir(JButton btnImprimir) {
         this.btnImprimir = btnImprimir;
     }
-
-    public JComboBox<String> getCbxPoblacion() {
-        return cbxPoblacion;
-    }
-
-    public void setCbxPoblacion(JComboBox<String> cbxPoblacion) {
-        this.cbxPoblacion = cbxPoblacion;
-    }
-
+    
     public JTable getTblCamionero() {
         return tblCamionero;
     }
@@ -353,14 +349,6 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
 
     public void setTxtBuscar(JTextField txtBuscar) {
         this.txtBuscar = txtBuscar;
-    }
-
-    public JTextField getTxtDireccion() {
-        return txtDireccion;
-    }
-
-    public void setTxtDireccion(JTextField txtDireccion) {
-        this.txtDireccion = txtDireccion;
     }
 
     public JTextField getTxtDni() {
@@ -395,8 +383,24 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
         this.txtTelefono = txtTelefono;
     }
 
+    public JComboBox<String> getTxtDireccion() {
+        return txtDireccion;
+    }
+
+    public void setTxtDireccion(JComboBox<String> txtDireccion) {
+        this.txtDireccion = txtDireccion;
+    }
+
+    public JComboBox<String> getTxtPoblacion() {
+        return txtPoblacion;
+    }
+
+    public void setTxtPoblacion(JComboBox<String> txtPoblacion) {
+        this.txtPoblacion = txtPoblacion;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog DigCamionero;
+    private javax.swing.JDialog DlgPersona;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
@@ -404,7 +408,6 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnImprimir;
-    private javax.swing.JComboBox<String> cbxPoblacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -420,9 +423,10 @@ public class VistaCamionero extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblCamionero;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JComboBox<String> txtDireccion;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JComboBox<String> txtPoblacion;
     private javax.swing.JTextField txtSalario;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
