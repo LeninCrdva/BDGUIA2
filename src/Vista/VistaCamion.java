@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author santi
  */
-public class VistaCamion extends javax.swing.JFrame {
+public class VistaCamion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VistaCamion
@@ -31,6 +31,14 @@ public class VistaCamion extends javax.swing.JFrame {
 
     public void setBtnactualizarcam(JButton btnactualizarcam) {
         this.btnactualizarcam = btnactualizarcam;
+    }
+
+    public JButton getBtnlist() {
+        return btnlist;
+    }
+
+    public void setBtnlist(JButton btnlist) {
+        this.btnlist = btnlist;
     }
 
     public JButton getBtnaddtipo() {
@@ -142,6 +150,7 @@ public class VistaCamion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblcamiones = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        btnlist = new javax.swing.JButton();
 
         jLabel3.setText("Matrícula:");
 
@@ -263,17 +272,17 @@ public class VistaCamion extends javax.swing.JFrame {
 
         tblcamiones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Matrícula", "Modelo", "Tipo", "Potencia (CC)"
+                "ID", "Matrícula", "Modelo", "Tipo", "Potencia (CC)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -286,9 +295,12 @@ public class VistaCamion extends javax.swing.JFrame {
             tblcamiones.getColumnModel().getColumn(1).setResizable(false);
             tblcamiones.getColumnModel().getColumn(2).setResizable(false);
             tblcamiones.getColumnModel().getColumn(3).setResizable(false);
+            tblcamiones.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jLabel2.setText("Buscar:");
+
+        btnlist.setText("Actualizar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -304,7 +316,9 @@ public class VistaCamion extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtbuscarcamion, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnlist, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(btncrearcam, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnactualizarcam, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,12 +330,14 @@ public class VistaCamion extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscarcamion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btncrearcam)
-                    .addComponent(btneliminarcam)
-                    .addComponent(btnactualizarcam)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtbuscarcamion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btncrearcam)
+                        .addComponent(btneliminarcam)
+                        .addComponent(btnactualizarcam)
+                        .addComponent(btnlist)))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
@@ -367,6 +383,7 @@ public class VistaCamion extends javax.swing.JFrame {
     private javax.swing.JButton btnaddtipo;
     private javax.swing.JButton btncrearcam;
     private javax.swing.JButton btneliminarcam;
+    private javax.swing.JButton btnlist;
     private javax.swing.JComboBox<String> cmbtipocam;
     private javax.swing.JDialog dlgCrudCam;
     private javax.swing.JLabel jLabel1;
