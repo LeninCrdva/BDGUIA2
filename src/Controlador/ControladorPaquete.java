@@ -10,6 +10,8 @@ import Modelo.ConnectionG2;
 import Modelo.ModeloCliente;
 import Modelo.ModeloPaquete;
 import Modelo.Paquete;
+import Modelo.viaje_BD;
+import Modelo.viaje_MD;
 import Vista.VistaPaquete;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,7 +47,12 @@ public class ControladorPaquete {
         vista.getBtnElegirCliente().addActionListener(l->elegirCliente());
         vista.getTblCliente().addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseClicked(java.awt.event.MouseEvent evt){
-                clickTblCliente(evt);
+                clickTblCliente();
+            }
+        });
+        vista.getTblEnvio().addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                clickTblEnvio();
             }
         });
         vista.getTxtBuscar().addKeyListener(new java.awt.event.KeyAdapter() {
@@ -209,6 +216,16 @@ public class ControladorPaquete {
         vista.getDigSeleccionarEnvio().setTitle("SELECCIONAR ENVIO");
         vista.getDigSeleccionarEnvio().setSize(600,600);
         vista.getDigSeleccionarEnvio().setLocationRelativeTo(vista);
+        viaje_BD modeloC=new viaje_BD();
+        List<viaje_MD> lista=modeloC.lista_viaje();
+        DefaultTableModel mTabla=(DefaultTableModel) vista.getTblEnvio().getModel();
+        mTabla.setNumRows(0);   
+        String[] columnas={"ID VIA", "ID CAMION", "ID CAMIONERO", "FECHA CONDUCCION"};
+        mTabla.setColumnIdentifiers(columnas);
+        lista.stream().forEach(pe->{
+            Object[] registro={pe.getVia(), pe.getCam(), pe.getCa(), pe.getFecha_conduccion()};
+            mTabla.addRow(registro);
+        });
         vista.getDigSeleccionarEnvio().setVisible(true);
         
     }
@@ -228,8 +245,12 @@ public class ControladorPaquete {
         });
         vista.getDigSeleccionarCliente().setVisible(true);
     }
-    private void clickTblCliente(java.awt.event.MouseEvent evt){
+    private void clickTblCliente(){
         vista.getTxtIdCliente().setText(vista.getTblCliente().getValueAt(vista.getTblCliente().getSelectedRow(), 0).toString());
         vista.getDigSeleccionarCliente().dispose();
+    }
+    private void clickTblEnvio(){
+        vista.getTxtIdEnvio().setText(vista.getTblEnvio().getValueAt(vista.getTblEnvio().getSelectedRow(), 0).toString());
+        vista.getDigSeleccionarEnvio().dispose();
     }
 }
