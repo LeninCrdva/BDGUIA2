@@ -23,6 +23,14 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    public JTable getTblCliente() {
+        return tblCliente;
+    }
+
+    public void setTblCliente(JTable tblCliente) {
+        this.tblCliente = tblCliente;
+    }
+
     public JButton getBtnBuscarCliente() {
         return btnBuscarCliente;
     }
@@ -268,6 +276,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         txtBuscarCliente = new javax.swing.JTextField();
         btnBuscarCliente = new javax.swing.JButton();
         btnSalirCliente = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblCliente = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -444,6 +454,25 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         btnSalirCliente.setText("SALIR");
 
+        tblCliente = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "DNI", "NOMBRE", "APELLIDO", "SALARIO", "TELEFONO", "DIRECCION", "POBLACION"
+            }
+        ));
+        tblCliente.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblCliente);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -457,7 +486,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 .addComponent(btnBuscarCliente)
                 .addGap(48, 48, 48)
                 .addComponent(btnSalirCliente)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,18 +498,24 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                     .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCliente)
                     .addComponent(btnSalirCliente))
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout DigSeleccionarClienteLayout = new javax.swing.GroupLayout(DigSeleccionarCliente.getContentPane());
         DigSeleccionarCliente.getContentPane().setLayout(DigSeleccionarClienteLayout);
         DigSeleccionarClienteLayout.setHorizontalGroup(
             DigSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(DigSeleccionarClienteLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         DigSeleccionarClienteLayout.setVerticalGroup(
             DigSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(DigSeleccionarClienteLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Buscar:");
@@ -616,6 +652,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblCliente;
     private javax.swing.JTable tblEnvio;
     private javax.swing.JTable tblPaquete;
     private javax.swing.JTextField txtBuscar;

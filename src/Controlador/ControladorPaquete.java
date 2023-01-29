@@ -5,7 +5,9 @@
  */
 package Controlador;
 
+import Modelo.Cliente;
 import Modelo.ConnectionG2;
+import Modelo.ModeloCliente;
 import Modelo.ModeloPaquete;
 import Modelo.Paquete;
 import Vista.VistaPaquete;
@@ -41,6 +43,7 @@ public class ControladorPaquete {
         vista.getBtnBuscar().addActionListener(l->buscarPaquete());
         vista.getBtnElegirEnvio().addActionListener(l->elegirEnvio());
         vista.getBtnElegirCliente().addActionListener(l->elegirCliente());
+        vista.getTblCliente().addMouseWheelListener(l->clickTblCliente());
     }
     private void cargaPaquete(){
         List<Paquete> lista=modelo.listaPaquete();
@@ -195,8 +198,20 @@ public class ControladorPaquete {
         vista.getDigSeleccionarCliente().setTitle("SELECCIONAR CLIENTE");
         vista.getDigSeleccionarCliente().setSize(600,600);
         vista.getDigSeleccionarCliente().setLocationRelativeTo(vista);
+        ModeloCliente modeloC=new ModeloCliente();
+        List<Cliente> lista=modeloC.ListClientes();
+        DefaultTableModel mTabla=(DefaultTableModel) vista.getTblCliente().getModel();
+        mTabla.setNumRows(0);   
+        String[] columnas={"ID CLIENTE", "DNI", "NOMBRE", "APELLIDO", "CORREO", "TELEFONO", "DIRECCION", "POBLACION"};
+        mTabla.setColumnIdentifiers(columnas);
+        lista.stream().forEach(pe->{
+            Object[] registro={String.valueOf(pe.getId_cli()), pe.getDni(), pe.getNombre(), pe.getApellido(), String.valueOf(pe.getCorreo()), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
+            mTabla.addRow(registro);
+        });
         vista.getDigSeleccionarCliente().setVisible(true);
-        
     }
-    
+    private void clickTblCliente(){
+        vista.getTxtIdCliente().setText(vista.getTblCliente().getValueAt(vista.getTblCliente().getSelectedRow(), 0).toString());
+        vista.getDigSeleccionarCliente().dispose();
+    }
 }
