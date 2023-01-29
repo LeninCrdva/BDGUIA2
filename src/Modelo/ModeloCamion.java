@@ -58,7 +58,7 @@ public class ModeloCamion extends Camion {
                 id = rs.getInt(1);
             }
             rs.close();
-            return id;
+            return id+1;
         } catch (SQLException e) {
             System.out.println(id);
             return id;

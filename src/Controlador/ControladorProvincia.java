@@ -145,7 +145,8 @@ public class ControladorProvincia {
             modelo.eliminarProvincia(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString());
             cargarProvincia();
         }catch (SQLException ex) {
-            Logger.getLogger(ModeloProvincia.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(vista, ex, "ERROR", vista.ERROR);
+//            Logger.getLogger(ModeloProvincia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void buscarProvincia(){

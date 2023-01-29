@@ -82,7 +82,7 @@ public class ModeloPoblacion extends Poblacion{
     
     public SQLException eliminarPoblacion(String codigo){
         ConnectionG2 con=new ConnectionG2();
-        String sql="DELETE FROM Poblacion WHERE id_pob='"+idPoblacion(codigo)+"'";
+        String sql="DELETE FROM Poblacion WHERE id_pob="+idPoblacion(codigo)+"";
         SQLException ex=con.Accion(sql);
         return ex;   
     }
@@ -93,13 +93,13 @@ public class ModeloPoblacion extends Poblacion{
         
         return ex;
     }
-    public int idPoblacion(String codigo){//BUSCA EL ID DE LA PROVINCIA MEDIANTE EL CODIGO
+    public int idPoblacion(String codigo){//BUSCA EL ID DE LA POBLACION MEDIANTE EL CODIGO
         ConnectionG2 con=new ConnectionG2();
-        String sql="SELECT id_pob FROM POBLACION WHERE nombre_pob='"+codigo+"'";
+        String sql="SELECT id_pob FROM POBLACION WHERE id_pob="+codigo+"";
         try {
             ResultSet rs=con.Consulta(sql);
             rs.next();
-            return rs.getInt(1);
+            return rs.getInt("id_pob");
         } catch (SQLException ex) {
             Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
             return 0;

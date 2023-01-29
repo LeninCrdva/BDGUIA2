@@ -79,7 +79,7 @@ public class ModeloProvincia extends Provincia{
     }
     public SQLException eliminarProvincia(String codigo){
         ConnectionG2 con=new ConnectionG2();
-        String sql="DELETE FROM PROVINCIA WHERE id_pro='"+idProvincia(codigo)+"'";
+        String sql="DELETE FROM PROVINCIA WHERE id_pro="+idProvincia(codigo)+"";
         SQLException ex=con.Accion(sql);
         return ex;   
     }

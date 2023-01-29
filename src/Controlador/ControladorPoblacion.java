@@ -121,6 +121,7 @@ public class ControladorPoblacion {
             modelo.eliminarPoblacion(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString());
             cargarPoblacion();
         }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
             Logger.getLogger(ModeloPoblacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

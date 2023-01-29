@@ -65,7 +65,7 @@ public class ModeloTipoCam extends Tipo_camion {
                 id = (rs.getInt(1));
             }
             rs.close();
-            return id;
+            return id+1;
         } catch (SQLException e) {
             return id;
         }
@@ -73,7 +73,7 @@ public class ModeloTipoCam extends Tipo_camion {
     
     
     public SQLException InsertarTipoCamion() {
-        String sql = "INSERT INTO TIPO_CAMION (ID_TIP, NOMBRE_TIP) VALUES (" + getId_tip()+ ", '" + getNombre_tipo() +"')";
+        String sql = "INSERT INTO TIPO_CAMION (ID_TIP, NOMBRE_TIP) VALUES (" + ObtieneIdTipo()+ ", '" + getNombre_tipo() +"')";
         ConnectionG2 conq = new ConnectionG2();
         SQLException ex = conq.Accion(sql);
         return ex;
