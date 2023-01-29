@@ -471,6 +471,11 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             }
         ));
         tblCliente.getTableHeader().setReorderingAllowed(false);
+        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClienteMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblCliente);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -616,8 +621,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblEnvioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnvioMouseClicked
-        // TODO add your handling code here:
+        txtBuscar.setText(null);
     }//GEN-LAST:event_tblEnvioMouseClicked
+
+    private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
+        
+    }//GEN-LAST:event_tblClienteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

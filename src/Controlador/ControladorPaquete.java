@@ -43,7 +43,18 @@ public class ControladorPaquete {
         vista.getBtnBuscar().addActionListener(l->buscarPaquete());
         vista.getBtnElegirEnvio().addActionListener(l->elegirEnvio());
         vista.getBtnElegirCliente().addActionListener(l->elegirCliente());
-        vista.getTblCliente().addMouseWheelListener(l->clickTblCliente());
+        vista.getTblCliente().addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                clickTblCliente(evt);
+            }
+        });
+        vista.getTxtBuscar().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt){
+                buscarPaquete();
+            }
+        });
+        vista.getBtnSalirCliente().addActionListener(l->vista.getDigSeleccionarCliente().dispose());
+        vista.getBtnSalirEnvio().addActionListener(l->vista.getDigSeleccionarEnvio().dispose());
     }
     private void cargaPaquete(){
         List<Paquete> lista=modelo.listaPaquete();
@@ -119,7 +130,14 @@ public class ControladorPaquete {
                 JOptionPane.showMessageDialog(null, "DEBE DE ELEGIR UN CLIENTE");
                 return;
             }
-            
+            try{
+                if (modelo.buscarPaquete(vista.getTxtCodigo().getText())==true) {
+                    JOptionPane.showMessageDialog(null, "YA EXISTE UN PAQUETE CON ESE CODIGO");
+                    return;
+                }
+            }catch (SQLException ex) {
+                Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
+            }
             new ModeloPaquete(vista.getTxtCodigo().getText(),vista.getTxtDescripcion().getText(),Integer.parseInt(vista.getTxtIdEnvio().getText()),Integer.parseInt(vista.getTxtIdCliente().getText())).grabarPaquete();
             cargaPaquete();
         }else{
@@ -210,7 +228,7 @@ public class ControladorPaquete {
         });
         vista.getDigSeleccionarCliente().setVisible(true);
     }
-    private void clickTblCliente(){
+    private void clickTblCliente(java.awt.event.MouseEvent evt){
         vista.getTxtIdCliente().setText(vista.getTblCliente().getValueAt(vista.getTblCliente().getSelectedRow(), 0).toString());
         vista.getDigSeleccionarCliente().dispose();
     }
