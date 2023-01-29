@@ -11,6 +11,7 @@ package Controlador;
 import Modelo.ModeloPoblacion;
 import Modelo.Poblacion;
 import Vista.VistaPoblacion;
+import java.awt.event.KeyAdapter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
@@ -36,6 +37,7 @@ public class ControladorPoblacion {
     
     public void iniciarControl(){
         cargarPoblacion();
+        validateCamps();
         vista.getBtnActualizar().addActionListener(l->cargarPoblacion());
         vista.getBtnCrear().addActionListener(l->abrirPoblacionDialog(1));
         vista.getBtnEditar().addActionListener(l->abrirPoblacionDialog(2));
@@ -86,7 +88,7 @@ public class ControladorPoblacion {
     
     private void ingresarModificarProvincia(){//BOTON ACEPTAR DEL FORMULARIO VALIDACIONES
         if (vista.getDigProvincia().getTitle().equals("Crear Poblacion")) {
-            if (!vista.getTxtNombre().getText().matches("[a-zA-Z0-9]{1,50}")) {
+            if (!vista.getTxtNombre().getText().matches("[a-zA-Z]{1,50}")) {
                 JOptionPane.showMessageDialog(null, "DEBE DE INGRESAR UN NOMBRE DE MAXIMO 50 CARACTERES");
                 return;
             }
@@ -152,6 +154,18 @@ public class ControladorPoblacion {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA DE LA TABLA");
         }
         return a;
+    }
+    
+    private void validateCamps() {
+        vista.getTxtNombre().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (Character.isDigit(key) || vista.getTxtNombre().getText().length() >= 50) {
+                    evt.consume();
+                }
+            }
+        });
     }
 }
 

@@ -20,11 +20,12 @@ public class ControladorPrincipal {
     public void IniciaControlVP() {
         vp.getBtnCamion().addActionListener(l -> CrudCamion());
         vp.getBtnTipoCamion().addActionListener(l -> CrudTipoCamion());
-        vp.getBtnCamionero().addActionListener(l -> abrirDialogo(1));
-        vp.getBtnCliente().addActionListener(l -> abrirDialogo(2));
+        vp.getBtnCamionero().addActionListener(l -> CrudClienteCamionero(1));
+        vp.getBtnCliente().addActionListener(l -> CrudClienteCamionero(2));
         vp.getBtnPaquete().addActionListener(l->iniciarVistaPaquete());
         vp.getBtnProvincia().addActionListener(l->iniciarVistaProvincia());
         vp.getBtnPoblacion().addActionListener(l ->iniciarVistaPoblacion());
+        vp.getBtnViaje().addActionListener(l -> CrudEnvio());
     }
 
     public void CrudCamion() {
@@ -59,7 +60,7 @@ public class ControladorPrincipal {
         cc.iniciaControl();
     }
 
-    private void abrirDialogo(int ce) {
+    private void CrudClienteCamionero(int ce) {
         String title;
         VistaPersona vper = new VistaPersona();
         ModeloCamionero mc = new ModeloCamionero();
@@ -80,9 +81,9 @@ public class ControladorPrincipal {
         if(vper.getName().equals("camionero")){
             ControladorCamionero cc = new ControladorCamionero(mc, vper);
             cc.iniciaControl();
-        }else{
-            ControladorCliente cc = new ControladorCliente(mcli, vper);
-            cc.iniciaControl();
+        }else if(vper.getName().equals("cliente")){
+            ControladorCliente ccli = new ControladorCliente(mcli, vper);
+            ccli.iniciaControl();
         }
     }
     
@@ -116,6 +117,17 @@ public class ControladorPrincipal {
         
         vista.setVisible(true);
         ControladorPoblacion control=new ControladorPoblacion(modelo,vista);
+        control.iniciarControl();
+    }
+    
+    private void CrudEnvio(){
+        VistaViaje vista=new VistaViaje();
+        viaje_BD modelo=new viaje_BD();
+        
+        vp.getdeskoptMain().add(vista);
+        
+        vista.setVisible(true);
+        C_viaje control=new C_viaje(modelo,vista);
         control.iniciarControl();
     }
 }
