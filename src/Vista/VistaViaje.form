@@ -57,8 +57,6 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                   <Component id="combo_camion" min="-2" pref="180" max="-2" attributes="0"/>
-                  <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
-                  <Component id="calendar_conduccion" min="-2" pref="170" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
@@ -69,8 +67,6 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                   <Component id="combo_camionero" min="-2" pref="180" max="-2" attributes="0"/>
-                  <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
-                  <Component id="calendar_llegada" min="-2" pref="170" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
@@ -127,20 +123,14 @@
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="combo_camion" min="-2" max="-2" attributes="0"/>
-                      <Component id="calendar_conduccion" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="combo_camion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="combo_camionero" min="-2" max="-2" attributes="0"/>
-                      <Component id="calendar_llegada" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="combo_camionero" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="108" max="-2" attributes="0"/>
               </Group>
@@ -254,10 +244,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="FECHA DE CONDUCCION"/>
           </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="calendar_llegada">
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="calendar_conduccion">
         </Component>
         <Component class="javax.swing.JComboBox" name="combo_provincio">
           <Properties>
