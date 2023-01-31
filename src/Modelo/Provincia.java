@@ -36,5 +36,9 @@ public class Provincia {
     public void setNombre_pro(String nombre_pro) {
         this.nombre_pro = nombre_pro;
     }
-    
+
+    @Override
+    public String toString() {
+        return codigo_pro + ": " + nombre_pro;
+    }
 }

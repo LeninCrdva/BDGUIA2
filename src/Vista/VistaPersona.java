@@ -5,12 +5,15 @@
  */
 package Vista;
 
+import Modelo.Poblacion;
+import Modelo.Provincia;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+
 
 /**
  *
@@ -82,13 +85,9 @@ public class VistaPersona extends javax.swing.JInternalFrame {
 
         jLabel10.setText("POBLACION:");
 
-        txtPoblacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnAceptar.setText("ACEPTAR");
 
         btnCancelar.setText("CANCELAR");
-
-        txtDireccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel11.setText("ID:");
 
@@ -397,19 +396,19 @@ public class VistaPersona extends javax.swing.JInternalFrame {
         this.txtTelefono = txtTelefono;
     }
 
-    public JComboBox<String> getTxtDireccion() {
+    public JComboBox<Provincia> getTxtDireccion() {
         return txtDireccion;
     }
 
-    public void setTxtDireccion(JComboBox<String> txtDireccion) {
+    public void setTxtDireccion(JComboBox<Provincia> txtDireccion) {
         this.txtDireccion = txtDireccion;
     }
 
-    public JComboBox<String> getTxtPoblacion() {
+    public JComboBox<Poblacion> getTxtPoblacion() {
         return txtPoblacion;
     }
 
-    public void setTxtPoblacion(JComboBox<String> txtPoblacion) {
+    public void setTxtPoblacion(JComboBox<Poblacion> txtPoblacion) {
         this.txtPoblacion = txtPoblacion;
     }
 
@@ -447,10 +446,10 @@ public class VistaPersona extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblCamionero;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JComboBox<String> txtDireccion;
+    private javax.swing.JComboBox<Provincia> txtDireccion;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JComboBox<String> txtPoblacion;
+    private javax.swing.JComboBox<Poblacion> txtPoblacion;
     private javax.swing.JTextField txtSalario;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

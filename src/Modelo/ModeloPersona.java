@@ -87,7 +87,7 @@ public class ModeloPersona extends Persona {
         String sql = "UPDATE Persona SET nombre_per = '" + getNombre()
                 + "', apellido_per = '" + getApellido() + "', telefono_per = '" + getTelefono()
                 + "', direccion_per = '" + getDireccion() + "', id_pob= '" + getId_pob()
-                + "' WHERE id_per = '" + getId() + "'";
+                + "' WHERE id_per = " + getId() + "";
 
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);
