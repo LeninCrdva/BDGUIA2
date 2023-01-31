@@ -23,6 +23,118 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    public JButton getBtnBuscarCliente() {
+        return btnBuscarCliente;
+    }
+
+    public void setBtnBuscarCliente(JButton btnBuscarCliente) {
+        this.btnBuscarCliente = btnBuscarCliente;
+    }
+
+    public JButton getBtnSalirCliente() {
+        return btnSalirCliente;
+    }
+
+    public void setBtnSalirCliente(JButton btnSalirCliente) {
+        this.btnSalirCliente = btnSalirCliente;
+    }
+
+    public JTextField getTxtBuscarCliente() {
+        return txtBuscarCliente;
+    }
+
+    public void setTxtBuscarCliente(JTextField txtBuscarCliente) {
+        this.txtBuscarCliente = txtBuscarCliente;
+    }
+
+    public JDialog getDigSeleccionarCliente() {
+        return DigSeleccionarCliente;
+    }
+
+    public void setDigSeleccionarCliente(JDialog DigSeleccionarCliente) {
+        this.DigSeleccionarCliente = DigSeleccionarCliente;
+    }
+
+    public JButton getBtnBuscarEnvio() {
+        return btnBuscarEnvio;
+    }
+
+    public void setBtnBuscarEnvio(JButton btnBuscarEnvio) {
+        this.btnBuscarEnvio = btnBuscarEnvio;
+    }
+
+    public JButton getBtnSalirEnvio() {
+        return btnSalirEnvio;
+    }
+
+    public void setBtnSalirEnvio(JButton btnSalirEnvio) {
+        this.btnSalirEnvio = btnSalirEnvio;
+    }
+
+    public JTable getTblEnvio() {
+        return tblEnvio;
+    }
+
+    public void setTblEnvio(JTable tblEnvio) {
+        this.tblEnvio = tblEnvio;
+    }
+
+    public JTextField getTxtBuscarEnvio() {
+        return txtBuscarEnvio;
+    }
+
+    public void setTxtBuscarEnvio(JTextField txtBuscarEnvio) {
+        this.txtBuscarEnvio = txtBuscarEnvio;
+    }
+
+    public JDialog getDigSeleccionarEnvio() {
+        return DigSeleccionarEnvio;
+    }
+
+    public void setDigSeleccionarEnvio(JDialog DigSeleccionarEnvio) {
+        this.DigSeleccionarEnvio = DigSeleccionarEnvio;
+    }
+
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+
+    public JTextField getTxtIdCliente() {
+        return txtIdCliente;
+    }
+
+    public void setTxtIdCliente(JTextField txtIdCliente) {
+        this.txtIdCliente = txtIdCliente;
+    }
+
+    public JButton getBtnElegirCliente() {
+        return btnElegirCliente;
+    }
+
+    public void setBtnElegirCliente(JButton btnElegirCliente) {
+        this.btnElegirCliente = btnElegirCliente;
+    }
+
+    public JButton getBtnElegirEnvio() {
+        return btnElegirEnvio;
+    }
+
+    public void setBtnElegirEnvio(JButton btnElegirEnvio) {
+        this.btnElegirEnvio = btnElegirEnvio;
+    }
+
+    public JTextField getTxtIdEnvio() {
+        return txtIdEnvio;
+    }
+
+    public void setTxtIdEnvio(JTextField txtIdEnvio) {
+        this.txtIdEnvio = txtIdEnvio;
+    }
+
     public JDialog getDigPaquete() {
         return DigPaquete;
     }
@@ -69,14 +181,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     public void setBtnEditar(JButton btnEditar) {
         this.btnEditar = btnEditar;
-    }
-
-    public JButton getBtnElegirCamionero() {
-        return btnElegirCamionero;
-    }
-
-    public void setBtnElegirCamionero(JButton btnElegirCamionero) {
-        this.btnElegirCamionero = btnElegirCamionero;
     }
 
     public JButton getBtnEliminar() {
@@ -127,30 +231,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         this.txtDescripcion = txtDescripcion;
     }
 
-    public JTextField getTxtDestinatario() {
-        return txtDestinatario;
-    }
-
-    public void setTxtDestinatario(JTextField txtDestinatario) {
-        this.txtDestinatario = txtDestinatario;
-    }
-
-    public JTextField getTxtDireccion() {
-        return txtDireccion;
-    }
-
-    public void setTxtDireccion(JTextField txtDireccion) {
-        this.txtDireccion = txtDireccion;
-    }
-
-    public JTextField getTxtIdCamionero() {
-        return txtIdCamionero;
-    }
-
-    public void setTxtIdCamionero(JTextField txtIdCamionero) {
-        this.txtIdCamionero = txtIdCamionero;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,17 +244,30 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
-        txtDestinatario = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
-        txtIdCamionero = new javax.swing.JTextField();
+        txtIdEnvio = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnElegirCamionero = new javax.swing.JButton();
+        btnElegirEnvio = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtIdCliente = new javax.swing.JTextField();
+        btnElegirCliente = new javax.swing.JButton();
+        DigSeleccionarEnvio = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txtBuscarEnvio = new javax.swing.JTextField();
+        btnBuscarEnvio = new javax.swing.JButton();
+        btnSalirEnvio = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEnvio = new javax.swing.JTable();
+        DigSeleccionarCliente = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txtBuscarCliente = new javax.swing.JTextField();
+        btnBuscarCliente = new javax.swing.JButton();
+        btnSalirCliente = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -186,6 +279,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jScrollPane = new javax.swing.JScrollPane();
         tblPaquete = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
 
         jLabel3.setText("PAQUETE");
 
@@ -193,17 +287,17 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         jLabel5.setText("DESCRIPCION:");
 
-        jLabel6.setText("DESTINATARIO:");
-
-        jLabel7.setText("DIRECCION:");
-
-        jLabel8.setText("ID CAMIONERO:");
+        jLabel8.setText("ID ENVIO:");
 
         btnAceptar.setText("ACEPTAR");
 
         btnCancelar.setText("CANCELAR");
 
-        btnElegirCamionero.setText("ELEGIR");
+        btnElegirEnvio.setText("ELEGIR");
+
+        jLabel9.setText("ID CLIENTE:");
+
+        btnElegirCliente.setText("ELEGIR");
 
         javax.swing.GroupLayout DigPaqueteLayout = new javax.swing.GroupLayout(DigPaquete.getContentPane());
         DigPaquete.getContentPane().setLayout(DigPaqueteLayout);
@@ -218,28 +312,26 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                         .addGap(22, 22, 22)
                         .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(DigPaqueteLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DigPaqueteLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DigPaqueteLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DigPaqueteLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDireccion))
+                                .addComponent(txtIdCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
                             .addGroup(DigPaqueteLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdCamionero)))
+                                .addComponent(txtIdEnvio))
+                            .addGroup(DigPaqueteLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DigPaqueteLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnElegirCamionero)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnElegirEnvio)
+                            .addComponent(btnElegirCliente))))
+                .addContainerGap(210, Short.MAX_VALUE))
             .addGroup(DigPaqueteLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(btnAceptar)
@@ -252,7 +344,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             .addGroup(DigPaqueteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addGap(94, 94, 94)
                 .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,22 +354,132 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtIdCamionero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnElegirCamionero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                    .addComponent(txtIdEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnElegirEnvio))
+                .addGap(18, 18, 18)
+                .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnElegirCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(DigPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
                 .addGap(74, 74, 74))
+        );
+
+        jLabel6.setText("Buscar:");
+
+        btnBuscarEnvio.setText("BUSCAR");
+
+        btnSalirEnvio.setText("SALIR");
+
+        tblEnvio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id_cam_ca", "id_cam", "id_ca", "fecha_conduccion"
+            }
+        ));
+        tblEnvio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEnvioMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblEnvio);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addGap(29, 29, 29)
+                .addComponent(txtBuscarEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnBuscarEnvio)
+                .addGap(48, 48, 48)
+                .addComponent(btnSalirEnvio)
+                .addContainerGap(221, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtBuscarEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarEnvio)
+                    .addComponent(btnSalirEnvio))
+                .addContainerGap(266, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout DigSeleccionarEnvioLayout = new javax.swing.GroupLayout(DigSeleccionarEnvio.getContentPane());
+        DigSeleccionarEnvio.getContentPane().setLayout(DigSeleccionarEnvioLayout);
+        DigSeleccionarEnvioLayout.setHorizontalGroup(
+            DigSeleccionarEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        DigSeleccionarEnvioLayout.setVerticalGroup(
+            DigSeleccionarEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jLabel7.setText("Buscar:");
+
+        btnBuscarCliente.setText("BUSCAR");
+
+        btnSalirCliente.setText("SALIR");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(29, 29, 29)
+                .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnBuscarCliente)
+                .addGap(48, 48, 48)
+                .addComponent(btnSalirCliente)
+                .addContainerGap(221, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCliente)
+                    .addComponent(btnSalirCliente))
+                .addContainerGap(266, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout DigSeleccionarClienteLayout = new javax.swing.GroupLayout(DigSeleccionarCliente.getContentPane());
+        DigSeleccionarCliente.getContentPane().setLayout(DigSeleccionarClienteLayout);
+        DigSeleccionarClienteLayout.setHorizontalGroup(
+            DigSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        DigSeleccionarClienteLayout.setVerticalGroup(
+            DigSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Buscar:");
@@ -294,13 +496,13 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         tblPaquete.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "DESTINATARIO", "DIRECCION", "ID CAMIONERO"
+                "CODIGO", "DESCRIPCION", "ID ENVIO", "ID CLIENTE"
             }
         ));
         jScrollPane.setViewportView(tblPaquete);
@@ -309,6 +511,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("TRANSPORTES S.A");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnBuscar.setText("Buscar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -319,15 +523,17 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCrear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(btnImprimir)
                 .addGap(55, 55, 55))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -350,7 +556,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                     .addComponent(btnCrear)
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar)
-                    .addComponent(btnImprimir))
+                    .addComponent(btnImprimir)
+                    .addComponent(btnBuscar))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -372,17 +579,29 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblEnvioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnvioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblEnvioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog DigPaquete;
+    private javax.swing.JDialog DigSeleccionarCliente;
+    private javax.swing.JDialog DigSeleccionarEnvio;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarCliente;
+    private javax.swing.JButton btnBuscarEnvio;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnElegirCamionero;
+    private javax.swing.JButton btnElegirCliente;
+    private javax.swing.JButton btnElegirEnvio;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnSalirCliente;
+    private javax.swing.JButton btnSalirEnvio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -391,14 +610,20 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblEnvio;
     private javax.swing.JTable tblPaquete;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscarCliente;
+    private javax.swing.JTextField txtBuscarEnvio;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtDestinatario;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtIdCamionero;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtIdEnvio;
     // End of variables declaration//GEN-END:variables
 }

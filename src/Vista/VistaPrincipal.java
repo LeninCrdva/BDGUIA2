@@ -26,7 +26,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopMain = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
         btnCamion = new javax.swing.JButton();
         btnCamionero = new javax.swing.JButton();
@@ -41,7 +41,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         javax.swing.GroupLayout desktopMainLayout = new javax.swing.GroupLayout(desktopMain);
         desktopMain.setLayout(desktopMainLayout);
         desktopMainLayout.setHorizontalGroup(
@@ -133,6 +132,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JDesktopPane getEscritorio() {
+        return escritorio;
+    }
+
+    public void setEscritorio(JDesktopPane escritorio) {
+        this.escritorio = escritorio;
+    }
+
     public JButton getBtnCamion() {
         return btnCamion;
     }
@@ -205,7 +212,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPaquete;
     private javax.swing.JButton btnProvincia;
     private javax.swing.JButton btnViaje;
-    private javax.swing.JDesktopPane desktopMain;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
