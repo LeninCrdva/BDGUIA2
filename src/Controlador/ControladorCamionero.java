@@ -1,12 +1,15 @@
 package Controlador;
 
+import Modelo.Camionero;
+import Modelo.ModeloCamionero;
 import Modelo.ModeloPersona;
-import Modelo.Persona;
 import Vista.VistaPersona;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,26 +18,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ControladorCamionero {
 
-    private ModeloPersona modelo;
+    private ModeloCamionero modelo;
     private VistaPersona vista;
 
     public ControladorCamionero() {
     }
 
-    public ControladorCamionero(ModeloPersona modelo, VistaPersona vista) {
+    public ControladorCamionero(ModeloCamionero modelo, VistaPersona vista) {
         this.modelo = modelo;
         this.vista = vista;
-
         vista.setVisible(true);
     }
 
     public void iniciaControl() {
         vista.getBtnActualizar().addActionListener(l -> cargaCamioneros());
+        vista.getBtnCrear().addActionListener(l -> abrirDialogo(1));
+        vista.getBtnEditar().addActionListener(l -> abrirDialogo(2));
+        vista.getBtnAceptar().addActionListener(l -> crearEditarPersona());
+        vista.getTxtBuscar().addActionListener(l -> buscarCamionero());
     }
 
     private void cargaCamioneros() {
         //Control para consultar a la BD/modelo y luego cargar en la vista
-        List<Persona> listap = modelo.ListPersonas();
+        List<Camionero> listap = modelo.ListCamioneros();
 
         DefaultTableModel mTabla;
         mTabla = new DefaultTableModel();
@@ -42,15 +48,14 @@ public class ControladorCamionero {
         mTabla.setColumnCount(7);
         mTabla.setColumnIdentifiers(new Object[]{"ID CAMIONERO", "DNI", "NOMBRE", "APELLIDO", "SALARIO", "TELEFONO", "DIRECCION", "POBLACION"});
         vista.getTblCamionero().setModel(mTabla);
-        
 
         listap.stream().forEach(pe -> {
-            String[] filanueva = {String.valueOf(pe.getId()), pe.getDni(), pe.getNombre(), pe.getApellido(), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
+            String[] filanueva = {String.valueOf(pe.getId_ca()), pe.getDni(), pe.getNombre(), pe.getApellido(), String.valueOf(pe.getSalario()), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
             mTabla.addRow(filanueva);
         });
     }
 
-    /*private void abrirDialogo(int ce) {
+    private void abrirDialogo(int ce) {
         String title;
         boolean openwindow = false;
         if (ce == 1) {
@@ -63,66 +68,115 @@ public class ControladorCamionero {
             try {
                 openwindow = uploadDates(vista.getTblCamionero());
             } catch (ParseException ex) {
-                Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControladorCamionero.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
         if (openwindow) {
-            vista.getDigCamionero().setLocationRelativeTo(null);
-            vista.getDigCamionero().setSize(530, 400);
+            vista.getDigCamionero().setLocationRelativeTo(vista.getBtnCrear());
+            vista.getDigCamionero().setSize(500, 400);
             vista.getDigCamionero().setTitle(title);
             vista.getDigCamionero().setVisible(true);
+
+            ModeloCamionero persona = new ModeloCamionero();
+            String id_ca = persona.NoSerie();
+
+            int increment_ca;
+
+            if (id_ca == null) {
+                vista.getIdlbl().setText("000001");
+            } else {
+                increment_ca = Integer.parseInt(id_ca);
+                increment_ca++;
+                vista.getIdlbl().setText("00000" + increment_ca);
+            }
         }
     }
 
     private void crearEditarPersona() {
+        ModeloPersona per = new ModeloPersona();
+        ModeloCamionero persona = new ModeloCamionero();
+        String id_ca = persona.NoSerie();
+        String id_per = per.NoSerie();
+
+        int increment_per = 0;
+        int increment_ca = 0;
+
         if (vista.getDigCamionero().getName().equals("crear")) {
             //INSERTAR
             String cedula = vista.getTxtDni().getText();
             String nombre = vista.getTxtNombre().getText();
             String apellido = vista.getTxtApellido().getText();
+            String salario = vista.getTxtSalario().getText();
             String telefono = vista.getTxtTelefono().getText();
             int direccion = vista.getTxtDireccion().getSelectedIndex();
             int poblacion = vista.getTxtPoblacion().getSelectedIndex();
-            //double salario = Double.parseDouble(vista.getTxtSalario().getText());
 
-            ModeloPersona persona = new ModeloPersona();
-            persona.setId(0);
+            if (id_per == null) {
+                increment_per = 1;
+            } else {
+                increment_per = Integer.parseInt(id_per);
+                increment_per++;
+            }
+
+            if (id_ca == null) {
+                increment_ca = 1;
+            } else {
+                increment_ca = Integer.parseInt(id_ca);
+                increment_ca++;
+            }
+
+            persona.setId(increment_per);
+            persona.setId_ca(increment_ca);
             persona.setDni(cedula);
             persona.setNombre(nombre);
             persona.setApellido(apellido);
             persona.setTelefono(telefono);
             persona.setDireccion(direccion);
             persona.setId_pob(poblacion);
-            /*persona.setSueldo(salario);
-            persona.setCupo(cupo);
+            persona.setSalario(Double.parseDouble(salario));
 
             if (persona.GrabaPersonaDB() == null) {
-                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR LA PERSONA");
+                JOptionPane.showMessageDialog(null, "SE HA CREADO AL CAMIONERO CON ÉXITO");
             } else {
-                JOptionPane.showMessageDialog(null, "SE HA CREADO A LA PERSONA CON ÉXITO");
+                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL CAMIONERO");
+                JOptionPane.showMessageDialog(null, persona.GrabaPersonaDB());
             }
-        } else if (vista.getDlgCreate().getName().equals("editar")) {
+        } else if (vista.getDigCamionero().getName().equals("editar")) {
             //EDITAR
-            String cedula = vista.getTxtCed().getText();
-            String nombre = vista.getTxtName().getText();
-            Date fnac = vista.getDateNac().getDate();
-            String telefono = vista.getTxtTelf().getText();
-            String sex = vista.getTxtSex().getText();
-            double sueldo = Double.parseDouble(vista.getTxtSalary().getText());
-            int cupo = Integer.parseInt(vista.getTxtCup().getText());
-            //byte foto = Byte.valueOf(vista.gettxtFoto().getText());
+            String cedula = vista.getTxtDni().getText();
+            String nombre = vista.getTxtNombre().getText();
+            String apellido = vista.getTxtApellido().getText();
+            String telefono = vista.getTxtTelefono().getText();
+            String salario = vista.getTxtSalario().getText();
+            int direccion = vista.getTxtDireccion().getSelectedIndex();
+            int poblacion = vista.getTxtPoblacion().getSelectedIndex();
 
-            ModeloPersona persona = new ModeloPersona();
-            persona.setIdpersona(cedula);
-            persona.setNombres(nombre);
-            persona.setFechanac(fnac);
+            if (id_per == null) {
+                increment_per = 1;
+            } else {
+                increment_per = Integer.parseInt(id_per);
+                increment_per++;
+            }
+
+            if (id_ca == null) {
+                increment_ca = 1;
+            } else {
+                increment_ca = Integer.parseInt(id_ca);
+                increment_ca++;
+            }
+
+            persona.setId(increment_per);
+            persona.setId_ca(increment_ca);
+            persona.setDni(cedula);
+            persona.setNombre(nombre);
+            persona.setApellido(apellido);
             persona.setTelefono(telefono);
-            persona.setSexo(sex);
-            persona.setSueldo(sueldo);
-            persona.setCupo(cupo);
+            persona.setSalario(Double.parseDouble(salario));
+            persona.setDireccion(direccion);
+            persona.setId_pob(poblacion);
 
-            if (persona.EditPersonaDB() == null) {
+            if (persona.EditCamioneroDB() == null) {
                 JOptionPane.showMessageDialog(null, "NO SE HA PODIDO EDITAR A LA PERSONA");
             } else {
                 JOptionPane.showMessageDialog(null, "SE HA EDITADO A LA PERSONA CON ÉXITO");
@@ -130,10 +184,10 @@ public class ControladorCamionero {
         }
     }
 
-    private void eliminarPersona(JTable table) {
-        ModeloPersona persona = new ModeloPersona();
+    private void eliminarCamionero(JTable table) {
+        ModeloCamionero persona = new ModeloCamionero();
         if (table.getSelectedRowCount() == 1) {
-            persona.setIdpersona(String.valueOf(table.getValueAt(table.getSelectedRow(), 0)));
+            persona.setId_ca(Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0)));
         } else {
             JOptionPane.showMessageDialog(null, "NECESITA SELECCIONAR UNA FILA PRIMERO");
         }
@@ -145,35 +199,46 @@ public class ControladorCamionero {
         }
     }
 
-    private void buscarPersona() {
-        ModeloPersona persona = new ModeloPersona();
-        persona.setIdpersona(String.valueOf(vista.getTxtBuscar().getText()));
-        List<Persona> listap = persona.SearchListPersonas();
+    private void buscarCamionero() {
+        ModeloCamionero persona = new ModeloCamionero();
+        persona.setDni(String.valueOf(vista.getTxtBuscar().getText()));
+        List<Camionero> listap = persona.SearchListCamioneros();
 
-        DefaultTableModel mTabla;
-        mTabla = (DefaultTableModel) vista.getTablePerson().getModel();
-        mTabla.setNumRows(0); //Limpio la tabla
+        if (!listap.isEmpty()) {
+            DefaultTableModel mTabla;
+            mTabla = (DefaultTableModel) vista.getTblCamionero().getModel();
+            mTabla.setNumRows(0); //Limpio la tabla
+            mTabla.setColumnCount(7);
+            mTabla.setColumnIdentifiers(new Object[]{"ID CAMIONERO", "DNI", "NOMBRE", "APELLIDO", "SALARIO", "TELEFONO", "DIRECCION", "POBLACION"});
+            vista.getTblCamionero().setModel(mTabla);
 
-        listap.stream().forEach(pe -> {
-            String[] filanueva = {pe.getIdpersona(), pe.getNombres(), String.valueOf(pe.getFechanac()), pe.getTelefono(), pe.getSexo(), String.valueOf(pe.getSueldo()), String.valueOf(pe.getCupo())};
-            mTabla.addRow(filanueva);
-        });
+            listap.stream().forEach(pe -> {
+                String[] filanueva = {String.valueOf(pe.getId_ca()), pe.getDni(), pe.getNombre(), pe.getApellido(), String.valueOf(pe.getSalario()), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
+                mTabla.addRow(filanueva);
+            });
+        }else{
+            JOptionPane.showMessageDialog(null, "NO SE HA ENCONTRADO EL CAMIONERO");
+        }
+
     }
 
     private boolean uploadDates(JTable table) throws ParseException {
         boolean a = false;
         if (table.getSelectedRowCount() == 1) {
             a = true;
-            vista.getTxtDni().setText((String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 0))));
-            vista.getTxtNombre().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 1)));
-            vista.getTxtApellido().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 2)));
-            vista.getTxtTelefono().setText(String.valueOf(vista.getTablePerson().getValueAt(vista.getTablePerson().getSelectedRow(), 3)));
-            vista.getTxtSex().setText(String.valueOf(vista.getTablePerson().getValueAt(vista.getTablePerson().getSelectedRow(), 4)));
-            vista.getTxtSalary().setText(String.valueOf(vista.getTablePerson().getValueAt(vista.getTablePerson().getSelectedRow(), 5)));
-            vista.getTxtCup().setText(String.valueOf(vista.getTablePerson().getValueAt(vista.getTablePerson().getSelectedRow(), 6)));
+            vista.getIdlbl().setText((String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 0))));
+            vista.getTxtDni().setText((String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 1))));
+            vista.getTxtNombre().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 2)));
+            vista.getTxtApellido().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 3)));
+            vista.getTxtSalario().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 4)));
+            vista.getTxtTelefono().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 5)));
+            vista.getTxtDireccion().setSelectedIndex(1);
+            vista.getTxtPoblacion().setSelectedIndex(1);
+//            vista.getTxtDireccion().setSelectedIndex((int) vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 5));
+//            vista.getTxtPoblacion().setSelectedIndex((int)vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 6));
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA DE LA TABLA");
         }
         return a;
-    }*/
+    }
 }

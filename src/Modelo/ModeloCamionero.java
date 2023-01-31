@@ -19,9 +19,9 @@ public class ModeloCamionero extends Camionero{
         super(id_ca, salario, id, dni, nombre, apellido, telefono, direccion, id_pob);
     }
     
-    public List<Persona> ListCamioneros() {
-        List<Persona> lista = new ArrayList<>();
-        String sql = "SELECT c.id_ca, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.salario_ca, p.direccion_per FROM Persona p Join Camionero c on(c.id_per=p.id_per)";
+    public List<Camionero> ListCamioneros() {
+        List<Camionero> lista = new ArrayList<>();
+        String sql = "SELECT c.id_ca, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.salario_ca, p.direccion_per, p.id_pob FROM Persona p Join Camionero c on(c.id_per=p.id_per) ORDER BY 1";
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
         try {
@@ -45,9 +45,10 @@ public class ModeloCamionero extends Camionero{
         }
     }
     
-    public List<Persona> SearchListCamioneros() {
-        List<Persona> lista = new ArrayList<>();
-        String sql = "SELECT c.id_ca, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.salario_ca, p.direccion_per FROM Persona p join Camionero c on(p.dni_per like '%" + getDni()+"%' AND p.id_per=c.id_per)";
+    public List<Camionero> SearchListCamioneros() {
+        List<Camionero> lista = new ArrayList<>();
+        String sql = "SELECT c.id_ca, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.salario_ca, p.direccion_per "
+                + "FROM Persona p join Camionero c on(p.dni_per like '%" + getDni()+"%' AND p.id_per=c.id_per) ORDER BY 1";
         
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
@@ -72,17 +73,20 @@ public class ModeloCamionero extends Camionero{
         }
     }
 
-    public SQLException GrabaClienteDB() {
-        String sql = "INSERT INTO Cliente (id_ca, salario_ca, id_per) VALUES ('" + getId_ca()+ "','" + getSalario()+ "',"
-                + "'" + getId()+ "')"; //REVISAR EL INSERT 
-
+    public SQLException GrabaPersonaDB() {
+        String sql = "INSERT ALL INTO Persona (id_per, dni_per, nombre_per, apellido_per, telefono_per, "
+                + "direccion_per, id_pob) VALUES ('" + getId() + "','" + getDni() + "',"
+                + "'" + getNombre() + "','" + getApellido() + "','" + getTelefono() + "','"
+                + getDireccion() + "','" + getId_pob() + "') INTO CAMIONERO (id_ca, salario_ca, id_per)"
+                + "VALUES (" + getId_ca() + ", " + getSalario() + ", " + getId() + ") SELECT * FROM DUAL";
+        
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);
         return ex;
     }
 
-    public SQLException EditClienteDB() {
-        String sql = "UPDATE Cliente SET salario_ca = '" + getSalario() +
+    public SQLException EditCamioneroDB() {
+        String sql = "UPDATE Camionero SET salario_ca = '" + getSalario() +
                 "' WHERE id_ca = '" + getId_ca()+ "'";
         
         ConnectionG2 con = new ConnectionG2();
@@ -91,10 +95,27 @@ public class ModeloCamionero extends Camionero{
     }
     
     public SQLException DeletePhisicPerson(){
-        String sql = "DELETE FROM Camionero WHERE id_cli = '" + getId_ca()+ "'";
+        String sql = "DELETE FROM Camionero WHERE id_ca = '" + getId_ca()+ "'";
         
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);
         return ex;
+    }
+    
+    public String NoSerie(){
+        String serie = "";
+        String sql ="SELECT MAX(id_ca) FROM Camionero";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+        
+        try{
+            while(rs.next()){
+                serie = rs.getString(1);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return serie;
     }
 }

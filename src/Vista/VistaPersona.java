@@ -8,6 +8,7 @@ package Vista;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author Andrea
  */
-public class VistaPersona extends javax.swing.JFrame {
+public class VistaPersona extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VistaCrudPaquetes
@@ -51,6 +52,8 @@ public class VistaPersona extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         txtDireccion = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        idlbl = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -65,7 +68,7 @@ public class VistaPersona extends javax.swing.JFrame {
 
         jLabel3.setText("DNI:");
 
-        jLabel4.setText("CAMIONERO");
+        jLabel4.setText("CREAR");
 
         jLabel5.setText("NOMBRE:");
 
@@ -87,6 +90,11 @@ public class VistaPersona extends javax.swing.JFrame {
 
         txtDireccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel11.setText("ID:");
+
+        idlbl.setText(" ");
+        idlbl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout DlgPersonaLayout = new javax.swing.GroupLayout(DlgPersona.getContentPane());
         DlgPersona.getContentPane().setLayout(DlgPersonaLayout);
         DlgPersonaLayout.setHorizontalGroup(
@@ -101,36 +109,40 @@ public class VistaPersona extends javax.swing.JFrame {
                     .addGroup(DlgPersonaLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel3)
                             .addComponent(jLabel10)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DlgPersonaLayout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(DlgPersonaLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDni)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtTelefono)
-                                    .addComponent(txtApellido)
-                                    .addComponent(txtSalario)
-                                    .addComponent(txtDireccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPoblacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(txtDni)
+                            .addComponent(txtNombre)
+                            .addComponent(txtTelefono)
+                            .addComponent(txtApellido)
+                            .addComponent(txtSalario)
+                            .addComponent(txtDireccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPoblacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(idlbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(121, 121, 121))
+            .addGroup(DlgPersonaLayout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DlgPersonaLayout.setVerticalGroup(
             DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DlgPersonaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(idlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,12 +170,14 @@ public class VistaPersona extends javax.swing.JFrame {
                 .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(DlgPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
                 .addGap(45, 45, 45))
         );
+
+        setClosable(true);
 
         jLabel1.setText("Buscar:");
 
@@ -399,6 +413,14 @@ public class VistaPersona extends javax.swing.JFrame {
         this.txtPoblacion = txtPoblacion;
     }
 
+    public JLabel getIdlbl() {
+        return idlbl;
+    }
+
+    public void setIdlbl(JLabel idlbl) {
+        this.idlbl = idlbl;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog DlgPersona;
     private javax.swing.JButton btnAceptar;
@@ -408,8 +430,10 @@ public class VistaPersona extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnImprimir;
+    private javax.swing.JLabel idlbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -1,5 +1,7 @@
 package Controlador;
 
+import Modelo.Cliente;
+import Modelo.ModeloCliente;
 import Modelo.ModeloPersona;
 import Modelo.Persona;
 import Vista.VistaPersona;
@@ -15,13 +17,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ControladorCliente {
 
-    private ModeloPersona modelo;
+    private ModeloCliente modelo;
     private VistaPersona vista;
 
     public ControladorCliente() {
     }
 
-    public ControladorCliente(ModeloPersona modelo, VistaPersona vista) {
+    public ControladorCliente(ModeloCliente modelo, VistaPersona vista) {
         this.modelo = modelo;
         this.vista = vista;
 
@@ -34,7 +36,7 @@ public class ControladorCliente {
 
     private void cargaClientes() {
         //Control para consultar a la BD/modelo y luego cargar en la vista
-        List<Persona> listap = modelo.ListPersonas();
+        List<Cliente> listap = modelo.ListClientes();
 
         DefaultTableModel mTabla;
         mTabla = new DefaultTableModel();
@@ -45,7 +47,7 @@ public class ControladorCliente {
         
 
         listap.stream().forEach(pe -> {
-            String[] filanueva = {String.valueOf(pe.getId()), pe.getDni(), pe.getNombre(), pe.getApellido(), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
+            String[] filanueva = {String.valueOf(pe.getId_cli()), pe.getDni(), pe.getNombre(), pe.getApellido(), pe.getCorreo(), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
             mTabla.addRow(filanueva);
         });
     }
