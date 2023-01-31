@@ -34,6 +34,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnViaje = new javax.swing.JButton();
         btnPaquete = new javax.swing.JButton();
         btnPoblacion = new javax.swing.JButton();
+        btnTipoCamion = new javax.swing.JButton();
         deskoptMain = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -92,6 +93,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnPoblacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPoblacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnPoblacion);
+
+        btnTipoCamion.setText("Tipo Camion");
+        btnTipoCamion.setFocusable(false);
+        btnTipoCamion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTipoCamion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnTipoCamion);
 
         javax.swing.GroupLayout deskoptMainLayout = new javax.swing.GroupLayout(deskoptMain);
         deskoptMain.setLayout(deskoptMainLayout);
@@ -211,6 +218,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public void setBtnPoblacion(JButton btnPoblacion) {
         this.btnPoblacion = btnPoblacion;
     }
+
+    public JButton getBtnTipoCamion() {
+        return btnTipoCamion;
+    }
+
+    public void setBtnTipoCamion(JButton btnTipoCamion) {
+        this.btnTipoCamion = btnTipoCamion;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCamion;
@@ -219,6 +234,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPaquete;
     private javax.swing.JButton btnPoblacion;
     private javax.swing.JButton btnProvincia;
+    private javax.swing.JButton btnTipoCamion;
     private javax.swing.JButton btnViaje;
     private javax.swing.JDesktopPane deskoptMain;
     private javax.swing.JMenu jMenu1;

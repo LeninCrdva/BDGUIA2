@@ -1,13 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package Vista;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -15,86 +12,13 @@ import javax.swing.JTextField;
  *
  * @author Lenin
  */
-public class VistaViaje extends javax.swing.JFrame {
+public class VistaViaje extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form asd
+     * Creates new form VistaViaje
      */
     public VistaViaje() {
         initComponents();
-        
-    }
-
-    public JButton getBtn_actualizar() {
-        return btn_actualizar;
-    }
-
-    public void setBtn_actualizar(JButton btn_actualizar) {
-        this.btn_actualizar = btn_actualizar;
-    }
-
-    public JButton getBtn_buscar() {
-        return btn_buscar;
-    }
-
-    public void setBtn_buscar(JButton btn_buscar) {
-        this.btn_buscar = btn_buscar;
-    }
-
-    public JButton getBtn_eliminar() {
-        return btn_eliminar;
-    }
-
-    public void setBtn_eliminar(JButton btn_eliminar) {
-        this.btn_eliminar = btn_eliminar;
-    }
-
-    public JButton getBtn_modificar() {
-        return btn_modificar;
-    }
-
-    public void setBtn_modificar(JButton btn_modificar) {
-        this.btn_modificar = btn_modificar;
-    }
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
-
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
-
-    public JLabel getLabel_buscar() {
-        return label_buscar;
-    }
-
-    public void setLabel_buscar(JLabel label_buscar) {
-        this.label_buscar = label_buscar;
-    }
-
-    public JPanel getPanel_vista_camion_camionero() {
-        return panel_vista_camion_camionero;
-    }
-
-    public void setPanel_vista_camion_camionero(JPanel panel_vista_camion_camionero) {
-        this.panel_vista_camion_camionero = panel_vista_camion_camionero;
-    }
-
-    public JTable getTabla_Camion_Camionero() {
-        return tabla_Camion_Camionero;
-    }
-
-    public void setTabla_Camion_Camionero(JTable tabla_Camion_Camionero) {
-        this.tabla_Camion_Camionero = tabla_Camion_Camionero;
-    }
-
-    public JTextField getTxt_buscar() {
-        return txt_buscar;
-    }
-
-    public void setTxt_buscar(JTextField txt_buscar) {
-        this.txt_buscar = txt_buscar;
     }
 
     /**
@@ -106,139 +30,149 @@ public class VistaViaje extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel_vista_camion_camionero = new javax.swing.JPanel();
-        label_buscar = new javax.swing.JLabel();
-        txt_buscar = new javax.swing.JTextField();
-        btn_buscar = new javax.swing.JButton();
-        btn_eliminar = new javax.swing.JButton();
-        btn_modificar = new javax.swing.JButton();
-        btn_actualizar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        TxtBuscar = new javax.swing.JTextField();
+        BtnActualizar = new javax.swing.JButton();
+        BtnCrear = new javax.swing.JButton();
+        BtnEliminar = new javax.swing.JButton();
+        BtnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla_Camion_Camionero = new javax.swing.JTable();
+        TblViaje = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel1.setText("BUSCAR");
 
-        label_buscar.setText("BUSCAR:");
+        BtnActualizar.setText("Actualizar");
 
-        txt_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_buscarActionPerformed(evt);
-            }
-        });
+        BtnCrear.setText("Crear");
 
-        btn_buscar.setText("NUEVO");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
-            }
-        });
+        BtnEliminar.setText("Eliminar");
 
-        btn_eliminar.setText("ELIMINAR");
-        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminarActionPerformed(evt);
-            }
-        });
+        BtnEditar.setText("Editar");
 
-        btn_modificar.setText("MODIFICAR");
-        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_modificarActionPerformed(evt);
-            }
-        });
-
-        btn_actualizar.setText("ACTUALIZAR");
-        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_actualizarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panel_vista_camion_camioneroLayout = new javax.swing.GroupLayout(panel_vista_camion_camionero);
-        panel_vista_camion_camionero.setLayout(panel_vista_camion_camioneroLayout);
-        panel_vista_camion_camioneroLayout.setHorizontalGroup(
-            panel_vista_camion_camioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_vista_camion_camioneroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label_buscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_buscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_eliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_modificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_actualizar)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-        panel_vista_camion_camioneroLayout.setVerticalGroup(
-            panel_vista_camion_camioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_vista_camion_camioneroLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(panel_vista_camion_camioneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_buscar)
-                    .addComponent(btn_buscar)
-                    .addComponent(btn_eliminar)
-                    .addComponent(btn_modificar)
-                    .addComponent(btn_actualizar))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(panel_vista_camion_camionero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 630, 80));
-
-        tabla_Camion_Camionero.setModel(new javax.swing.table.DefaultTableModel(
+        TblViaje.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "id_cam_ca", "id_cam", "id_ca", "fecha_conduccion"
+                "ID VIAJE", "CAMION", "CAMIONERO", "FECHA CONDUCCION", "FECHA LLEGADA"
             }
         ));
-        jScrollPane1.setViewportView(tabla_Camion_Camionero);
+        jScrollPane1.setViewportView(TblViaje);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 590, 150));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnCrear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnEditar)
+                .addContainerGap(123, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnActualizar)
+                    .addComponent(BtnCrear)
+                    .addComponent(BtnEliminar)
+                    .addComponent(BtnEditar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_buscarActionPerformed
+    public JButton getBtnActualizar() {
+        return BtnActualizar;
+    }
 
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_buscarActionPerformed
+    public void setBtnActualizar(JButton BtnActualizar) {
+        this.BtnActualizar = BtnActualizar;
+    }
 
-    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_eliminarActionPerformed
+    public JButton getBtnCrear() {
+        return BtnCrear;
+    }
 
-    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_modificarActionPerformed
+    public void setBtnCrear(JButton BtnCrear) {
+        this.BtnCrear = BtnCrear;
+    }
 
-    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_actualizarActionPerformed
+    public JButton getBtnEditar() {
+        return BtnEditar;
+    }
 
-    /**
-     * @param args the command line arguments
-     */
+    public void setBtnEditar(JButton BtnEditar) {
+        this.BtnEditar = BtnEditar;
+    }
 
+    public JButton getBtnEliminar() {
+        return BtnEliminar;
+    }
 
+    public void setBtnEliminar(JButton BtnEliminar) {
+        this.BtnEliminar = BtnEliminar;
+    }
+
+    public JTable getTblViaje() {
+        return TblViaje;
+    }
+
+    public void setTblViaje(JTable TblViaje) {
+        this.TblViaje = TblViaje;
+    }
+
+    public JTextField getTxtBuscar() {
+        return TxtBuscar;
+    }
+
+    public void setTxtBuscar(JTextField TxtBuscar) {
+        this.TxtBuscar = TxtBuscar;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_actualizar;
-    private javax.swing.JButton btn_buscar;
-    private javax.swing.JButton btn_eliminar;
-    private javax.swing.JButton btn_modificar;
+    private javax.swing.JButton BtnActualizar;
+    private javax.swing.JButton BtnCrear;
+    private javax.swing.JButton BtnEditar;
+    private javax.swing.JButton BtnEliminar;
+    private javax.swing.JTable TblViaje;
+    private javax.swing.JTextField TxtBuscar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel label_buscar;
-    private javax.swing.JPanel panel_vista_camion_camionero;
-    private javax.swing.JTable tabla_Camion_Camionero;
-    private javax.swing.JTextField txt_buscar;
     // End of variables declaration//GEN-END:variables
 }
