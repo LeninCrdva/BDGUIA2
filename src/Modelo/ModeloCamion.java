@@ -18,7 +18,7 @@ public class ModeloCamion extends Camion {
     
     public List<Camion> ListarCamiones() {
         List<Camion> lista = new ArrayList<>();
-        String sql = "SELECT ID_CAM, MATRICULA_CAM, MODELO_CAM, ID_TIP, POTENCIA FROM CAMION";
+        String sql = "SELECT ID_CAM, MATRICULA_CAM, MODELO_CAM, ID_TIP, POTENCIA FROM CAMION ORDER BY 1";
         ConnectionG2 conOracle = new ConnectionG2();
         ResultSet rs = conOracle.Consulta(sql);
         try {
@@ -40,17 +40,50 @@ public class ModeloCamion extends Camion {
     
     public SQLException InsertaCamion() {
         String sql = "INSERT INTO CAMION (ID_CAM, MATRICULA_CAM, MODELO_CAM, ID_TIP, POTENCIA) VALUES "
-                + "(" + getId_cam() + ", '" + getMatricula_cam() + "', '" + getModelo_cam() + "', " + getId_tip() + 
+                + "(" + Id_cam() + ", UPPER('"+ getMatricula_cam() + "'), UPPER('" + getModelo_cam() + "'), " + getId_tip() + 
                 ", " + getPotencia_cam() + ")";
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);
         return ex;
     }
     
+    // ??????
+    public int Id_cam() {
+        String sql = "SELECT MAX(ID_CAM) FROM CAMION";
+        ConnectionG2 con = new ConnectionG2();
+        int id = 1;
+        ResultSet rs = con.Consulta(sql);
+        try {
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            rs.close();
+            return id;
+        } catch (SQLException e) {
+            System.out.println(id);
+            return id;
+        }
+    }
+    
+    public boolean ObtieneMatricula(String mat) {
+        String sql = "SELECT MATRICULA_CAM FROM CAMION WHERE MATRICULA_CAM = '" + mat + "'";
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+        boolean existe;
+        try {
+            existe = rs.next();
+            rs.close();
+            return existe;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    
     public List<Camion> BuscarCamion(String search) {
             List<Camion> lista = new ArrayList<>();
             String sql = "SELECT ID_CAM, MATRICULA_CAM, MODELO_CAM, ID_TIP, POTENCIA "
-                + "FROM CAMION WHERE MATRICULA_CAM LIKE '%" + search + "%' OR MODELO LIKE '%" + search + "%'";
+                + "FROM CAMION WHERE MATRICULA_CAM LIKE '%" + search + "%' OR MODELO_CAM LIKE '%" + search + "%'";
             ConnectionG2 conpq = new ConnectionG2();
             ResultSet rs = conpq.Consulta(sql);
         try {            
@@ -80,7 +113,7 @@ public class ModeloCamion extends Camion {
     }
 
     public SQLException EliminarCamion(String matricula) {
-        String sql = "DELETE FROM CAMION WHERE MATRICULA_CAM LIKE '" + matricula + "'";
+        String sql = "DELETE FROM CAMION WHERE MATRICULA_CAM = '" + matricula + "'";
         
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);

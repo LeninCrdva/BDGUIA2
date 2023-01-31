@@ -8,6 +8,10 @@ public class Tipo_camion {
     public Tipo_camion() {
     }
 
+    public Tipo_camion(int id_tip) {
+        this.id_tip = id_tip;
+    }
+
     public Tipo_camion(int id_tip, String nombre_tipo) {
         this.id_tip = id_tip;
         this.nombre_tipo = nombre_tipo;
@@ -27,5 +31,10 @@ public class Tipo_camion {
 
     public void setNombre_tipo(String nombre_tipo) {
         this.nombre_tipo = nombre_tipo;
-    }    
+    }   
+
+    @Override
+    public String toString() {
+        return nombre_tipo;
+    }
 }

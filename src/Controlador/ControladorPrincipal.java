@@ -35,7 +35,7 @@ public class ControladorPrincipal {
         ControladorCamion cc = new ControladorCamion(md, vc, mtp, vtc);
         cc.IniciaControl();
     }
-
+    
     public void CrudCamionero() {
         VistaPersona vper = new VistaPersona();
         ModeloCamionero mc = new ModeloCamionero();
