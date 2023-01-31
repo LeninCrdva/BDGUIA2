@@ -30,12 +30,9 @@ public class ControladorPrincipal {
         VistaCamion vc = new VistaCamion();
         ModeloCamion md = new ModeloCamion();
         ModeloTipoCam mtp = new ModeloTipoCam();
-        //VistaTipoCamion vtc = new VistaTipoCamion();
-
-        vp.getdeskoptMain().add(vc);
-        
-        ControladorCamion cc = new ControladorCamion(md, vc);
-        //ControladorCamion cc = new ControladorCamion(md, vc, mtp, vtc);
+        VistaTipoCamion vtc = new VistaTipoCamion();
+        vp.getjDesktopPane1().add(vc);
+        ControladorCamion cc = new ControladorCamion(md, vc, mtp, vtc);
         cc.IniciaControl();
     }
 
