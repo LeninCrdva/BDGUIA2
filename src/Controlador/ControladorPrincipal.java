@@ -21,28 +21,26 @@ public class ControladorPrincipal {
         vp.getBtnCamion().addActionListener(l -> CrudCamion());
         vp.getBtnCamionero().addActionListener(l -> abrirDialogo(1));
         vp.getBtnCliente().addActionListener(l -> abrirDialogo(2));
-        vistaPrincipal.getBtnPaquete().addActionListener(l->iniciarVistaPaquete());
-        vistaPrincipal.getBtnProvincia().addActionListener(l->iniciarVistaProvincia());
+        vp.getBtnPaquete().addActionListener(l->iniciarVistaPaquete());
+        vp.getBtnProvincia().addActionListener(l->iniciarVistaProvincia());
+        vp.getBtnPoblacion().addActionListener(l ->iniciarVistaPoblacion());
     }
 
     public void CrudCamion() {
         VistaCamion vc = new VistaCamion();
         ModeloCamion md = new ModeloCamion();
         ModeloTipoCam mtp = new ModeloTipoCam();
-        //VistaTipoCamion vtc = new VistaTipoCamion();
-
-        vp.getdesktopMain().add(vc);
-        
-        ControladorCamion cc = new ControladorCamion(md, vc);
-        //ControladorCamion cc = new ControladorCamion(md, vc, mtp, vtc);
+        VistaTipoCamion vtc = new VistaTipoCamion();
+        vp.getjDesktopPane1().add(vc);
+        ControladorCamion cc = new ControladorCamion(md, vc, mtp, vtc);
         cc.IniciaControl();
     }
-
+    
     public void CrudCamionero() {
         VistaPersona vper = new VistaPersona();
         ModeloCamionero mc = new ModeloCamionero();
 
-        vp.getdesktopMain().add(vper);
+        vp.getdeskoptMain().add(vper);
 
         ControladorCamionero cc = new ControladorCamionero(mc, vper);
         cc.iniciaControl();
@@ -64,7 +62,7 @@ public class ControladorPrincipal {
         
         vper.setTitle(title);
         
-        vp.getdesktopMain().add(vper);
+        vp.getdeskoptMain().add(vper);
 
         if(vper.getName().equals("camionero")){
             ControladorCamionero cc = new ControladorCamionero(mc, vper);
@@ -78,17 +76,33 @@ public class ControladorPrincipal {
     private void iniciarVistaPaquete(){
         VistaPaquete vista=new VistaPaquete();
         ModeloPaquete modelo=new ModeloPaquete();
-        vistaPrincipal.getEscritorio().add(vista);
+        
+        vp.getdeskoptMain().add(vista);
+        
         vista.setVisible(true);
         ControladorPaquete control=new ControladorPaquete(modelo,vista);
         control.iniciarControl();
     }
+    
     private void iniciarVistaProvincia(){
         VistaProvincia vista=new VistaProvincia();
         ModeloProvincia modelo=new ModeloProvincia();
-        vistaPrincipal.getEscritorio().add(vista);
+        
+        vp.getdeskoptMain().add(vista);
+        
         vista.setVisible(true);
         ControladorProvincia control=new ControladorProvincia(modelo,vista);
+        control.iniciarControl();
+    }
+    
+    private void iniciarVistaPoblacion(){
+        VistaPoblacion vista=new VistaPoblacion();
+        ModeloPoblacion modelo=new ModeloPoblacion();
+        
+        vp.getdeskoptMain().add(vista);
+        
+        vista.setVisible(true);
+        ControladorPoblacion control=new ControladorPoblacion(modelo,vista);
         control.iniciarControl();
     }
 }

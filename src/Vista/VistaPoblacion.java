@@ -8,6 +8,7 @@ package Vista;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -39,6 +40,8 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        labelid = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -50,6 +53,7 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
         jScrollPane = new javax.swing.JScrollPane();
         tblProvincia = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
 
         jLabel4.setText("POBLACION");
 
@@ -58,6 +62,8 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
         btnAceptar.setText("ACEPTAR");
 
         btnCancelar.setText("CANCELAR");
+
+        jLabel3.setText("ID:");
 
         javax.swing.GroupLayout DigProvinciaLayout = new javax.swing.GroupLayout(DigProvincia.getContentPane());
         DigProvincia.getContentPane().setLayout(DigProvinciaLayout);
@@ -69,15 +75,19 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
                         .addGap(197, 197, 197)
                         .addComponent(jLabel4))
                     .addGroup(DigProvinciaLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DigProvinciaLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(btnAceptar)
                         .addGap(91, 91, 91)
-                        .addComponent(btnCancelar)))
+                        .addComponent(btnCancelar))
+                    .addGroup(DigProvinciaLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(DigProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DigProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(labelid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
         DigProvinciaLayout.setVerticalGroup(
@@ -85,7 +95,11 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
             .addGroup(DigProvinciaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addGap(56, 56, 56)
+                .addGap(24, 24, 24)
+                .addGroup(DigProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(labelid, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(DigProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -95,6 +109,8 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
                     .addComponent(btnCancelar))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
+
+        setClosable(true);
 
         jLabel1.setText("Buscar:");
 
@@ -126,6 +142,8 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
         jLabel2.setText("TRANSPORTES S.A");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        btnBuscar.setText("Buscar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,7 +153,9 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(14, 14, 14)
+                .addComponent(btnBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCrear)
@@ -143,12 +163,12 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
                 .addComponent(btnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnImprimir)
                 .addGap(55, 55, 55))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -166,11 +186,12 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
                     .addComponent(btnCrear)
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar)
-                    .addComponent(btnImprimir))
+                    .addComponent(btnImprimir)
+                    .addComponent(btnBuscar))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -275,12 +296,28 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
     public void setTxtNombre(JTextField txtNombre) {
         this.txtNombre = txtNombre;
     }
-    
+
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+
+    public JLabel getLabelid() {
+        return labelid;
+    }
+
+    public void setLabelid(JLabel labelid) {
+        this.labelid = labelid;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog DigProvincia;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
@@ -288,10 +325,12 @@ public class VistaPoblacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JLabel labelid;
     private javax.swing.JTable tblProvincia;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtNombre;

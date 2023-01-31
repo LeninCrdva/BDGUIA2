@@ -27,16 +27,16 @@ public class ModeloProvincia extends Provincia{
     public List<Provincia> listaProvincia(){
         try{
             List<Provincia> lista=new ArrayList<>();
-            String sql="SELECT codigo_pro,nombre_pro FROM PROVINCIA";
+            String sql="SELECT id_pro,codigo_pro,nombre_pro FROM PROVINCIA ORDER BY 1";
             ConnectionG2 con=new ConnectionG2();
-            ResultSet rs=con.Consulta(sql);
-            while (rs.next()) {
-                Provincia pr=new Provincia(rs.getString("codigo_pro"),rs.getString("nombre_pro"));
-                lista.add(pr);
+            try (ResultSet rs = con.Consulta(sql)) {
+                while (rs.next()) {
+                    Provincia pr=new Provincia(rs.getString("codigo_pro"),rs.getString("nombre_pro"));
+                    lista.add(pr);
+                }
             }
-            rs.close();
             return lista;
-        }catch (Exception ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
@@ -44,16 +44,16 @@ public class ModeloProvincia extends Provincia{
     public List<Provincia> buscaProvincia(String nombre){
         try{
             List<Provincia> lista=new ArrayList<>();
-            String sql="SELECT codigo_pro,nombre_pro FROM PROVINCIA WHERE nombre_pro LIKE '%"+nombre+"%' OR codigo_pro LIKE '%"+nombre+"%'";
+            String sql="SELECT codigo_pro,nombre_pro FROM PROVINCIA WHERE nombre_pro LIKE '%"+nombre+"%' OR codigo_pro LIKE '%"+nombre+"%' ORDER BY 1";
             ConnectionG2 con=new ConnectionG2();
-            ResultSet rs=con.Consulta(sql);
-            while (rs.next()) {
-                Provincia pr=new Provincia(rs.getString("codigo_pro"),rs.getString("nombre_pro"));
-                lista.add(pr);
+            try (ResultSet rs = con.Consulta(sql)) {
+                while (rs.next()) {
+                    Provincia pr=new Provincia(rs.getString("codigo_pro"),rs.getString("nombre_pro"));
+                    lista.add(pr);
+                }
             }
-            rs.close();
             return lista;
-        }catch (Exception ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
@@ -103,16 +103,12 @@ public class ModeloProvincia extends Provincia{
         }
     }
     public boolean buscarProvincia(String codigo) throws SQLException{
-        boolean test=false;
+        boolean test;
         ConnectionG2 con=new ConnectionG2();
         String sql="SELECT id_pro FROM PROVINCIA WHERE codigo_pro='"+codigo+"'";
-        ResultSet re=con.Consulta(sql);
-        if (re.next()) {
-            test=true;
-        }else{test=false;}
-        re.close();
+        try (ResultSet re = con.Consulta(sql)) {
+            test = re.next();
+        }
         return test;
     }
-    
-    
 }

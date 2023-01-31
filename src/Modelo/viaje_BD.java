@@ -9,6 +9,6 @@ package Modelo;
  *
  * @author VICO5
  */
-public class Camion_Camionero_BD {
+public class viaje_BD {
     
 }

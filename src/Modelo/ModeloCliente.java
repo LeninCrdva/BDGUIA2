@@ -117,4 +117,22 @@ public class ModeloCliente extends Cliente{
         }
         return serie;
     }
+    
+    public int getIdPer(int id_cli){
+        int id = 0;
+        String sql = "SELECT ID_PER FROM CLIENTE WHERE(ID_CCLI="+ id_cli +")";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+
+        try{
+            while(rs.next()){
+                id = rs.getInt(1);
+            }
+            rs.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return id;
+    }
 }
