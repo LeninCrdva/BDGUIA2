@@ -2,9 +2,6 @@ package Controlador;
 
 import Vista.*;
 import Modelo.*;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +21,8 @@ public class ControladorPrincipal {
         vp.getBtnCamion().addActionListener(l -> CrudCamion());
         vp.getBtnCamionero().addActionListener(l -> abrirDialogo(1));
         vp.getBtnCliente().addActionListener(l -> abrirDialogo(2));
+        vistaPrincipal.getBtnPaquete().addActionListener(l->iniciarVistaPaquete());
+        vistaPrincipal.getBtnProvincia().addActionListener(l->iniciarVistaProvincia());
     }
 
     public void CrudCamion() {
@@ -74,5 +73,22 @@ public class ControladorPrincipal {
             ControladorCliente cc = new ControladorCliente(mcli, vper);
             cc.iniciaControl();
         }
+    }
+    
+    private void iniciarVistaPaquete(){
+        VistaPaquete vista=new VistaPaquete();
+        ModeloPaquete modelo=new ModeloPaquete();
+        vistaPrincipal.getEscritorio().add(vista);
+        vista.setVisible(true);
+        ControladorPaquete control=new ControladorPaquete(modelo,vista);
+        control.iniciarControl();
+    }
+    private void iniciarVistaProvincia(){
+        VistaProvincia vista=new VistaProvincia();
+        ModeloProvincia modelo=new ModeloProvincia();
+        vistaPrincipal.getEscritorio().add(vista);
+        vista.setVisible(true);
+        ControladorProvincia control=new ControladorProvincia(modelo,vista);
+        control.iniciarControl();
     }
 }
