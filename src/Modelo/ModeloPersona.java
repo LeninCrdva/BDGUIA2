@@ -109,4 +109,21 @@ public class ModeloPersona extends Persona {
         SQLException ex = con.Accion(sql);
         return ex;
     }
+    
+    public String NoSerie(){
+        String serie = "";
+        String sql ="SELECT MAX(id_per) FROM Persona";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+        
+        try{
+            while(rs.next()){
+                serie = rs.getString(1);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return serie;
+    }
 }
