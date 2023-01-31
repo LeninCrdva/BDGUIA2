@@ -26,10 +26,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopMain = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
         btnCamion = new javax.swing.JButton();
-        btnPersona = new javax.swing.JButton();
+        btnCamionero = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
         btnProvincia = new javax.swing.JButton();
         btnViaje = new javax.swing.JButton();
         btnPaquete = new javax.swing.JButton();
@@ -40,8 +41,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(desktopMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 820, 430));
+        javax.swing.GroupLayout desktopMainLayout = new javax.swing.GroupLayout(desktopMain);
+        desktopMain.setLayout(desktopMainLayout);
+        desktopMainLayout.setHorizontalGroup(
+            desktopMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        desktopMainLayout.setVerticalGroup(
+            desktopMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 430, Short.MAX_VALUE)
+        );
 
         jToolBar1.setRollover(true);
 
@@ -52,11 +61,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnCamion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnCamion);
 
-        btnPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grupo-de-chat.png"))); // NOI18N
-        btnPersona.setFocusable(false);
-        btnPersona.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersona.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnPersona);
+        btnCamionero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/camionero.png"))); // NOI18N
+        btnCamionero.setToolTipText("Camioneros");
+        btnCamionero.setFocusable(false);
+        btnCamionero.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCamionero.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnCamionero);
+
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/receptor.png"))); // NOI18N
+        btnCliente.setToolTipText("Clientes");
+        btnCliente.setFocusable(false);
+        btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnCliente);
 
         btnProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ecuador.png"))); // NOI18N
         btnProvincia.setToolTipText("Provincias");
@@ -79,8 +96,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnPaquete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnPaquete);
 
-        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 25));
-
         jMenu1.setText("Personas");
 
         jMenuItem1.setText("Cliente");
@@ -98,8 +113,32 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+            .addComponent(desktopMain)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(desktopMain)
+                .addGap(33, 33, 33))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public JDesktopPane getEscritorio() {
+        return escritorio;
+    }
+
+    public void setEscritorio(JDesktopPane escritorio) {
+        this.escritorio = escritorio;
+    }
 
     public JButton getBtnCamion() {
         return btnCamion;
@@ -117,12 +156,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.btnPaquete = btnPaquete;
     }
 
-    public JButton getBtnPersona() {
-        return btnPersona;
+    public JButton getBtnCamionero() {
+        return btnCamionero;
     }
 
-    public void setBtnPersona(JButton btnPersona) {
-        this.btnPersona = btnPersona;
+    public void setBtnCamionero(JButton btnCamionero) {
+        this.btnCamionero = btnCamionero;
     }
 
     public JButton getBtnProvincia() {
@@ -141,11 +180,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.btnViaje = btnViaje;
     }
 
-    public JDesktopPane getjDesktopPane1() {
+    public JDesktopPane getdesktopMain() {
         return desktopMain;
     }
 
-    public void setjDesktopPane1(JDesktopPane jDesktopPane1) {
+    public void setdesktopMain(JDesktopPane jDesktopPane1) {
         this.desktopMain = jDesktopPane1;
     }
 
@@ -156,15 +195,24 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public void setjToolBar1(JToolBar jToolBar1) {
         this.jToolBar1 = jToolBar1;
     }
+
+    public JButton getBtnCliente() {
+        return btnCliente;
+    }
+
+    public void setBtnCliente(JButton btnCliente) {
+        this.btnCliente = btnCliente;
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCamion;
+    private javax.swing.JButton btnCamionero;
+    private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnPaquete;
-    private javax.swing.JButton btnPersona;
     private javax.swing.JButton btnProvincia;
     private javax.swing.JButton btnViaje;
-    private javax.swing.JDesktopPane desktopMain;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

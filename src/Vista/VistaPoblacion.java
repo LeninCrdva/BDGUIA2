@@ -15,12 +15,12 @@ import javax.swing.JTextField;
  *
  * @author Andrea
  */
-public class VistaProvincia extends javax.swing.JInternalFrame {
+public class VistaPoblacion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VistaCrudPaquetes
      */
-    public VistaProvincia() {
+    public VistaPoblacion() {
         initComponents();
     }
 
@@ -34,10 +34,8 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         DigProvincia = new javax.swing.JDialog();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -52,11 +50,8 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
         jScrollPane = new javax.swing.JScrollPane();
         tblProvincia = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
 
-        jLabel3.setText("CODIGO:");
-
-        jLabel4.setText("PROVINCIA");
+        jLabel4.setText("POBLACION");
 
         jLabel5.setText("NOMBRE:");
 
@@ -75,15 +70,9 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4))
                     .addGroup(DigProvinciaLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(DigProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(DigProvinciaLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DigProvinciaLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNombre))))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DigProvinciaLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(btnAceptar)
@@ -96,11 +85,7 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
             .addGroup(DigProvinciaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addGap(25, 25, 25)
-                .addGroup(DigProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(56, 56, 56)
                 .addGroup(DigProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -125,13 +110,13 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
 
         tblProvincia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "CODIGO", "NOMBRE"
+                "NOMBRE"
             }
         ));
         jScrollPane.setViewportView(tblProvincia);
@@ -140,8 +125,6 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("TRANSPORTES S.A");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        btnBuscar.setText("Buscar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -152,17 +135,15 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(51, 51, 51)
                 .addComponent(btnActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCrear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                 .addComponent(btnImprimir)
                 .addGap(55, 55, 55))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -185,12 +166,11 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
                     .addComponent(btnCrear)
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar)
-                    .addComponent(btnImprimir)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnImprimir))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -207,14 +187,6 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public JButton getBtnBuscar() {
-        return btnBuscar;
-    }
-
-    public void setBtnBuscar(JButton btnBuscar) {
-        this.btnBuscar = btnBuscar;
-    }
 
     public JDialog getDigProvincia() {
         return DigProvincia;
@@ -296,14 +268,6 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
         this.txtBuscar = txtBuscar;
     }
 
-    public JTextField getTxtCodigo() {
-        return txtCodigo;
-    }
-
-    public void setTxtCodigo(JTextField txtCodigo) {
-        this.txtCodigo = txtCodigo;
-    }
-
     public JTextField getTxtNombre() {
         return txtNombre;
     }
@@ -317,7 +281,6 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
     private javax.swing.JDialog DigProvincia;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
@@ -325,14 +288,12 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable tblProvincia;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
