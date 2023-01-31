@@ -48,7 +48,8 @@ public class ModeloCamionero extends Camionero{
     public List<Camionero> SearchListCamioneros() {
         List<Camionero> lista = new ArrayList<>();
         String sql = "SELECT c.id_ca, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.salario_ca, p.direccion_per "
-                + "FROM Persona p join Camionero c on(p.dni_per like '%" + getDni()+"%' AND p.id_per=c.id_per) ORDER BY 1";
+                + "FROM Persona p join Camionero c on(p.dni_per like '%" + getDni()+"%' AND p.id_per=c.id_per "
+                + "OR p.nombre_per like '%" + getDni()+"%' OR p.apellido_per like '%" + getDni()+"%' ) ORDER BY 1";
         
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
@@ -86,8 +87,8 @@ public class ModeloCamionero extends Camionero{
     }
 
     public SQLException EditCamioneroDB() {
-        String sql = "UPDATE Camionero SET salario_ca = '" + getSalario() +
-                "' WHERE id_ca = '" + getId_ca()+ "'";
+        String sql = "UPDATE Camionero SET salario_ca = " + getSalario() +
+                " WHERE id_ca = " + getId_ca()+ "";
         
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);
@@ -113,9 +114,28 @@ public class ModeloCamionero extends Camionero{
             while(rs.next()){
                 serie = rs.getString(1);
             }
+            rs.close();
         }catch(SQLException e){
             System.out.println(e);
         }
         return serie;
+    }
+    
+    public int getIdPer(int id_ca){
+        int id = 0;
+        String sql = "SELECT ID_PER FROM CAMIONERO WHERE(ID_CA="+ id_ca +")";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+
+        try{
+            while(rs.next()){
+                id = rs.getInt(1);
+            }
+            rs.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return id;
     }
 }

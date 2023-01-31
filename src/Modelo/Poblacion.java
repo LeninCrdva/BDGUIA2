@@ -34,6 +34,6 @@ public class Poblacion {
 
     @Override
     public String toString() {
-        return "ID: " + id + "NOMBRE: " + nombre;
+        return id + ": " + nombre;
     }
 }

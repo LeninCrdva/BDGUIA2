@@ -3,6 +3,10 @@ package Controlador;
 import Modelo.Camionero;
 import Modelo.ModeloCamionero;
 import Modelo.ModeloPersona;
+import Modelo.ModeloPoblacion;
+import Modelo.ModeloProvincia;
+import Modelo.Poblacion;
+import Modelo.Provincia;
 import Vista.VistaPersona;
 import java.text.ParseException;
 import java.util.List;
@@ -31,11 +35,15 @@ public class ControladorCamionero {
     }
 
     public void iniciaControl() {
+        cargaCamioneros();
+        cargarComboPoblacion();
+        cargarComboProvincia();
         vista.getBtnActualizar().addActionListener(l -> cargaCamioneros());
         vista.getBtnCrear().addActionListener(l -> abrirDialogo(1));
         vista.getBtnEditar().addActionListener(l -> abrirDialogo(2));
         vista.getBtnAceptar().addActionListener(l -> crearEditarPersona());
         vista.getTxtBuscar().addActionListener(l -> buscarCamionero());
+        vista.getBtnCancelar().addActionListener(l -> vista.getDigCamionero().dispose());
     }
 
     private void cargaCamioneros() {
@@ -72,23 +80,26 @@ public class ControladorCamionero {
             }
         }
 
+        int prevent = 0;
         if (openwindow) {
             vista.getDigCamionero().setLocationRelativeTo(vista.getBtnCrear());
             vista.getDigCamionero().setSize(500, 400);
             vista.getDigCamionero().setTitle(title);
             vista.getDigCamionero().setVisible(true);
 
-            ModeloCamionero persona = new ModeloCamionero();
-            String id_ca = persona.NoSerie();
+            if (vista.getDigCamionero().getName().equals("crear")) {
+                ModeloCamionero persona = new ModeloCamionero();
+                String id_ca = persona.NoSerie();
 
-            int increment_ca;
+                int increment_ca;
 
-            if (id_ca == null) {
-                vista.getIdlbl().setText("000001");
-            } else {
-                increment_ca = Integer.parseInt(id_ca);
-                increment_ca++;
-                vista.getIdlbl().setText("00000" + increment_ca);
+                if (id_ca == null) {
+                    vista.getIdlbl().setText("000001");
+                } else {
+                    increment_ca = Integer.parseInt(id_ca);
+                    increment_ca++;
+                    vista.getIdlbl().setText("00000" + increment_ca);
+                }
             }
         }
     }
@@ -109,8 +120,8 @@ public class ControladorCamionero {
             String apellido = vista.getTxtApellido().getText();
             String salario = vista.getTxtSalario().getText();
             String telefono = vista.getTxtTelefono().getText();
-            int direccion = vista.getTxtDireccion().getSelectedIndex();
-            int poblacion = vista.getTxtPoblacion().getSelectedIndex();
+            int direccion = vista.getTxtDireccion().getSelectedIndex() + 1;
+            int poblacion = vista.getTxtPoblacion().getSelectedIndex() + 1;
 
             if (id_per == null) {
                 increment_per = 1;
@@ -144,44 +155,35 @@ public class ControladorCamionero {
             }
         } else if (vista.getDigCamionero().getName().equals("editar")) {
             //EDITAR
+            vista.getIdlbl().setText((String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 0))));
+            String id_cam = vista.getIdlbl().getText();
             String cedula = vista.getTxtDni().getText();
             String nombre = vista.getTxtNombre().getText();
             String apellido = vista.getTxtApellido().getText();
             String telefono = vista.getTxtTelefono().getText();
             String salario = vista.getTxtSalario().getText();
-            int direccion = vista.getTxtDireccion().getSelectedIndex();
-            int poblacion = vista.getTxtPoblacion().getSelectedIndex();
+            int direccion = vista.getTxtDireccion().getSelectedIndex()+1;
+            int poblacion = vista.getTxtPoblacion().getSelectedIndex()+1;
 
-            if (id_per == null) {
-                increment_per = 1;
-            } else {
-                increment_per = Integer.parseInt(id_per);
-                increment_per++;
-            }
-
-            if (id_ca == null) {
-                increment_ca = 1;
-            } else {
-                increment_ca = Integer.parseInt(id_ca);
-                increment_ca++;
-            }
-
-            persona.setId(increment_per);
-            persona.setId_ca(increment_ca);
-            persona.setDni(cedula);
-            persona.setNombre(nombre);
-            persona.setApellido(apellido);
-            persona.setTelefono(telefono);
+            persona.setId_ca(Integer.parseInt(id_cam));
+            per.setId(modelo.getIdPer(Integer.parseInt(id_cam)));
+            per.setDni(cedula);
+            per.setNombre(nombre);
+            per.setApellido(apellido);
+            per.setTelefono(telefono);
             persona.setSalario(Double.parseDouble(salario));
-            persona.setDireccion(direccion);
-            persona.setId_pob(poblacion);
-
-            if (persona.EditCamioneroDB() == null) {
-                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO EDITAR A LA PERSONA");
+            per.setDireccion(direccion);
+            per.setId_pob(poblacion);
+            
+            if (persona.EditCamioneroDB() == null && per.EditPersonaDB() == null) {
+                JOptionPane.showMessageDialog(null, "SE HA EDITADO AL CAMIONERO CON ÉXITO");
+                vista.getDigCamionero().dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "SE HA EDITADO A LA PERSONA CON ÉXITO");
+                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR AL CAMIONERO");
+                vista.getDigCamionero().dispose();
             }
         }
+        cargaCamioneros();
     }
 
     private void eliminarCamionero(JTable table) {
@@ -216,7 +218,7 @@ public class ControladorCamionero {
                 String[] filanueva = {String.valueOf(pe.getId_ca()), pe.getDni(), pe.getNombre(), pe.getApellido(), String.valueOf(pe.getSalario()), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
                 mTabla.addRow(filanueva);
             });
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "NO SE HA ENCONTRADO EL CAMIONERO");
         }
 
@@ -232,13 +234,29 @@ public class ControladorCamionero {
             vista.getTxtApellido().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 3)));
             vista.getTxtSalario().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 4)));
             vista.getTxtTelefono().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 5)));
-            vista.getTxtDireccion().setSelectedIndex(1);
-            vista.getTxtPoblacion().setSelectedIndex(1);
-//            vista.getTxtDireccion().setSelectedIndex((int) vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 5));
-//            vista.getTxtPoblacion().setSelectedIndex((int)vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 6));
+            vista.getTxtDireccion().setSelectedIndex(Integer.parseInt(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 6).toString()) - 1);
+            vista.getTxtPoblacion().setSelectedIndex(Integer.parseInt(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 7).toString()) - 1);
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA DE LA TABLA");
         }
         return a;
+    }
+
+    private void cargarComboProvincia() {
+        ModeloProvincia modelop = new ModeloProvincia();
+        List<Provincia> listap = modelop.listaProvincia();
+
+        listap.stream().forEach(pe -> {
+            vista.getTxtDireccion().addItem(new Provincia(pe.getCodigo_pro(), pe.getNombre_pro()));
+        });
+    }
+
+    private void cargarComboPoblacion() {
+        ModeloPoblacion modelop = new ModeloPoblacion();
+        List<Poblacion> listap = modelop.listaPoblacion();
+
+        listap.stream().forEach(pe -> {
+            vista.getTxtPoblacion().addItem(new Poblacion(pe.getId(), pe.getNombre()));
+        });
     }
 }

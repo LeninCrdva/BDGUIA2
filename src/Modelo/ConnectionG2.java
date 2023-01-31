@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 
 public class ConnectionG2 {
     Connection con;
-    String CadenaCon = "jdbc:oracle:thin:@localhost:1521/xe";
-    //String CadenaCon = "jdbc:oracle:thin:@192.168.43.92:1521/xe";
+    //String CadenaCon = "jdbc:oracle:thin:@localhost:1521/xe";
+    String CadenaCon = "jdbc:oracle:thin:@192.168.43.92:1521/xe";
     //Escribir la direccion IPV4 del host
     String UsuarioPG = "GUIABD2";
     String PasswordPG = "1234";
@@ -39,6 +39,7 @@ public class ConnectionG2 {
         try {
             try (Statement st = con.createStatement()) {
                 st.execute(sql);
+                
             }
             return null;
         } catch (SQLException ex) {
