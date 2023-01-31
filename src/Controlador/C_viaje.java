@@ -9,6 +9,6 @@ package Controlador;
  *
  * @author VICO5
  */
-public class C_Camion_Camionero {
+public class C_viaje {
     
 }
