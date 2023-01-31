@@ -19,7 +19,7 @@ public class ControladorPrincipal {
 
     public void IniciaControlVP() {
         vp.getBtnCamion().addActionListener(l -> CrudCamion());
-        vp.getBtnTipoCamion().addActionListener(l -> CrudCamionero());
+        vp.getBtnTipoCamion().addActionListener(l -> CrudTipoCamion());
         vp.getBtnCamionero().addActionListener(l -> abrirDialogo(1));
         vp.getBtnCliente().addActionListener(l -> abrirDialogo(2));
         vp.getBtnPaquete().addActionListener(l->iniciarVistaPaquete());
@@ -36,6 +36,16 @@ public class ControladorPrincipal {
         vp.getdeskoptMain().add(vc);
         
         ControladorCamion cc = new ControladorCamion(md, vc, mtp, vtc);
+        cc.IniciaControl();
+    }
+    
+    public void CrudTipoCamion() {
+        VistaTipoCamion vc = new VistaTipoCamion();
+        ModeloTipoCam mtp = new ModeloTipoCam();
+        
+        vp.getdeskoptMain().add(vc);
+        
+        ControladorTipoCam cc = new ControladorTipoCam(vc, mtp);
         cc.IniciaControl();
     }
     
