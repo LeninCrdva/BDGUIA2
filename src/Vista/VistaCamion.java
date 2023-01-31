@@ -5,10 +5,13 @@
  */
 package Vista;
 
+import Modelo.Tipo_camion;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -65,11 +68,11 @@ public class VistaCamion extends javax.swing.JInternalFrame {
         this.btneliminarcam = btneliminarcam;
     }
 
-    public JComboBox<String> getCmbtipocam() {
+    public JComboBox<Tipo_camion> getCmbtipocam() {
         return cmbtipocam;
     }
 
-    public void setCmbtipocam(JComboBox<String> cmbtipocam) {
+    public void setCmbtipocam(JComboBox<Tipo_camion> cmbtipocam) {
         this.cmbtipocam = cmbtipocam;
     }
 
@@ -77,16 +80,32 @@ public class VistaCamion extends javax.swing.JInternalFrame {
         return dlgCrudCam;
     }
 
+    public JSpinner getSpnpotencia() {
+        return spnpotencia;
+    }
+
+    public void setSpnpotencia(JSpinner spnpotencia) {
+        this.spnpotencia = spnpotencia;
+    }
+
     public void setDlgCrudCam(JDialog dlgCrudCam) {
         this.dlgCrudCam = dlgCrudCam;
     }
 
-    public JLabel getLbltitulo() {
-        return lbltitulo;
+    public JButton getBtnaceptar() {
+        return btnaceptar;
     }
 
-    public void setLbltitulo(JLabel lbltitulo) {
-        this.lbltitulo = lbltitulo;
+    public void setBtnaceptar(JButton btnaceptar) {
+        this.btnaceptar = btnaceptar;
+    }
+
+    public JButton getBtncancelar() {
+        return btncancelar;
+    }
+
+    public void setBtncancelar(JButton btncancelar) {
+        this.btncancelar = btncancelar;
     }
 
     public JTable getTblcamiones() {
@@ -105,11 +124,11 @@ public class VistaCamion extends javax.swing.JInternalFrame {
         this.txtbuscarcamion = txtbuscarcamion;
     }
 
-    public JTextField getTxtmatricula() {
+    public JFormattedTextField getTxtmatricula() {
         return txtmatricula;
     }
 
-    public void setTxtmatricula(JTextField txtmatricula) {
+    public void setTxtmatricula(JFormattedTextField txtmatricula) {
         this.txtmatricula = txtmatricula;
     }
 
@@ -121,6 +140,29 @@ public class VistaCamion extends javax.swing.JInternalFrame {
         this.txtmodelo = txtmodelo;
     }
 
+    public JLabel getLblvalidamat() {
+        return lblvalidamat;
+    }
+
+    public void setLblvalidamat(JLabel lblvalidamat) {
+        this.lblvalidamat = lblvalidamat;
+    }
+
+    public JLabel getLblvalidamod() {
+        return lblvalidamod;
+    }
+
+    public void setLblvalidamod(JLabel lblvalidamod) {
+        this.lblvalidamod = lblvalidamod;
+    }
+
+    public JLabel getLblvalidapot() {
+        return lblvalidapot;
+    }
+
+    public void setLblvalidapot(JLabel lblvalidapot) {
+        this.lblvalidapot = lblvalidapot;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -128,17 +170,21 @@ public class VistaCamion extends javax.swing.JInternalFrame {
 
         dlgCrudCam = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
-        txtmatricula = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtmodelo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cmbtipocam = new javax.swing.JComboBox<>();
-        btnaddtipo = new javax.swing.JButton();
-        lbltitulo = new javax.swing.JLabel();
+        btnaceptar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
         spnpotencia = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
+        btnaddtipo = new javax.swing.JButton();
+        cmbtipocam = new javax.swing.JComboBox<>();
+        txtmodelo = new javax.swing.JTextField();
+        txtmatricula = new javax.swing.JFormattedTextField();
+        lblvalidamat = new javax.swing.JLabel();
+        lblvalidamod = new javax.swing.JLabel();
+        lblvalidapot = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -160,11 +206,27 @@ public class VistaCamion extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Potencia:");
 
-        cmbtipocam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnaceptar.setText("Aceptar");
+
+        btncancelar.setText("Cancelar");
+
+        spnpotencia.setModel(new javax.swing.SpinnerNumberModel(50, 50, 3000, 10));
+
+        jLabel7.setText("CC");
 
         btnaddtipo.setText("Añadir");
 
-        jLabel7.setText("CC");
+        try {
+            txtmatricula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("UUU-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        lblvalidamat.setForeground(new java.awt.Color(255, 51, 51));
+
+        lblvalidamod.setForeground(new java.awt.Color(255, 51, 51));
+
+        lblvalidapot.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -172,73 +234,88 @@ public class VistaCamion extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnaceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                        .addComponent(btncancelar))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(cmbtipocam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbtipocam, 0, 110, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnaddtipo))
-                            .addComponent(txtmodelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spnpotencia, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel7))))
-                .addGap(28, 28, 28))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbltitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(spnpotencia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7))
+                            .addComponent(txtmatricula, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtmodelo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblvalidamod, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(lblvalidapot, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addComponent(lblvalidamat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbltitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(lblvalidamat, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addComponent(lblvalidamod, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
                     .addComponent(cmbtipocam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnaddtipo))
+                    .addComponent(btnaddtipo)
+                    .addComponent(jLabel5))
                 .addGap(22, 22, 22)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(spnpotencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(spnpotencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel6))
+                    .addComponent(lblvalidapot, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btncancelar)
+                    .addComponent(btnaceptar))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout dlgCrudCamLayout = new javax.swing.GroupLayout(dlgCrudCam.getContentPane());
         dlgCrudCam.getContentPane().setLayout(dlgCrudCamLayout);
         dlgCrudCamLayout.setHorizontalGroup(
             dlgCrudCamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         dlgCrudCamLayout.setVerticalGroup(
             dlgCrudCamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -379,12 +456,14 @@ public class VistaCamion extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnaceptar;
     private javax.swing.JButton btnactualizarcam;
     private javax.swing.JButton btnaddtipo;
+    private javax.swing.JButton btncancelar;
     private javax.swing.JButton btncrearcam;
     private javax.swing.JButton btneliminarcam;
     private javax.swing.JButton btnlist;
-    private javax.swing.JComboBox<String> cmbtipocam;
+    private javax.swing.JComboBox<Tipo_camion> cmbtipocam;
     private javax.swing.JDialog dlgCrudCam;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -398,11 +477,13 @@ public class VistaCamion extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbltitulo;
+    private javax.swing.JLabel lblvalidamat;
+    private javax.swing.JLabel lblvalidamod;
+    private javax.swing.JLabel lblvalidapot;
     private javax.swing.JSpinner spnpotencia;
     private javax.swing.JTable tblcamiones;
     private javax.swing.JTextField txtbuscarcamion;
-    private javax.swing.JTextField txtmatricula;
+    private javax.swing.JFormattedTextField txtmatricula;
     private javax.swing.JTextField txtmodelo;
     // End of variables declaration//GEN-END:variables
 }

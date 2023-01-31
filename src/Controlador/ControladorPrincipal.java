@@ -22,8 +22,10 @@ public class ControladorPrincipal {
     public void CrudCamion() {
         VistaCamion vc = new VistaCamion();
         ModeloCamion md = new ModeloCamion();
+        ModeloTipoCam mtp = new ModeloTipoCam();
+        VistaTipoCamion vtc = new VistaTipoCamion();
         vp.getjDesktopPane1().add(vc);
-        ControladorCamion cc = new ControladorCamion(md, vc);
+        ControladorCamion cc = new ControladorCamion(md, vc, mtp, vtc);
         cc.IniciaControl();
     }
 }
