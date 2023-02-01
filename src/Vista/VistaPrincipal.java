@@ -36,10 +36,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnPoblacion = new javax.swing.JButton();
         btnTipoCamion = new javax.swing.JButton();
         deskoptMain = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EMPRESA ESPAÑOLA");
 
+        jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
 
         btnCamion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/camion.png"))); // NOI18N
@@ -85,12 +88,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(btnPaquete);
 
         btnPoblacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/demografia.png"))); // NOI18N
+        btnPoblacion.setToolTipText("Poblacion");
         btnPoblacion.setFocusable(false);
         btnPoblacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPoblacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnPoblacion);
 
         btnTipoCamion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/tipocamion.png"))); // NOI18N
+        btnTipoCamion.setToolTipText("Tipo de Camion");
         btnTipoCamion.setFocusable(false);
         btnTipoCamion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTipoCamion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -104,23 +109,49 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
         deskoptMainLayout.setVerticalGroup(
             deskoptMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ista-logo.png"))); // NOI18N
+        jLabel1.setText("SISTEMA DE GESTION");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(838, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
-            .addComponent(deskoptMain)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deskoptMain))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deskoptMain)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                    .addComponent(deskoptMain)))
         );
 
         pack();
@@ -216,6 +247,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnTipoCamion;
     private javax.swing.JButton btnViaje;
     private javax.swing.JDesktopPane deskoptMain;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

@@ -184,7 +184,7 @@ public class ControladorCliente {
                             if (validateCorreo()) {
                                 persona.setId(persona.getID());
                                 if (persona.RegistrarClienteDB() == null) {
-                                    JOptionPane.showMessageDialog(null, "LA PERSONA HA SIDO REGISTRADA COMO CLIENTE ANTERIORMENTE");
+                                    JOptionPane.showMessageDialog(null, "LA PERSONA HA SIDO REGISTRADA COMO CLIENTE EXITOSAMENTE");
                                 } else {
                                     JOptionPane.showMessageDialog(null, "NO SE HA PODIDO REGISTRAR A LA PERSONA");
                                 }
