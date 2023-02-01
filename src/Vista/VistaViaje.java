@@ -6,6 +6,7 @@ package Vista;
 
 import Modelo.Camion;
 import Modelo.Camionero;
+import Modelo.Provincia;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -62,11 +63,11 @@ public class VistaViaje extends javax.swing.JInternalFrame {
         this.combo_camionero = combo_camionero;
     }
 
-    public JComboBox<String> getCombo_provincio() {
+    public JComboBox<Provincia> getCombo_provincio() {
         return combo_provincio;
     }
 
-    public void setCombo_provincio(JComboBox<String> combo_provincio) {
+    public void setCombo_provincio(JComboBox<Provincia> combo_provincio) {
         this.combo_provincio = combo_provincio;
     }
 
@@ -141,8 +142,14 @@ public class VistaViaje extends javax.swing.JInternalFrame {
     public void setjScrollPane1(JScrollPane jScrollPane1) {
         this.jScrollPane1 = jScrollPane1;
     }
-    
-    
+
+    public JLabel getLabelID() {
+        return labelID;
+    }
+
+    public void setLabelID(JLabel labelID) {
+        this.labelID = labelID;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,8 +214,6 @@ public class VistaViaje extends javax.swing.JInternalFrame {
         jLabel5.setText("ID DE LA PROVINCIA");
 
         jLabel6.setText("FECHA DE CONDUCCION");
-
-        combo_provincio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("ID DEL CAMIONERO");
 
@@ -380,7 +385,7 @@ public class VistaViaje extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser calendar_llegada;
     private javax.swing.JComboBox<Camion> combo_camion;
     private javax.swing.JComboBox<Camionero> combo_camionero;
-    private javax.swing.JComboBox<String> combo_provincio;
+    private javax.swing.JComboBox<Provincia> combo_provincio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

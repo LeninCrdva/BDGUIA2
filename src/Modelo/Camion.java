@@ -15,6 +15,11 @@ public class Camion {
     public Camion() {
     }
 
+    public Camion(String matricula_cam, String modelo_cam) {
+        this.matricula_cam = matricula_cam;
+        this.modelo_cam = modelo_cam;
+    }
+
     public Camion(int id_cam, String matricula_cam, String modelo_cam, int id_tip, double potencia_cam) {
         this.id_cam = id_cam;
         this.matricula_cam = matricula_cam;
@@ -61,5 +66,10 @@ public class Camion {
 
     public void setPotencia_cam(double potencia_cam) {
         this.potencia_cam = potencia_cam;
+    }
+
+    @Override
+    public String toString() {
+        return matricula_cam + ": " + modelo_cam;
     }
 }

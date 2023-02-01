@@ -16,6 +16,11 @@ public class Persona {
     public Persona() {
     }
 
+    public Persona(String dni, String nombre) {
+        this.dni = dni;
+        this.nombre = nombre;
+    }
+
     public Persona(int id, String dni, String nombre, String apellido, String telefono, int direccion, int id_pob) {
         this.id = id;
         this.dni = dni;
