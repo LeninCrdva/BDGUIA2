@@ -80,8 +80,8 @@ public class viaje_BD extends viaje_MD{
     public SQLException GrabaViajeDB() {
         String sql = "INSERT INTO VIAJE (id_via, id_ca, id_cam, id_pro, fecha_conduccion, "
                 + "fecha_llegada) VALUES (" + getVia()+ "," + getCa()+ ","
-                + getCam()+ "," + getPro()+ ",'" + getFecha_conduccion()+ "','"
-                + getFecha_llegada()+ "')"; //REVISAR EL INSERT 
+                + getCam()+ "," + getPro()+ ", to_date('" + getFecha_conduccion()+ "'), to_date('"
+                + getFecha_llegada()+ "'))"; //REVISAR EL INSERT 
 
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);

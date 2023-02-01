@@ -15,6 +15,11 @@ public class Camion {
     public Camion() {
     }
 
+    public Camion(int id_cam, String matricula_cam) {
+        this.id_cam = id_cam;
+        this.matricula_cam = matricula_cam;
+    }
+
     public Camion(String matricula_cam, String modelo_cam) {
         this.matricula_cam = matricula_cam;
         this.modelo_cam = modelo_cam;
@@ -70,6 +75,6 @@ public class Camion {
 
     @Override
     public String toString() {
-        return matricula_cam + ": " + modelo_cam;
+        return matricula_cam;
     }
 }
