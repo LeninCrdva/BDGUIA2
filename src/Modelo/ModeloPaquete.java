@@ -44,8 +44,8 @@ public class ModeloPaquete extends Paquete{
     public List<Paquete> buscaPaquete(String nombre){
         try{
             List<Paquete> lista=new ArrayList<>();
-            String sql="SELECT codigo_paq,descripcion_paq,id_env,id_cli FROM PAQUETE WHERE descripcion_paq "
-                    + "LIKE '%"+nombre+"%' OR codigo_paq LIKE '%"+nombre+"%'";
+            String sql="SELECT codigo_paq,descripcion_paq,id_env,id_cli FROM PAQUETE WHERE UPPER(descripcion_paq) "
+                    + "LIKE UPPER('%"+nombre+"%') OR UPPER(codigo_paq) LIKE UPPER('%"+nombre+"%')";
             ConnectionG2 con=new ConnectionG2();
             ResultSet rs=con.Consulta(sql);
             while (rs.next()) {
