@@ -131,4 +131,22 @@ public class viaje_BD extends viaje_MD{
         }
         return serie;
     }
+    
+    public viaje_MD getViaje(int via){
+        viaje_MD viaje = new viaje_MD();
+        String sql ="SELECT v.id_ca, v.fecha_conduccion FROM VIAJE v, PAQUETE p where v.id_via=p.id_env AND p.id_env = " + via + " ORDER BY 1";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+        
+        try{
+            while(rs.next()){
+                viaje.setCa(rs.getInt(1));
+                viaje.setFecha_conduccion(rs.getDate(2));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return viaje;
+    }
 }

@@ -36,13 +36,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnPoblacion = new javax.swing.JButton();
         btnTipoCamion = new javax.swing.JButton();
         deskoptMain = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EMPRESA ESPAÑOLA");
 
         jToolBar1.setRollover(true);
 
@@ -88,13 +84,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnPaquete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnPaquete);
 
-        btnPoblacion.setText("Poblacion");
+        btnPoblacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/demografia.png"))); // NOI18N
         btnPoblacion.setFocusable(false);
         btnPoblacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPoblacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnPoblacion);
 
-        btnTipoCamion.setText("Tipo Camion");
+        btnTipoCamion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/tipocamion.png"))); // NOI18N
         btnTipoCamion.setFocusable(false);
         btnTipoCamion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTipoCamion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -108,25 +104,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
         deskoptMainLayout.setVerticalGroup(
             deskoptMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+            .addGap(0, 472, Short.MAX_VALUE)
         );
-
-        jMenu1.setText("Personas");
-
-        jMenuItem1.setText("Cliente");
-        jMenuItem1.setToolTipText("Crud de cliente");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Camionero");
-        jMenuItem2.setToolTipText("Crud de camionero");
-        jMenu1.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,11 +216,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnTipoCamion;
     private javax.swing.JButton btnViaje;
     private javax.swing.JDesktopPane deskoptMain;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
