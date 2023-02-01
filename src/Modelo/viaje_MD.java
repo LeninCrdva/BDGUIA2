@@ -78,6 +78,9 @@ public class viaje_MD {
     public void setFecha_llegada(Date fecha_llegada) {
         this.fecha_llegada = fecha_llegada;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "viaje_MD{" + "via=" + via + ", ca=" + ca + ", cam=" + cam + ", pro=" + pro + ", fecha_conduccion=" + fecha_conduccion + ", fecha_llegada=" + fecha_llegada + '}';
+    }
 }

@@ -223,4 +223,25 @@ public class ModeloCliente extends Cliente{
         
         return condition;
     }
+    
+    public Cliente getCliente(int id){
+        Cliente cliente = new Cliente();
+        String sql = "SELECT p.nombre_per, p.apellido_per, c.correo_cli FROM PERSONA p, Cliente c WHERE (p.id_per = c.id_per AND  c.id_cli= "+ id + ")";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+
+        try{
+            while(rs.next()){
+                cliente.setNombre(rs.getString(1));
+                cliente.setApellido(rs.getString(2));
+                cliente.setCorreo(rs.getString(3));
+            }
+            rs.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+        return cliente;
+    }
 }

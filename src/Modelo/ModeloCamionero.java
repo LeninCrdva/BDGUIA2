@@ -224,4 +224,22 @@ public class ModeloCamionero extends Camionero {
         
         return condition;
     }
+    
+    public Camionero getCamionero(int id){
+        Camionero camionero = new Camionero();
+        String sql ="SELECT p.nombre_per, p.apellido_per c FROM PERSONA p, Camionero c WHERE (p.id_per = c.id_per AND  c.id_ca= "+ id + ") ORDER BY 1";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+        
+        try{
+            while(rs.next()){
+                camionero.setNombre(rs.getString(1));
+                camionero.setApellido(rs.getString(2));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return camionero;
+    }
 }
