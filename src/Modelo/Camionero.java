@@ -11,6 +11,11 @@ public class Camionero extends Persona {
     public Camionero() {
     }
 
+    public Camionero(int id_ca, String nombre, String dni){
+        super(nombre, dni);
+        this.id_ca = id_ca;
+    }
+    
     public Camionero(String dni, String nombre) {
         super(dni, nombre);
     }
@@ -39,6 +44,6 @@ public class Camionero extends Persona {
 
     @Override
     public String toString() {
-        return "ID_CA: " + id_ca + "SALARIO: " + salario;
+        return id_ca + " - " + super.getDni() + " - " + " - " + super.getNombre();
     }
 }
