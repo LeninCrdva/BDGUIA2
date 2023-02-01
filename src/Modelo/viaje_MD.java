@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author VICO5
@@ -14,8 +16,20 @@ public class viaje_MD {
     private int ca;
     private int cam;
     private int pro;
-    private String fecha_conduccion;
-    private String fecha_llegada;
+    private Date fecha_conduccion;
+    private Date fecha_llegada;
+
+    public viaje_MD() {
+    }
+
+    public viaje_MD(int via, int ca, int cam, int pro, Date fecha_conduccion, Date fecha_llegada) {
+        this.via = via;
+        this.ca = ca;
+        this.cam = cam;
+        this.pro = pro;
+        this.fecha_conduccion = fecha_conduccion;
+        this.fecha_llegada = fecha_llegada;
+    }
 
     public int getVia() {
         return via;
@@ -49,19 +63,19 @@ public class viaje_MD {
         this.pro = pro;
     }
 
-    public String getFecha_conduccion() {
+    public Date getFecha_conduccion() {
         return fecha_conduccion;
     }
 
-    public void setFecha_conduccion(String fecha_conduccion) {
+    public void setFecha_conduccion(Date fecha_conduccion) {
         this.fecha_conduccion = fecha_conduccion;
     }
 
-    public String getFecha_llegada() {
+    public Date getFecha_llegada() {
         return fecha_llegada;
     }
 
-    public void setFecha_llegada(String fecha_llegada) {
+    public void setFecha_llegada(Date fecha_llegada) {
         this.fecha_llegada = fecha_llegada;
     }
     

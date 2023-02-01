@@ -216,6 +216,12 @@ public class VistaCamion extends javax.swing.JInternalFrame {
 
         btnaddtipo.setText("Añadir");
 
+        txtmodelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmodeloActionPerformed(evt);
+            }
+        });
+
         try {
             txtmatricula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("UUU-###")));
         } catch (java.text.ParseException ex) {
@@ -458,6 +464,10 @@ public class VistaCamion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtmodeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmodeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmodeloActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

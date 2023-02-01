@@ -21,7 +21,8 @@ public class ModeloCliente extends Cliente{
     
     public List<Cliente> ListClientes() {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT c.id_cli, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.correo_cli, p.direccion_per, p.id_pob FROM Persona p Join Cliente c on(c.id_per=p.id_per)";
+        String sql = "SELECT c.id_cli, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.correo_cli, p.direccion_per, p.id_pob "
+                + "FROM Persona p Join Cliente c on(c.id_per=p.id_per) ORDER BY 1";
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
         try {
@@ -47,7 +48,9 @@ public class ModeloCliente extends Cliente{
     
     public List<Cliente> SearchListClientes() {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT c.id_cli, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.correo_cli, p.direccion_per FROM Persona p join Cliente c on(p.dni_per like '%" + getDni()+"%' AND p.id_per=c.id_per)";
+        String sql = "SELECT DISTINCT c.id_cli, p.dni_per, p.nombre_per, p.apellido_per, p.telefono_per, c.correo_cli, p.direccion_per, p.id_pob "
+                + "FROM Persona p join Cliente c on(p.id_per=c.id_per AND (p.dni_per like '%" + getDni()+"%' "
+                + "OR p.nombre_per like '%"+ getDni() +"%' OR p.nombre_per like '%"+ getDni() +"%')) ORDER BY 1";
         
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
@@ -74,10 +77,19 @@ public class ModeloCliente extends Cliente{
 
     public SQLException GrabaClienteDB() {
         String sql = "INSERT ALL INTO Persona (id_per, dni_per, nombre_per, apellido_per, telefono_per, "
-                + "direccion_per, id_pob) VALUES ('" + getId() + "','" + getDni() + "',"
-                + "'" + getNombre() + "','" + getApellido() + "','" + getTelefono() + "','"
-                + getDireccion() + "','" + getId_pob() + "') INTO CLIENTE (id_cli, correo_cli, id_per)"
-                + "VALUES (" + getId_cli() + ", " + getCorreo()+ ", " + getId() + ") SELECT * FROM DUAL";
+                + "direccion_per, id_pob) VALUES (" + getId() + ",'" + getDni() + "',"
+                + "'" + getNombre() + "','" + getApellido() + "','" + getTelefono() + "',"
+                + getDireccion() + "," + getId_pob() + ") INTO CLIENTE (id_cli, correo_cli, id_per)"
+                + "VALUES (" + getId_cli() + ", '" + getCorreo()+ "', " + getId() + ") SELECT * FROM DUAL";
+
+        ConnectionG2 con = new ConnectionG2();
+        SQLException ex = con.Accion(sql);
+        return ex;
+    }
+    
+    public SQLException RegistrarClienteDB() {
+        String sql = "INSERT INTO CLIENTE (id_cli, correo_cli, id_per)"
+                + "VALUES (" + getId_cli() + ", '" + getCorreo()+ "', " + getId() + ")";
 
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);
@@ -120,7 +132,7 @@ public class ModeloCliente extends Cliente{
     
     public int getIdPer(int id_cli){
         int id = 0;
-        String sql = "SELECT ID_PER FROM CLIENTE WHERE(ID_CCLI="+ id_cli +")";
+        String sql = "SELECT ID_PER FROM CLIENTE WHERE(ID_CLI="+ id_cli +")";
         
         ConnectionG2 con = new ConnectionG2();
         ResultSet rs = con.Consulta(sql);
@@ -134,5 +146,81 @@ public class ModeloCliente extends Cliente{
             System.out.println(e);
         }
         return id;
+    }
+    
+    public int getID(){
+        int condition = 0;
+        String sql = "SELECT p.id_per FROM Persona p WHERE (p.dni_per = '" + getDni() +"')";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+
+        try{
+            while(rs.next()){
+                condition = rs.getInt(1);
+            }
+            rs.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+        return condition;
+    }
+    
+    public int allowDelete(){
+        int condition = 0;
+        String sql = "SELECT COUNT(p.id_cli) FROM PAQUETE p WHERE (p.id_cli = '" + getId_cli()+"')";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+
+        try{
+            while(rs.next()){
+                condition = rs.getInt(1);
+            }
+            rs.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+        return condition;
+    }
+    
+    public boolean isRepeat(){
+        boolean condition = false;
+        String sql = "SELECT COUNT(p.dni_per) FROM PERSONA p WHERE (p.dni_per = '"+ getDni()+ "')";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+
+        try{
+            while(rs.next()){
+                condition = rs.getInt(1) > 0;
+            }
+            rs.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+        return condition;
+    }
+    
+    public boolean isRepeatCli(){
+        boolean condition = false;
+        String sql = "SELECT COUNT(p.dni_per) FROM PERSONA p, Cliente c WHERE (p.id_per = c.id_per AND p.dni_per = '"+ getDni()+ "')";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+
+        try{
+            while(rs.next()){
+                condition = rs.getInt(1) > 0;
+            }
+            rs.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+        return condition;
     }
 }

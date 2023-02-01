@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitHub/BDGUIA2/src/Controlador/ControladorCamionero.java</file>
-            <file>file:/D:/GitHub/BDGUIA2/src/Modelo/ConnectionG2.java</file>
-            <file>file:/D:/GitHub/BDGUIA2/src/Controlador/ControladorPrincipal.java</file>
-            <file>file:/D:/GitHub/BDGUIA2/src/Modelo/ModeloCliente.java</file>
-            <file>file:/D:/GitHub/BDGUIA2/src/Controlador/ControladorCliente.java</file>
-            <file>file:/D:/GitHub/BDGUIA2/src/Modelo/ModeloCamionero.java</file>
-            <file>file:/D:/GitHub/BDGUIA2/src/Vista/VistaPersona.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Controlador/ControladorProvincia.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Modelo/ModeloPaquete.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Modelo/viaje_MD.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Controlador/ControladorCamion.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Vista/VistaPaquete.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Controlador/ControladorPaquete.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Modelo/ModeloCamion.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Vista/VistaProvincia.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Modelo/viaje_BD.java</file>
+            <file>file:/C:/Users/Andrea/Documents/NetBeansProjects/BDGUIA2/src/Vista/VistaCamion.java</file>
         </group>
     </open-files>
 </project-private>
