@@ -49,6 +49,9 @@ public class C_viaje {
 
     public void iniciarControl() {
         cargar();
+        cargarComboCamion();
+        cargarComboCamionero();
+        cargarComboProvincia();
         vista.getBtnActualizar().addActionListener(l -> cargar());
         vista.getBtnCrear().addActionListener(l -> crearViaje());
         vista.getBtnEditar().addActionListener(l -> editarViaje());
@@ -76,7 +79,7 @@ public class C_viaje {
             listapro.stream().forEach(pro -> {
                 listaca.stream().forEach(ca -> {
                     listacam.stream().forEach(cam -> {
-                        if (vi.getPro() == pro.getId_pro() && vi.getCa()== ca.getId_ca() && vi.getCam() == cam.getId_cam()) {
+                        if (vi.getPro() == pro.getId_pro() && vi.getCa() == ca.getId_ca() && vi.getCam() == cam.getId_cam()) {
                             String[] filanueva = {String.valueOf(vi.getVia()), ca.getNombre() + " " + ca.getApellido(), cam.getModelo_cam(),
                                 pro.getNombre_pro(), String.valueOf(vi.getFecha_conduccion()), String.valueOf(vi.getFecha_llegada())};
                             mTabla.addRow(filanueva);
@@ -85,14 +88,52 @@ public class C_viaje {
                 });
             });
         });
+
+        viaje_BD vi = new viaje_BD();
+        String id_cli = vi.NoSerie();
+
+        int increment_cli;
+
+        if (id_cli == null) {
+            vista.getLabelID().setText("000001");
+        } else {
+            increment_cli = Integer.parseInt(id_cli);
+            increment_cli++;
+            vista.getLabelID().setText("00000" + increment_cli);
+        }
     }
 
     private void crearViaje() {
-        
+        viaje_BD viaje = new viaje_BD();
+
+        int id = Integer.parseInt(vista.getLabelID().getText());
+        int idca = vista.getCombo_camionero().getSelectedIndex() + 1;
+        int idcam = vista.getCombo_camion().getSelectedIndex() + 1;
+        int idpro = vista.getCombo_provincio().getSelectedIndex() + 1;
+        Date feccond = vista.getCalendar_conduccion().getDate();
+        Date feclle = vista.getCalendar_llegada().getDate();
+
+        viaje.setVia(id);
+        viaje.setCa(idca);
+        viaje.setCam(idcam);
+        viaje.setPro(idpro);
+        viaje.setFecha_conduccion(feccond);
+        viaje.setFecha_llegada(feclle);
+
+        if (allowCreateEdit()) {
+            if (viaje.GrabaViajeDB() == null) {
+                JOptionPane.showMessageDialog(null, "SE HA CREADO EL VIAJE CON ÉXITO");
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL VIAJE");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "ASEGÚRESE QUE TODOS LOS CAMPOS ESTÉN LLENOS");
+        }
     }
-    
-    private void editarViaje(){
-        
+
+    private void editarViaje() {
+
     }
 
     private void eliminarviaje(JTable table) {
@@ -110,4 +151,36 @@ public class C_viaje {
         }
     }
 
+    public boolean allowCreateEdit() {
+        boolean a = (vista.getCombo_camion().getSelectedItem() != null && vista.getCombo_camionero().getSelectedItem() != null
+                && vista.getCombo_provincio().getSelectedItem() != null && vista.getCalendar_conduccion().getDate() != null && vista.getCalendar_llegada().getDate() != null);
+        return a;
+    }
+    
+    private void cargarComboCamion() {
+        ModeloCamion modelop = new ModeloCamion();
+        List<Camion> listap = modelop.ListarCamiones();
+
+        listap.stream().forEach(pe -> {
+            vista.getCombo_camion().addItem(new Camion(pe.getMatricula_cam(), pe.getMatricula_cam()));
+        });
+    }
+
+    private void cargarComboCamionero() {
+        ModeloCamionero modelop = new ModeloCamionero();
+        List<Camionero> listap = modelop.ListCamioneros();
+
+        listap.stream().forEach(pe -> {
+            vista.getCombo_camionero().addItem(new Camionero(pe.getDni(), pe.getNombre()));
+        });
+    }
+    
+    private void cargarComboProvincia() {
+        ModeloProvincia modelop = new ModeloProvincia();
+        List<Provincia> listap = modelop.listaProvincia();
+
+        listap.stream().forEach(pe -> {
+            vista.getCombo_provincio().addItem(new Provincia(pe.getCodigo_pro(), pe.getNombre_pro()));
+        });
+    }
 }
