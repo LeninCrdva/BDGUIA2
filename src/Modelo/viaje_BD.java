@@ -107,8 +107,8 @@ public class viaje_BD extends viaje_MD{
         return ex;
     }
 
-    public SQLException DeletePhisicPerson() {
-        String sql = "DELETE FROM VIAJE WHERE id_via = '" + getVia()+ "'";
+    public SQLException DeletePhisicViaje() {
+        String sql = "DELETE FROM VIAJE WHERE id_via = " + getVia();
 
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);
@@ -148,5 +148,20 @@ public class viaje_BD extends viaje_MD{
             System.out.println(e);
         }
         return viaje;
+    }
+    
+    public boolean isUtilize(){
+        boolean serie = false;
+        String sql ="SELECT count(id_env) FROM PAQUETE WHERE id_env = " + getVia();
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+        
+        try{
+            serie = rs.next();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return serie;
     }
 }

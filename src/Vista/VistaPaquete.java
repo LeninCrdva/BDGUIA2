@@ -521,6 +521,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        setClosable(true);
+
         jLabel1.setText("Buscar:");
 
         btnActualizar.setText("Actualizar");

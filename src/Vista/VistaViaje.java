@@ -183,6 +183,8 @@ public class VistaViaje extends javax.swing.JInternalFrame {
         dcfechacon = new com.toedter.calendar.JDateChooser();
         dcfechallega = new com.toedter.calendar.JDateChooser();
 
+        setClosable(true);
+
         jLabel1.setText("FECHA DE LLEGADA");
 
         BtnActualizar.setText("Actualizar");

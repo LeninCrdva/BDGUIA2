@@ -107,6 +107,8 @@ public class VistaProvincia extends javax.swing.JInternalFrame {
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
+        setClosable(true);
+
         jLabel1.setText("Buscar:");
 
         btnActualizar.setText("Actualizar");
