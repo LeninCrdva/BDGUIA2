@@ -27,6 +27,7 @@ public class ControladorCamion {
         vc.getBtnlist().addActionListener(l -> CargaCamiones());
         vc.getBtncrearcam().addActionListener(l -> AbrirDialogo(1));
         vc.getBtncrearcam().addActionListener(l -> LlenaCombo());
+        vc.getBtncrearcam().addActionListener(l -> vtc.getLblid().setText(String.valueOf(IncrementaID())));
         vc.getBtnaddtipo().addActionListener(l -> AbreCrudTipo());
         vc.getBtnactualizarcam().addActionListener(l -> AbrirDialogo(2));
         vc.getBtnactualizarcam().addActionListener(l -> LlenaCombo());
@@ -40,8 +41,6 @@ public class ControladorCamion {
             @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 BuscaCamion();
-                String mat = "SWW-875";
-                System.out.println(mc.ObtieneMatricula(mat));
             } 
         });
         vtc.getBtnaceptartip().addActionListener(l -> UsaDialogoTipos());
@@ -52,7 +51,7 @@ public class ControladorCamion {
             @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 char key = evt.getKeyChar();
-                if (Character.isDigit(key) || vc.getTxtmodelo().getText().length() >= 10) {
+                if (Character.isDigit(key) || vc.getTxtmodelo().getText().length() >= 50) {
                     evt.consume();
                 }
             }
@@ -68,17 +67,22 @@ public class ControladorCamion {
                     e.consume();
                 }
             }
-        });
-        
+        });  
     }
         
     //Carga datos desde la tabla
-        private boolean MousePress(JTable me) {
+    private boolean MousePress(JTable me) {
         boolean press = false;
         try { 
             if (me.getSelectedRowCount() == 1) {
                 vc.getTxtmatricula().setText(vc.getTblcamiones().getValueAt(vc.getTblcamiones().getSelectedRow(), 1).toString());
                 vc.getTxtmodelo().setText(vc.getTblcamiones().getValueAt(vc.getTblcamiones().getSelectedRow(), 2).toString());
+                String nombre = vc.getTblcamiones().getValueAt(vc.getTblcamiones().getSelectedRow(), 3).toString();
+                if (tp.ExisteNombreTipo(nombre)) {
+                    int id = tp.ObtieneIdConsulta(nombre);
+                    vc.getCmbtipocam().setSelectedItem(new Tipo_camion(id));
+                }
+                vc.getSpnpotencia().setValue(Double.parseDouble(vc.getTblcamiones().getValueAt(vc.getTblcamiones().getSelectedRow(), 4).toString()));
                 press = true;
             } else {
                 JOptionPane.showMessageDialog(vc, "Seleccione una fila primero");
@@ -87,6 +91,12 @@ public class ControladorCamion {
             System.out.println(e);
         }
         return press;
+    }
+    
+    public void LimpiaValidacion() {
+        vc.getLblvalidamat().setText(null);
+        vc.getLblvalidamod().setText(null);
+        vc.getLblvalidapot().setText(null);
     }
     
     //Método para abrir el JDialog del camión
@@ -104,13 +114,17 @@ public class ControladorCamion {
                 vc.getTxtmatricula().setValue(null);
                 vc.getTxtmodelo().setText(null);
                 vc.getCmbtipocam().setSelectedIndex(0);
+                vc.getSpnpotencia().setValue(50);
+                LimpiaValidacion();
                 iscorrect = true;
                 break;
             case 2:
                 title = "MODIFICAR CAMIÓN";
                 vc.getDlgCrudCam().setName("editar");
                 ActivaCampos();
+                vc.getTxtmatricula().setEnabled(false);
                 vc.getDlgCrudCam().setTitle(title);
+                LimpiaValidacion();
                 iscorrect = MousePress(vc.getTblcamiones());
                 break;
             case 3:
@@ -122,6 +136,7 @@ public class ControladorCamion {
                 vc.getCmbtipocam().setEnabled(false);
                 vc.getSpnpotencia().setEnabled(false);
                 vc.getBtnaddtipo().setEnabled(false);
+                LimpiaValidacion();
                 iscorrect = MousePress(vc.getTblcamiones());
                 break;
             default:
@@ -152,9 +167,13 @@ public class ControladorCamion {
         mtabla.setNumRows(0);
         try {
             list.stream().forEach(ca -> {
-                String[] FilaNueva = {String.valueOf(ca.getId_cam()), ca.getMatricula_cam(), ca.getModelo_cam(),
-                String.valueOf(ca.getId_tip()), String.valueOf(ca.getPotencia_cam())};
-                mtabla.addRow(FilaNueva);
+                listtip.stream().forEach(tp -> {
+                    if (ca.getId_tip() == tp.getId_tip()) {
+                        String[] FilaNueva  = {String.valueOf(ca.getId_cam()), ca.getMatricula_cam(), ca.getModelo_cam(),
+                        tp.getNombre_tipo(), String.valueOf(ca.getPotencia_cam())};
+                        mtabla.addRow(FilaNueva);
+                    }
+                });
             });
         } catch (NumberFormatException e) {
             System.out.println(e);
@@ -164,7 +183,7 @@ public class ControladorCamion {
     //sub-diálogo del tipo
     private void AbreCrudTipo() {
         vtc.getDlgCrudTip().setVisible(true);
-        vtc.getDlgCrudTip().setSize(200, 150);
+        vtc.getDlgCrudTip().setSize(370, 180);
         vtc.getDlgCrudTip().setLocationRelativeTo(vc);
     }
     
@@ -206,17 +225,26 @@ public class ControladorCamion {
     private void UsaDialogoTipos() {
         try {
             int id_tip = IncrementaIDtipo();
-            String nombre = vtc.getTxtnombretip().getText();
-
-            ModeloTipoCam tip = new ModeloTipoCam();
-            tip.setId_tip(id_tip);
-            tip.setNombre_tipo(nombre);
-            if (tip.InsertarTipoCamion() == null) {
-                vtc.getDlgCrudTip().setVisible(false);
-                LlenaCombo();
-                JOptionPane.showMessageDialog(vtc, "Tipo añadido correctamente");
+            String nombre = vtc.getTxtnombretip().getText().toUpperCase().trim();
+            if (tp.ExisteNombreTipo(nombre)) {
+                vtc.getLblvalidanom().setText("Ya Registrado");
             } else {
-                JOptionPane.showMessageDialog(vtc, "No se pudo añadir el tipo");
+                if (nombre.isEmpty()) {
+                    vtc.getLblvalidanom().setText("Campo Vacío");
+                } else {
+                    ModeloTipoCam tip = new ModeloTipoCam();
+                    tip.setId_tip(id_tip);
+                    tip.setNombre_tipo(nombre);
+
+                    if (tip.InsertarTipoCamion() == null) {
+                        vtc.getDlgCrudTip().setVisible(false);
+                        LlenaCombo();
+                        JOptionPane.showMessageDialog(vtc, "Tipo añadido correctamente");
+
+                    } else {
+                        JOptionPane.showMessageDialog(vtc, "No se pudo añadir el tipo");
+                    }
+                }
             }
         } catch(NullPointerException | NumberFormatException e) {
             System.out.println(e);
@@ -241,31 +269,25 @@ public class ControladorCamion {
     private boolean ValidaDatos(String matricula, String modelo, double potencia) {
         boolean valido = false;
         if (matricula.equals("-") || matricula.length() < 6) {
-            vc.getLblvalidamat().setText("Inválido");
+            vc.getLblvalidamat().setText("Vacío");
             valido = true;
         } else {
             if (mc.ObtieneMatricula(matricula)) {
-                vc.getLblvalidamat().setText("Matrícula ya existente");
+                vc.getLblvalidamat().setText("Ya Registrado");
                 valido = true;
             } else {
                 if (modelo.isEmpty()) {
                     vc.getLblvalidamat().setText(null);
-                    vc.getLblvalidamod().setText("Inválido");
+                    vc.getLblvalidamod().setText("Vacío");
                     valido = true;
                 } else if(potencia < 50  || potencia > 3000) {
                     vc.getLblvalidamod().setText(null);
-                    vc.getLblvalidapot().setText("X");
+                    vc.getLblvalidapot().setText("No Válido");
                     valido = true;
                 }
             }
         }
         return valido;
-    }
-    
-    private void LimpiaValidaciones() {
-        vc.getLblvalidamat().setText(null);
-        vc.getLblvalidamod().setText(null);
-        vc.getLblvalidapot().setText(null);
     }
     
     //Crear, Editar y Eliminar camión
@@ -287,14 +309,12 @@ public class ControladorCamion {
                     camion.setPotencia_cam(potencia);
 
                     if (camion.InsertaCamion() == null) {
-                        LimpiaValidaciones();
+                        LimpiaValidacion();
                         vc.getDlgCrudCam().setVisible(false);
                         JOptionPane.showMessageDialog(vc, "Camión creado correctamente");
                     } else {
                         JOptionPane.showMessageDialog(vc, "No se pudo crear el camión");
                     }  
-                } else {
-                    JOptionPane.showMessageDialog(vtc, "Falló la validación de datos");
                 }
             } catch(NullPointerException | NumberFormatException e) {
                 System.out.println(e);
@@ -302,26 +322,48 @@ public class ControladorCamion {
         } else {
             if (vc.getDlgCrudCam().getName().equals("editar")) {
                 try {
-                    String matricula = vc.getTxtmatricula().getText();
+                    String matricula = vc.getTxtmatricula().getText().trim();
                     if (matricula.isEmpty()) {
-                            JOptionPane.showMessageDialog(vc, "Por favor seleccione una fila de la tabla");
+                        vc.getLblvalidamat().setText("Vacío");
                     } else {
-                        String modelo = vc.getTxtmodelo().getText();
+                        String modelo = vc.getTxtmodelo().getText().toUpperCase().trim();
+                        int id_cam = mc.ObtieneID(matricula);
                         int id_tip = vc.getCmbtipocam().getItemAt(vc.getCmbtipocam().getSelectedIndex()).getId_tip();
                         Double potencia = Double.parseDouble(vc.getSpnpotencia().getValue().toString());
-              
-                        ModeloCamion camion = new ModeloCamion();
-
+                        System.out.println(matricula);
+                        if (matricula.equalsIgnoreCase(vc.getTxtmatricula().getText().trim())) {
+                            System.out.println(id_cam);
+                            ModeloCamion camion = new ModeloCamion();
                             camion.setMatricula_cam(matricula);
                             camion.setModelo_cam(modelo);
                             camion.setId_tip(id_tip);
                             camion.setPotencia_cam(potencia);
-                        if (camion.ModficarCamion(matricula) == null) {
-                            LimpiaValidaciones();
-                            vc.getDlgCrudCam().setVisible(false);
-                            JOptionPane.showMessageDialog(vc, "Camión editado con éxito");
+                            if (camion.ModificarCamion(id_cam) == null) {
+                                LimpiaValidacion();
+                                vc.getDlgCrudCam().setVisible(false);
+                                JOptionPane.showMessageDialog(vc, "Camión editado con éxito");
+                            } else {
+                                JOptionPane.showMessageDialog(vc, "No se pudo editar el camión");
+                            }
                         } else {
-                            JOptionPane.showMessageDialog(vc, "No se pudo editar el camión");
+                            if (mc.ObtieneMatricula(matricula)) {
+                                System.out.println("Repetido");
+                            } else {
+                                System.out.println("pasa por aquí");
+                                System.out.println(id_cam);
+                                ModeloCamion camion = new ModeloCamion();
+                                camion.setMatricula_cam(matricula);
+                                camion.setModelo_cam(modelo);
+                                camion.setId_tip(id_tip);
+                                camion.setPotencia_cam(potencia);
+                                if (camion.ModificarCamion(id_cam) == null) {
+                                    LimpiaValidacion();
+                                    vc.getDlgCrudCam().setVisible(false);
+                                    JOptionPane.showMessageDialog(vc, "Camión editado con éxito");
+                                } else {
+                                    JOptionPane.showMessageDialog(vc, "No se pudo editar el camión");
+                                }
+                            }
                         }
                     }
                 } catch(NumberFormatException | NullPointerException e) {
