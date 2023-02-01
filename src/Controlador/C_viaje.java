@@ -7,9 +7,11 @@ package Controlador;
 
 import Modelo.*;
 import Vista.*;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -93,39 +95,50 @@ public class C_viaje {
             increment_cli++;
             vista.getLabelID().setText("00000" + increment_cli);
         }
+        
+        vista.getDcfechacon().setEnabled(false);
+        vista.getDcfechacon().getCalendarButton().setEnabled(true);
+        
+        vista.getDcfechallega().setEnabled(false);
+        vista.getDcfechallega().getCalendarButton().setEnabled(true);
     }
 
     private void crearViaje() {
+        viaje_BD viaje = new viaje_BD();
+        int id = Integer.parseInt(vista.getLabelID().getText());
+        int idca = vista.getCombo_camionero().getItemAt(vista.getCombo_camionero().getSelectedIndex()).getId_ca();
+        int idcam = vista.getCombo_camion().getItemAt(vista.getCombo_camion().getSelectedIndex()).getId_cam();
+        int idpro = vista.getCombo_provincio().getItemAt(vista.getCombo_provincio().getSelectedIndex()).getId_pro();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
         try {
-            viaje_BD viaje = new viaje_BD();
-            int id = Integer.parseInt(vista.getLabelID().getText());
-            int idca = vista.getCombo_camionero().getItemAt(vista.getCombo_camionero().getSelectedIndex()).getId_ca();
-            int idcam = vista.getCombo_camion().getItemAt(vista.getCombo_camion().getSelectedIndex()).getId_cam();
-            int idpro = vista.getCombo_provincio().getItemAt(vista.getCombo_provincio().getSelectedIndex()).getId_pro();
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
-            Date feccond = vista.getDcfechacon().getDate();
-            Date feclle = vista.getDcfechallega().getDate();
-            String formateadocon = formato.format(feccond);
-            String formateadollega = formato.format(feclle);
-            
+            java.sql.Date feccond = new java.sql.Date(vista.getDcfechacon().getDate().getTime());
+            java.sql.Date feclle = new java.sql.Date(vista.getDcfechallega().getDate().getTime());
+
             viaje.setVia(id);
             viaje.setCa(idca);
             viaje.setCam(idcam);
             viaje.setPro(idpro);
-            viaje.setFecha_conduccion(formato.parse(formateadocon));
-            viaje.setFecha_llegada(formato.parse(formateadollega));
-            if (allowCreateEdit()) {
-                if (viaje.GrabaViajeDB() == null) {
-                    JOptionPane.showMessageDialog(null, "SE HA CREADO EL VIAJE CON ÉXITO");
+            viaje.setFecha_conduccion(feccond);
+            viaje.setFecha_llegada(feclle);
+
+            if (vista.getDcfechacon().getDate().before(vista.getDcfechallega().getDate())) {
+                if (allowCreateEdit()) {
+                    if (viaje.GrabaViajeDB() == null) {
+                        JOptionPane.showMessageDialog(null, "SE HA CREADO EL VIAJE CON ÉXITO");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL VIAJE");
+                    }
+
                 } else {
-                    JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL VIAJE");
+                    JOptionPane.showMessageDialog(null, "ASEGÚRESE QUE TODOS LOS CAMPOS ESTÉN LLENOS");
                 }
-                
             } else {
-                JOptionPane.showMessageDialog(null, "ASEGÚRESE QUE TODOS LOS CAMPOS ESTÉN LLENOS");
+                JOptionPane.showMessageDialog(null, "RANGO DE FECHA NO VÁLIDA \nLA FECHA DE LLEGADA NO PUEDE SER MENOR A LA DEL ENVÍO");
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(C_viaje.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ASEGÚRESE DE QUE HA ELEGIDO LA FECHA");
         }
     }
 
@@ -153,7 +166,7 @@ public class C_viaje {
                 && vista.getCombo_provincio().getSelectedItem() != null && vista.getDcfechacon().getDate() != null && vista.getDcfechallega().getDate() != null);
         return a;
     }
-    
+
     private void cargarComboCamion() {
         ModeloCamion modelop = new ModeloCamion();
         List<Camion> listap = modelop.ListarCamiones();
@@ -171,7 +184,7 @@ public class C_viaje {
             vista.getCombo_camionero().addItem(new Camionero(pe.getId_ca(), pe.getDni(), pe.getNombre()));
         });
     }
-    
+
     private void cargarComboProvincia() {
         ModeloProvincia modelop = new ModeloProvincia();
         List<Provincia> listap = modelop.listaProvincia();
@@ -180,7 +193,7 @@ public class C_viaje {
             vista.getCombo_provincio().addItem(new Provincia(pe.getId_pro(), pe.getNombre_pro()));
         });
     }
-    
+
 //    private void formatDate(){
 //        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yy");
 //        vista.getCalendar_conduccion().setDateFormatString(date.toPattern());
