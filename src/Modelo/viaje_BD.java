@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  * @author VICO5
  */
 public class viaje_BD extends viaje_MD{
+
     public viaje_BD(int via, int ca, int cam, int pro, String fecha_conduccion, String fecha_llegada) {
         super(via, ca, cam, pro, fecha_conduccion, fecha_llegada);
     }
@@ -52,6 +53,7 @@ public class viaje_BD extends viaje_MD{
     public List<viaje_MD> SearchListPersonas() {
         List<viaje_MD> lista = new ArrayList<>();
         String sql = "SELECT * FROM VIAJE WHERE id_viaje like '%" + getVia()+ "%'";
+
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
         try {
@@ -127,5 +129,4 @@ public class viaje_BD extends viaje_MD{
         }
         return serie;
     }
-    
 }
