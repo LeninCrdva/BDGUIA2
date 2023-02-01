@@ -5,8 +5,11 @@
  */
 package Controlador;
 
+import Modelo.Camionero;
 import Modelo.Cliente;
+import Modelo.ConexionGmail;
 import Modelo.ConnectionG2;
+import Modelo.ModeloCamionero;
 import Modelo.ModeloCliente;
 import Modelo.ModeloPaquete;
 import Modelo.Paquete;
@@ -95,7 +98,7 @@ public class ControladorPaquete {
                 return;
                 }
                 ConnectionG2 con=new ConnectionG2();
-                String sql="SELECT codigo_paq,descripcion_paq,id_env,id_cli FROM PAQUETE WHERE codigo_paq="+vista.getTblPaquete().getValueAt(vista.getTblPaquete().getSelectedRow(), 0).toString()+"";
+                String sql="SELECT codigo_paq,descripcion_paq,id_env,id_cli FROM PAQUETE WHERE codigo_paq='"+vista.getTblPaquete().getValueAt(vista.getTblPaquete().getSelectedRow(), 0).toString()+"'";
                 ResultSet re=con.Consulta(sql);
                 re.next();
                 vista.getTxtCodigo().setText(re.getString("codigo_paq"));
@@ -107,7 +110,7 @@ public class ControladorPaquete {
                 Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        vista.getDigPaquete().setSize(600,600);
+        vista.getDigPaquete().setSize(500,500);
         vista.getDigPaquete().setLocationRelativeTo(vista);
         vista.getDigPaquete().setVisible(true);
     }
@@ -145,7 +148,18 @@ public class ControladorPaquete {
             }catch (SQLException ex) {
                 Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
             }
-            new ModeloPaquete(vista.getTxtCodigo().getText(),vista.getTxtDescripcion().getText(),Integer.parseInt(vista.getTxtIdEnvio().getText()),Integer.parseInt(vista.getTxtIdCliente().getText())).grabarPaquete();
+            if(new ModeloPaquete(vista.getTxtCodigo().getText(),vista.getTxtDescripcion().getText(),Integer.parseInt(vista.getTxtIdEnvio().getText()),Integer.parseInt(vista.getTxtIdCliente().getText())).grabarPaquete() == null){
+                ConexionGmail con = new ConexionGmail();
+                ModeloCliente cli = new ModeloCliente();
+                Cliente cliente = cli.getCliente(Integer.parseInt(vista.getTxtIdCliente().getText()));
+                viaje_BD vi = new viaje_BD();
+                viaje_MD viaje = vi.getViaje(Integer.parseInt(vista.getTxtIdEnvio().getText()));
+                ModeloCamionero cam = new ModeloCamionero();
+                Camionero camionero = cam.getCamionero(viaje.getCa());
+                
+                con.enviarCorreo(cliente, viaje, camionero);
+            }
+            vista.getDigPaquete().dispose();
             cargaPaquete();
         }else{
             if (vista.getTxtCodigo().getText().isEmpty()) {
@@ -188,18 +202,9 @@ public class ControladorPaquete {
     private void eliminarPaquete() {
         if (vista.getTblPaquete().getSelectedRow()<0) {
                 JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR EL PAQUETE A ELIMINAR");
-                return;
         }
-        try{
-            if (modelo.buscarPaquete(vista.getTblPaquete().getValueAt(vista.getTblPaquete().getSelectedRow(), 1).toString())==false) {
-                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO DICHO PAQUETE");
-                return;
-            }
-            new ModeloPaquete().eliminarPaquete(vista.getTblPaquete().getValueAt(vista.getTblPaquete().getSelectedRow(), 0).toString());
-            cargaPaquete();
-        }catch (SQLException ex) {
-            Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        modelo.eliminarPaquete(vista.getTblPaquete().getValueAt(vista.getTblPaquete().getSelectedRow(), 0).toString());
+        cargaPaquete();
     };
     private void buscarPaquete(){
         List<Paquete> lista=modelo.buscaPaquete(vista.getTxtBuscar().getText());
@@ -208,13 +213,13 @@ public class ControladorPaquete {
         String[] columnas={"Codigo","Descripcion","Id_env","Id_cli"};
         mTabla.setColumnIdentifiers(columnas);
         lista.stream().forEach(paquete->{
-            Object[] registro={paquete.getCodigo_paq(),paquete.getDescripcion_paq(),paquete.getId_env(),paquete.getId_cli()};
+            String[] registro={paquete.getCodigo_paq(),paquete.getDescripcion_paq(),String.valueOf(paquete.getId_env()), String.valueOf(paquete.getId_cli())};
             mTabla.addRow(registro);
         });
     }
     private void elegirEnvio(){
         vista.getDigSeleccionarEnvio().setTitle("SELECCIONAR ENVIO");
-        vista.getDigSeleccionarEnvio().setSize(600,600);
+        vista.getDigSeleccionarEnvio().setSize(600,350);
         vista.getDigSeleccionarEnvio().setLocationRelativeTo(vista);
         viaje_BD modeloC=new viaje_BD();
         List<viaje_MD> lista=modeloC.lista_viaje();
@@ -223,7 +228,7 @@ public class ControladorPaquete {
         String[] columnas={"ID VIA", "ID CAMION", "ID CAMIONERO", "FECHA CONDUCCION"};
         mTabla.setColumnIdentifiers(columnas);
         lista.stream().forEach(pe->{
-            Object[] registro={pe.getVia(), pe.getCam(), pe.getCa(), pe.getFecha_conduccion()};
+            String[] registro={String.valueOf(pe.getVia()), String.valueOf(pe.getCam()), String.valueOf(pe.getCa()), String.valueOf(pe.getFecha_conduccion())};
             mTabla.addRow(registro);
         });
         vista.getDigSeleccionarEnvio().setVisible(true);
@@ -231,7 +236,7 @@ public class ControladorPaquete {
     }
     private void elegirCliente(){
         vista.getDigSeleccionarCliente().setTitle("SELECCIONAR CLIENTE");
-        vista.getDigSeleccionarCliente().setSize(600,600);
+        vista.getDigSeleccionarCliente().setSize(890,270);
         vista.getDigSeleccionarCliente().setLocationRelativeTo(vista);
         ModeloCliente modeloC=new ModeloCliente();
         List<Cliente> lista=modeloC.ListClientes();

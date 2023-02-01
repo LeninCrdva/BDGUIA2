@@ -14,11 +14,12 @@ public class ConexionGmail {
     private String emailTo;
     private String encabezado;
     private String contenido;
-    private Properties mProperties = new Properties();
+    private Properties mProperties;
     private Session mSession;
     private MimeMessage mCorreo;
 
     private void createEmail(Cliente cliente, viaje_MD viaje, Camionero camionero) {
+        mProperties  = new Properties();
         emailTo = cliente.getCorreo();
         encabezado = "AVISO DE ENVÍO DE PAQUETE";
         contenido = "Estimado "+ cliente.getNombre() + " " + cliente.getApellido() + ",\n"
@@ -62,7 +63,7 @@ public class ConexionGmail {
 
     private void sendEmail() {
         try {
-            Transport mTransport = mSession.getTransport("mtp");
+            Transport mTransport = mSession.getTransport("smtp");
             mTransport.connect(emailFrom, passFrom);
             mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
             mTransport.close();
