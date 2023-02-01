@@ -29,7 +29,7 @@ public class viaje_BD extends viaje_MD{
     
        public List<viaje_MD> lista_viaje() {
         List<viaje_MD> lista = new ArrayList<>();
-        String sql = "SELECT id_via, id_ca, id_cam, id_pro, fecha_conduccion, fecha_llegada FROM VIAJE";
+        String sql = "SELECT id_via, id_ca, id_cam, id_pro, fecha_conduccion, fecha_llegada FROM VIAJE order by 1";
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
 
@@ -54,7 +54,7 @@ public class viaje_BD extends viaje_MD{
 
     public List<viaje_MD> SearchListPersonas() {
         List<viaje_MD> lista = new ArrayList<>();
-        String sql = "SELECT * FROM VIAJE WHERE id_viaje like '%" + getVia()+ "%'";
+        String sql = "SELECT * FROM VIAJE WHERE id_viaje like '%" + getVia()+ "%' order by 1";
 
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
@@ -77,11 +77,11 @@ public class viaje_BD extends viaje_MD{
         }
     }
 
-    public SQLException GrabaPersonaDB() {
-        String sql = "INSERT INTO VIAJE (id_viaje, id_ca, id_cam, id_pro, fecha_conduccion, "
-                + "fecha_llegada) VALUES ('" + getVia()+ "','" + getCa()+ "',"
-                + "'" + getCam()+ "','" + getPro()+ "','" + getFecha_conduccion()+ "','"
-                + getFecha_llegada()+ "')"; //REVISAR EL INSERT 
+    public SQLException GrabaViajeDB() {
+        String sql = "INSERT INTO VIAJE (id_via, id_ca, id_cam, id_pro, fecha_conduccion, "
+                + "fecha_llegada) VALUES (" + getVia()+ "," + getCa()+ ","
+                + getCam()+ "," + getPro()+ ", to_date('" + getFecha_conduccion()+ "'), to_date('"
+                + getFecha_llegada()+ "'))"; //REVISAR EL INSERT 
 
         ConnectionG2 con = new ConnectionG2();
         SQLException ex = con.Accion(sql);

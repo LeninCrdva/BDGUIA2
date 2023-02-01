@@ -7,23 +7,12 @@ package Controlador;
 
 import Modelo.*;
 import Vista.*;
-import java.awt.Image;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +38,12 @@ public class C_viaje {
 
     public void iniciarControl() {
         cargar();
+        cargarComboCamion();
+        cargarComboCamionero();
+        cargarComboProvincia();
+//        vista.getDcfechacon().getCalendarButton().setEnabled(true);
+//        vista.getDcfechacon().setDateFormatString("dd-MMM-yy");
+//        vista.getDcfechallega().setDateFormatString("dd-MMM-yy");
         vista.getBtnActualizar().addActionListener(l -> cargar());
         vista.getBtnCrear().addActionListener(l -> crearViaje());
         vista.getBtnEditar().addActionListener(l -> editarViaje());
@@ -76,7 +71,7 @@ public class C_viaje {
             listapro.stream().forEach(pro -> {
                 listaca.stream().forEach(ca -> {
                     listacam.stream().forEach(cam -> {
-                        if (vi.getPro() == pro.getId_pro() && vi.getCa()== ca.getId_ca() && vi.getCam() == cam.getId_cam()) {
+                        if (vi.getPro() == pro.getId_pro() && vi.getCa() == ca.getId_ca() && vi.getCam() == cam.getId_cam()) {
                             String[] filanueva = {String.valueOf(vi.getVia()), ca.getNombre() + " " + ca.getApellido(), cam.getModelo_cam(),
                                 pro.getNombre_pro(), String.valueOf(vi.getFecha_conduccion()), String.valueOf(vi.getFecha_llegada())};
                             mTabla.addRow(filanueva);
@@ -85,14 +80,57 @@ public class C_viaje {
                 });
             });
         });
+
+        viaje_BD vi = new viaje_BD();
+        String id_cli = vi.NoSerie();
+
+        int increment_cli;
+
+        if (id_cli == null) {
+            vista.getLabelID().setText("000001");
+        } else {
+            increment_cli = Integer.parseInt(id_cli);
+            increment_cli++;
+            vista.getLabelID().setText("00000" + increment_cli);
+        }
     }
 
     private void crearViaje() {
-        
+        try {
+            viaje_BD viaje = new viaje_BD();
+            int id = Integer.parseInt(vista.getLabelID().getText());
+            int idca = vista.getCombo_camionero().getItemAt(vista.getCombo_camionero().getSelectedIndex()).getId_ca();
+            int idcam = vista.getCombo_camion().getItemAt(vista.getCombo_camion().getSelectedIndex()).getId_cam();
+            int idpro = vista.getCombo_provincio().getItemAt(vista.getCombo_provincio().getSelectedIndex()).getId_pro();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+            Date feccond = vista.getDcfechacon().getDate();
+            Date feclle = vista.getDcfechallega().getDate();
+            String formateadocon = formato.format(feccond);
+            String formateadollega = formato.format(feclle);
+            
+            viaje.setVia(id);
+            viaje.setCa(idca);
+            viaje.setCam(idcam);
+            viaje.setPro(idpro);
+            viaje.setFecha_conduccion(formato.parse(formateadocon));
+            viaje.setFecha_llegada(formato.parse(formateadollega));
+            if (allowCreateEdit()) {
+                if (viaje.GrabaViajeDB() == null) {
+                    JOptionPane.showMessageDialog(null, "SE HA CREADO EL VIAJE CON ÉXITO");
+                } else {
+                    JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL VIAJE");
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "ASEGÚRESE QUE TODOS LOS CAMPOS ESTÉN LLENOS");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(C_viaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    private void editarViaje(){
-        
+
+    private void editarViaje() {
+
     }
 
     private void eliminarviaje(JTable table) {
@@ -110,4 +148,45 @@ public class C_viaje {
         }
     }
 
+    public boolean allowCreateEdit() {
+        boolean a = (vista.getCombo_camion().getSelectedItem() != null && vista.getCombo_camionero().getSelectedItem() != null
+                && vista.getCombo_provincio().getSelectedItem() != null && vista.getDcfechacon().getDate() != null && vista.getDcfechallega().getDate() != null);
+        return a;
+    }
+    
+    private void cargarComboCamion() {
+        ModeloCamion modelop = new ModeloCamion();
+        List<Camion> listap = modelop.ListarCamiones();
+
+        listap.stream().forEach(pe -> {
+            vista.getCombo_camion().addItem(new Camion(pe.getId_cam(), pe.getMatricula_cam()));
+        });
+    }
+
+    private void cargarComboCamionero() {
+        ModeloCamionero modelop = new ModeloCamionero();
+        List<Camionero> listap = modelop.ListCamioneros();
+
+        listap.stream().forEach(pe -> {
+            vista.getCombo_camionero().addItem(new Camionero(pe.getId_ca(), pe.getDni(), pe.getNombre()));
+        });
+    }
+    
+    private void cargarComboProvincia() {
+        ModeloProvincia modelop = new ModeloProvincia();
+        List<Provincia> listap = modelop.listaProvincia();
+
+        listap.stream().forEach(pe -> {
+            vista.getCombo_provincio().addItem(new Provincia(pe.getId_pro(), pe.getNombre_pro()));
+        });
+    }
+    
+//    private void formatDate(){
+//        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yy");
+//        vista.getCalendar_conduccion().setDateFormatString(date.toPattern());
+//        vista.getCalendar_conduccion().setEnabled(false);
+//        vista.getCalendar_conduccion().getCalendarButton().setEnabled(true);
+//        vista.getCalendar_llegada().setDateFormatString(date.toPattern());
+//        vista.getCalendar_llegada().setEnabled(false);
+//    }
 }

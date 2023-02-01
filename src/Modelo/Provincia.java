@@ -17,6 +17,11 @@ public class Provincia {
     public Provincia() {
     }
 
+    public Provincia(int id_pro, String nombre_pro) {
+        this.id_pro = id_pro;
+        this.nombre_pro = nombre_pro;
+    }
+
     public Provincia(String codigo_pro, String nombre_pro) {
         this.codigo_pro = codigo_pro;
         this.nombre_pro = nombre_pro;
@@ -54,6 +59,6 @@ public class Provincia {
 
     @Override
     public String toString() {
-        return codigo_pro + ": " + nombre_pro;
+        return id_pro + ": " + nombre_pro;
     }
 }
