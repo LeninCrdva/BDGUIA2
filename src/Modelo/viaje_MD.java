@@ -17,6 +17,9 @@ public class viaje_MD {
     private String fecha_conduccion;
     private String fecha_llegada;
 
+    public viaje_MD() {
+    }
+
     public viaje_MD(int via, int ca, int cam, int pro, String fecha_conduccion, String fecha_llegada) {
         this.via = via;
         this.ca = ca;
@@ -24,9 +27,6 @@ public class viaje_MD {
         this.pro = pro;
         this.fecha_conduccion = fecha_conduccion;
         this.fecha_llegada = fecha_llegada;
-    }
-
-    public viaje_MD() {
     }
 
     public int getVia() {
