@@ -6,15 +6,11 @@
 package Vista;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Andrea
- */
+
 public class VistaProvincia extends javax.swing.JInternalFrame {
 
     /**
