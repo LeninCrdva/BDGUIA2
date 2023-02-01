@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Modelo.Camion;
+import Modelo.Camionero;
+import Modelo.Provincia;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -44,27 +47,27 @@ public class VistaViaje extends javax.swing.JInternalFrame {
         this.calendar_llegada = calendar_llegada;
     }
 
-    public JComboBox<String> getCombo_camion() {
+    public JComboBox<Camion> getCombo_camion() {
         return combo_camion;
     }
 
-    public void setCombo_camion(JComboBox<String> combo_camion) {
+    public void setCombo_camion(JComboBox<Camion> combo_camion) {
         this.combo_camion = combo_camion;
     }
 
-    public JComboBox<String> getCombo_camionero() {
+    public JComboBox<Camionero> getCombo_camionero() {
         return combo_camionero;
     }
 
-    public void setCombo_camionero(JComboBox<String> combo_camionero) {
+    public void setCombo_camionero(JComboBox<Camionero> combo_camionero) {
         this.combo_camionero = combo_camionero;
     }
 
-    public JComboBox<String> getCombo_provincio() {
+    public JComboBox<Provincia> getCombo_provincio() {
         return combo_provincio;
     }
 
-    public void setCombo_provincio(JComboBox<String> combo_provincio) {
+    public void setCombo_provincio(JComboBox<Provincia> combo_provincio) {
         this.combo_provincio = combo_provincio;
     }
 
@@ -140,12 +143,12 @@ public class VistaViaje extends javax.swing.JInternalFrame {
         this.jScrollPane1 = jScrollPane1;
     }
 
-    public JSpinner getSpiner_idviaje() {
-        return spiner_idviaje;
+    public JLabel getLabelID() {
+        return labelID;
     }
 
-    public void setSpiner_idviaje(JSpinner spiner_idviaje) {
-        this.spiner_idviaje = spiner_idviaje;
+    public void setLabelID(JLabel labelID) {
+        this.labelID = labelID;
     }
 
     /**
@@ -175,9 +178,9 @@ public class VistaViaje extends javax.swing.JInternalFrame {
         calendar_conduccion = new com.toedter.calendar.JDateChooser();
         combo_provincio = new javax.swing.JComboBox<>();
         combo_camion = new javax.swing.JComboBox<>();
-        spiner_idviaje = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         combo_camionero = new javax.swing.JComboBox<>();
+        labelID = new javax.swing.JLabel();
 
         jLabel1.setText("FECHA DE LLEGADA");
 
@@ -212,13 +215,7 @@ public class VistaViaje extends javax.swing.JInternalFrame {
 
         jLabel6.setText("FECHA DE CONDUCCION");
 
-        combo_provincio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        combo_camion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel7.setText("ID DEL CAMIONERO");
-
-        combo_camionero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -244,16 +241,6 @@ public class VistaViaje extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(spiner_idviaje, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(combo_provincio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel4)
-                .addGap(179, 179, 179)
-                .addComponent(jLabel6))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addComponent(combo_camion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(calendar_conduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -270,6 +257,17 @@ public class VistaViaje extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelID, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135)
+                        .addComponent(combo_provincio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(179, 179, 179)
+                        .addComponent(jLabel6))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,9 +289,9 @@ public class VistaViaje extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spiner_idviaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_provincio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combo_provincio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelID, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -385,9 +383,9 @@ public class VistaViaje extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TxtBuscar;
     private com.toedter.calendar.JDateChooser calendar_conduccion;
     private com.toedter.calendar.JDateChooser calendar_llegada;
-    private javax.swing.JComboBox<String> combo_camion;
-    private javax.swing.JComboBox<String> combo_camionero;
-    private javax.swing.JComboBox<String> combo_provincio;
+    private javax.swing.JComboBox<Camion> combo_camion;
+    private javax.swing.JComboBox<Camionero> combo_camionero;
+    private javax.swing.JComboBox<Provincia> combo_provincio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -397,6 +395,6 @@ public class VistaViaje extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner spiner_idviaje;
+    private javax.swing.JLabel labelID;
     // End of variables declaration//GEN-END:variables
 }

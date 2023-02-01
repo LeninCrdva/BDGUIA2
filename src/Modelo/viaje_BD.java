@@ -5,9 +5,11 @@
  */
 package Modelo;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class viaje_BD extends viaje_MD{
 
-    public viaje_BD(int via, int ca, int cam, int pro, String fecha_conduccion, String fecha_llegada) {
+    public viaje_BD(int via, int ca, int cam, int pro, Date fecha_conduccion, Date fecha_llegada) {
         super(via, ca, cam, pro, fecha_conduccion, fecha_llegada);
     }
 
@@ -27,7 +29,7 @@ public class viaje_BD extends viaje_MD{
     
        public List<viaje_MD> lista_viaje() {
         List<viaje_MD> lista = new ArrayList<>();
-        String sql = "SELECT id_via, id_ca, id_cam, id_pro, fecha_conduccion, fecha_llegada FROM VIAJE";
+        String sql = "SELECT id_via, id_ca, id_cam, id_pro, fecha_conduccion, fecha_llegada FROM VIAJE order by 1";
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
 
@@ -38,8 +40,8 @@ public class viaje_BD extends viaje_MD{
                 viaje.setCa(rs.getInt(2));
                 viaje.setCam(rs.getInt(3));
                 viaje.setPro(rs.getInt(4));
-                viaje.setFecha_conduccion(rs.getString(5));
-                viaje.setFecha_llegada(rs.getString(5));
+                viaje.setFecha_conduccion(rs.getDate(5));
+                viaje.setFecha_llegada(rs.getDate(6));
                 lista.add(viaje);
             }
             rs.close();
@@ -52,7 +54,7 @@ public class viaje_BD extends viaje_MD{
 
     public List<viaje_MD> SearchListPersonas() {
         List<viaje_MD> lista = new ArrayList<>();
-        String sql = "SELECT * FROM VIAJE WHERE id_viaje like '%" + getVia()+ "%'";
+        String sql = "SELECT * FROM VIAJE WHERE id_viaje like '%" + getVia()+ "%' order by 1";
 
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
@@ -63,8 +65,8 @@ public class viaje_BD extends viaje_MD{
                 viaje.setCa(rs.getInt(2));
                 viaje.setCam(rs.getInt(3));
                 viaje.setPro(rs.getInt(4));
-                viaje.setFecha_conduccion(rs.getString(5));
-                viaje.setFecha_llegada(rs.getString(5));
+                viaje.setFecha_conduccion(rs.getDate(5));
+                viaje.setFecha_llegada(rs.getDate(6));
                 lista.add(viaje);
             }
             rs.close();
@@ -75,7 +77,7 @@ public class viaje_BD extends viaje_MD{
         }
     }
 
-    public SQLException GrabaPersonaDB() {
+    public SQLException GrabaViajeDB() {
         String sql = "INSERT INTO VIAJE (id_viaje, id_ca, id_cam, id_pro, fecha_conduccion, "
                 + "fecha_llegada) VALUES ('" + getVia()+ "','" + getCa()+ "',"
                 + "'" + getCam()+ "','" + getPro()+ "','" + getFecha_conduccion()+ "','"
