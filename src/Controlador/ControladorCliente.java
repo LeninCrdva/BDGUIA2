@@ -293,14 +293,17 @@ public class ControladorCliente {
         boolean a = false;
         if (table.getSelectedRowCount() == 1) {
             a = true;
+            ModeloProvincia mp = new ModeloProvincia();
+            ModeloPoblacion mpo = new ModeloPoblacion();
+            vista.getTxtDni().setEnabled(false);
             vista.getIdlbl().setText((String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 0))));
             vista.getTxtDni().setText((String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 1))));
             vista.getTxtNombre().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 2)));
             vista.getTxtApellido().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 3)));
             vista.getTxtSalario().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 4)));
             vista.getTxtTelefono().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 5)));
-            vista.getTxtDireccion().setSelectedIndex(Integer.parseInt(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 6).toString()) - 1);
-            vista.getTxtPoblacion().setSelectedIndex(Integer.parseInt(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 7).toString()) - 1);
+            vista.getTxtDireccion().setSelectedIndex(mp.getIdPro(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(),6)))-1);
+            vista.getTxtPoblacion().setSelectedIndex(mpo.getIdPob(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(),7)))-1);
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA DE LA TABLA");
         }
@@ -335,6 +338,8 @@ public class ControladorCliente {
         vista.getTxtPoblacion().setSelectedItem(null);
         vista.getTxtDireccion().setSelectedItem(null);
         vista.getDigCamionero().dispose();
+        vista.getTblCamionero().clearSelection();
+        vista.getTxtDni().setEnabled(true);
     }
 
     private void cancellOperation() {
