@@ -67,7 +67,7 @@ public class ModeloPaquete extends Paquete{
     }
     public SQLException eliminarPaquete(String codigo){
         ConnectionG2 con=new ConnectionG2();
-        String sql="DELETE FROM PAQUETE WHERE id_paq="+idPaquete(codigo)+";";
+        String sql="DELETE FROM PAQUETE WHERE codigo_paq='"+codigo +"'";
         SQLException ex=con.Accion(sql);
         return ex;   
     }
@@ -120,9 +120,7 @@ public class ModeloPaquete extends Paquete{
         ConnectionG2 con=new ConnectionG2();
         String sql="SELECT codigo_paq FROM PAQUETE WHERE codigo_paq='"+codigo+"'";
         ResultSet re=con.Consulta(sql);
-        if (re.next()) {
-            test=true;
-        }else{test=false;}
+        test = re.next();
         return test;
     }
 }

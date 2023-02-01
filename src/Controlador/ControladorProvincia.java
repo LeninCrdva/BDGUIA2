@@ -142,7 +142,11 @@ public class ControladorProvincia {
                 JOptionPane.showMessageDialog(null, "NO SE ENCONTRO DICHA PROVINCIA");
                 return;
             }
-            modelo.eliminarProvincia(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString());
+            if(modelo.isUtilizated(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString()) || modelo.isUtilizated1(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString())){
+                JOptionPane.showMessageDialog(null, "NO SE PUEDE ELIMINAR DEBIDO A QUE SE ENCUENTRA RELACIONADA");
+            } else{
+                modelo.eliminarProvincia(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString());
+            }
             cargarProvincia();
         }catch (SQLException ex) {
             Logger.getLogger(ModeloProvincia.class.getName()).log(Level.SEVERE, null, ex);

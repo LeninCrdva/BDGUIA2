@@ -29,7 +29,7 @@ public class viaje_BD extends viaje_MD{
     
        public List<viaje_MD> lista_viaje() {
         List<viaje_MD> lista = new ArrayList<>();
-        String sql = "SELECT id_via, id_ca, id_cam, id_pro, fecha_conduccion, fecha_llegada FROM VIAJE";
+        String sql = "SELECT id_via, id_ca, id_cam, id_pro, fecha_conduccion, fecha_llegada FROM VIAJE order by 1";
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
 
@@ -54,7 +54,7 @@ public class viaje_BD extends viaje_MD{
 
     public List<viaje_MD> SearchListPersonas() {
         List<viaje_MD> lista = new ArrayList<>();
-        String sql = "SELECT * FROM VIAJE WHERE id_viaje like '%" + getVia()+ "%'";
+        String sql = "SELECT * FROM VIAJE WHERE id_viaje like '%" + getVia()+ "%' order by 1";
 
         ConnectionG2 conpq = new ConnectionG2();
         ResultSet rs = conpq.Consulta(sql);
@@ -77,10 +77,10 @@ public class viaje_BD extends viaje_MD{
         }
     }
 
-    public SQLException GrabaPersonaDB() {
-        String sql = "INSERT INTO VIAJE (id_viaje, id_ca, id_cam, id_pro, fecha_conduccion, "
-                + "fecha_llegada) VALUES ('" + getVia()+ "','" + getCa()+ "',"
-                + "'" + getCam()+ "','" + getPro()+ "','" + getFecha_conduccion()+ "','"
+    public SQLException GrabaViajeDB() {
+        String sql = "INSERT INTO VIAJE (id_via, id_ca, id_cam, id_pro, fecha_conduccion, "
+                + "fecha_llegada) VALUES (" + getVia()+ "," + getCa()+ ","
+                + getCam()+ "," + getPro()+ ",'" + getFecha_conduccion()+ "','"
                 + getFecha_llegada()+ "')"; //REVISAR EL INSERT 
 
         ConnectionG2 con = new ConnectionG2();
@@ -130,5 +130,23 @@ public class viaje_BD extends viaje_MD{
             System.out.println(e);
         }
         return serie;
+    }
+    
+    public viaje_MD getViaje(int via){
+        viaje_MD viaje = new viaje_MD();
+        String sql ="SELECT v.id_ca, v.fecha_conduccion FROM VIAJE v, PAQUETE p where v.id_via=p.id_env AND p.id_env = " + via + " ORDER BY 1";
+        
+        ConnectionG2 con = new ConnectionG2();
+        ResultSet rs = con.Consulta(sql);
+        
+        try{
+            while(rs.next()){
+                viaje.setCa(rs.getInt(1));
+                viaje.setFecha_conduccion(rs.getDate(2));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return viaje;
     }
 }
