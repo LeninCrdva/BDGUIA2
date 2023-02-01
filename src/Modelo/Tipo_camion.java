@@ -37,4 +37,19 @@ public class Tipo_camion {
     public String toString() {
         return nombre_tipo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        try {
+        return this.id_tip == ((Tipo_camion) obj).id_tip;
+        }catch (NullPointerException e) {
+        }
+        return false;
+    } 
 }
