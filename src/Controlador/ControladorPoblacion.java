@@ -42,7 +42,7 @@ public class ControladorPoblacion {
         vista.getBtnCrear().addActionListener(l->abrirPoblacionDialog(1));
         vista.getBtnEditar().addActionListener(l->abrirPoblacionDialog(2));
         vista.getBtnAceptar().addActionListener(l->ingresarModificarProvincia());
-        vista.getBtnEliminar().addActionListener(l->eliminarProvincia());
+        vista.getBtnEliminar().addActionListener(l->eliminarPoblacion());
         vista.getBtnBuscar().addActionListener(l->buscarProvincia());
     }
     private void cargarPoblacion(){
@@ -80,7 +80,7 @@ public class ControladorPoblacion {
         
         if (openwindow) {
             vista.getDigProvincia().setLocationRelativeTo(vista.getBtnCrear());
-            vista.getDigProvincia().setSize(500, 400);
+            vista.getDigProvincia().setSize(350, 300);
             vista.getDigProvincia().setTitle(title);
             vista.getDigProvincia().setVisible(true);
         }
@@ -105,26 +105,22 @@ public class ControladorPoblacion {
             }
             new ModeloPoblacion(Integer.parseInt(vista.getLabelid().getText()),vista.getTxtNombre().getText()).modificarPoblacion();
             cargarPoblacion();
-            vista.getDigProvincia().dispose();
         }
+        vista.getDigProvincia().dispose();
         limpiar();
     }
     
-    private void eliminarProvincia(){
-        if (vista.getTblProvincia().getSelectedRow()<0) {
-            JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR LA POBLACION A ELIMINAR");
+    private void eliminarPoblacion(){
+        if (vista.getTblProvincia().getSelectedRow()!=1) {
+            JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR UNA FILA DE POBLACION A ELIMINAR");
             return;
+        } else
+        if (modelo.eliminarPoblacion(Integer.parseInt(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString())) == null) {
+            JOptionPane.showMessageDialog(null, "SE HA ELIMINADO A LA POBLACION");
+        } else {
+            JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR LA POBLACION");
         }
-        try{
-            if (modelo.buscarPoblacion(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 1).toString())==false) {
-                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO DICHA PROVINCIA");
-                return;
-            }
-            modelo.eliminarPoblacion(vista.getTblProvincia().getValueAt(vista.getTblProvincia().getSelectedRow(), 0).toString());
-            cargarPoblacion();
-        }catch (SQLException ex) {
-            Logger.getLogger(ModeloPoblacion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        cargarPoblacion();
     }
     
     private void buscarProvincia(){

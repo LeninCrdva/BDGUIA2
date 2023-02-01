@@ -80,9 +80,9 @@ public class ModeloPoblacion extends Poblacion{
         }
     }
     
-    public SQLException eliminarPoblacion(String codigo){
+    public SQLException eliminarPoblacion(int codigo){
         ConnectionG2 con=new ConnectionG2();
-        String sql="DELETE FROM Poblacion WHERE id_pob='"+idPoblacion(codigo)+"'";
+        String sql="DELETE FROM Poblacion WHERE id_pob="+codigo+"";
         SQLException ex=con.Accion(sql);
         return ex;   
     }
@@ -94,23 +94,27 @@ public class ModeloPoblacion extends Poblacion{
         return ex;
     }
     public int idPoblacion(String codigo){//BUSCA EL ID DE LA PROVINCIA MEDIANTE EL CODIGO
+        int i = 0;
         ConnectionG2 con=new ConnectionG2();
         String sql="SELECT id_pob FROM POBLACION WHERE nombre_pob='"+codigo+"'";
-        try {
-            ResultSet rs=con.Consulta(sql);
-            rs.next();
-            return rs.getInt(1);
+        
+        try (ResultSet rs = con.Consulta(sql)){
+            while(rs.next()){
+                i = rs.getInt(1);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
         }
+        return i;
     }
-    public boolean buscarPoblacion(String codigo) throws SQLException{
-        boolean test;
+    public boolean buscarPoblacion(String codigo){
+        boolean test = false;
         ConnectionG2 con=new ConnectionG2();
         String sql="SELECT id_pob FROM POBLACION WHERE nombre_pob='"+codigo+"'";
         try (ResultSet re = con.Consulta(sql)) {
             test = re.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(ModeloPoblacion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return test;
     }
