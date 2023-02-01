@@ -48,11 +48,11 @@ public class C_viaje {
 
     public void iniciaControl() {
         cargar();
-        cargarComboProvincia();
+      
         vista.getBtnActualizar().addActionListener(l -> cargar());
         vista.getBtnCrear().addActionListener(l -> abrirDialogo(1));
         vista.getBtnEditar().addActionListener(l -> abrirDialogo(2));
-        vista.getTxtBuscar().addActionListener(l -> buscarCamionero());
+//        vista.getTxtBuscar().addActionListener(l -> buscarCamionero());
         
     }
 
@@ -75,29 +75,25 @@ public class C_viaje {
         
       
     }
-
-    private void crearEditarPersona() {
-        viaje_BD via = new viaje_BD();
+    private void eliminarviaje(JTable table) {
         viaje_BD viaje = new viaje_BD();
-        String id_via = viaje.NoSerie();
-        
+        if (table.getSelectedRowCount() == 1) {
+            viaje.setVia(Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0)));
+        } else {
+            JOptionPane.showMessageDialog(null, "NECESITA SELECCIONAR UNA FILA PRIMERO");
+        }
 
-        int increment_per = 0;
-        int increment_ca = 0;
-
-       
-
-    private void buscarCamionero() {
-       
-
+        if (viaje.DeletePhisicPerson() == null) {
+            JOptionPane.showMessageDialog(null, "SE HA ELIMNADO  CON ÉXITO");
+        } else {
+            JOptionPane.showMessageDialog(null, "NO SE HA PODIDO ELIMINAR ");
+        }
     }
+
+}
+
+       
+
+   
 
     
-
-    private void cargarComboProvincia() {
-       
-    }
-
-    private void combocamion() {
-    }
-}
