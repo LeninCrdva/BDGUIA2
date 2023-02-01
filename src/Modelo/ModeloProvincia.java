@@ -31,7 +31,7 @@ public class ModeloProvincia extends Provincia{
             ConnectionG2 con=new ConnectionG2();
             try (ResultSet rs = con.Consulta(sql)) {
                 while (rs.next()) {
-                    Provincia pr=new Provincia(rs.getString("codigo_pro"),rs.getString("nombre_pro"));
+                    Provincia pr=new Provincia(rs.getInt(1),rs.getString("codigo_pro"),rs.getString("nombre_pro"));
                     lista.add(pr);
                 }
             }
