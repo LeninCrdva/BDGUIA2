@@ -114,4 +114,18 @@ public class ModeloPoblacion extends Poblacion{
         }
         return test;
     }
+    
+    public int getIdPob(String codigo){
+        int test = 0;
+        ConnectionG2 con=new ConnectionG2();
+        String sql="SELECT id_pob FROM POBLACION WHERE nombre_pob='"+codigo+"'";
+        try (ResultSet re = con.Consulta(sql)) {
+            while (re.next()) {
+                    test = re.getInt(1);
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModeloProvincia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return test;
+    }
 }
