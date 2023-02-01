@@ -33,7 +33,8 @@ import javax.swing.table.DefaultTableModel;
  * @author VICO5
  */
 public class C_viaje {
-     private viaje_BD modelo;
+
+    private viaje_BD modelo;
     private VistaViaje vista;
 
     public C_viaje() {
@@ -46,35 +47,54 @@ public class C_viaje {
         vista.setVisible(true);
     }
 
-    public void iniciaControl() {
+    public void iniciarControl() {
         cargar();
-      
         vista.getBtnActualizar().addActionListener(l -> cargar());
-        vista.getBtnCrear().addActionListener(l -> abrirDialogo(1));
-        vista.getBtnEditar().addActionListener(l -> abrirDialogo(2));
+        vista.getBtnCrear().addActionListener(l -> crearViaje());
+        vista.getBtnEditar().addActionListener(l -> editarViaje());
 //        vista.getTxtBuscar().addActionListener(l -> buscarCamionero());
-        
+
     }
 
     private void cargar() {
-        //Control para consultar a la BD/modelo y luego cargar en la vista
+        ModeloCamionero mca = new ModeloCamionero();
+        ModeloCamion mcam = new ModeloCamion();
+        ModeloProvincia mpro = new ModeloProvincia();
         List<viaje_MD> lista = modelo.lista_viaje();
+        List<Provincia> listapro = mpro.listaProvincia();
+        List<Camionero> listaca = mca.ListCamioneros();
+        List<Camion> listacam = mcam.ListarCamiones();
 
         DefaultTableModel mTabla;
         mTabla = new DefaultTableModel();
         mTabla.setNumRows(0); //Limpio la tabla
-        mTabla.setColumnCount(7);
-        mTabla.setColumnIdentifiers(new Object[]{"id_via", "id_ca ", "id_cam", "id_pro", "fecha_conduccion", "fecha_llegada"});
+        mTabla.setColumnCount(6);
+        mTabla.setColumnIdentifiers(new Object[]{"ID", "CAMIONERO", "CAMION", "PROVINCIA", "FECHA CONDUCCION", "FECHA LLEGADA"});
         vista.getTblViaje().setModel(mTabla);
 
-       
+        lista.stream().forEach(vi -> {
+            listapro.stream().forEach(pro -> {
+                listaca.stream().forEach(ca -> {
+                    listacam.stream().forEach(cam -> {
+                        if (vi.getPro() == pro.getId_pro() && vi.getCa()== ca.getId_ca() && vi.getCam() == cam.getId_cam()) {
+                            String[] filanueva = {String.valueOf(vi.getVia()), ca.getNombre() + " " + ca.getApellido(), cam.getModelo_cam(),
+                                pro.getNombre_pro(), String.valueOf(vi.getFecha_conduccion()), String.valueOf(vi.getFecha_llegada())};
+                            mTabla.addRow(filanueva);
+                        };
+                    });
+                });
+            });
+        });
     }
 
-    private void abrirDialogo(int ce) {
+    private void crearViaje() {
         
-        
-      
     }
+    
+    private void editarViaje(){
+        
+    }
+
     private void eliminarviaje(JTable table) {
         viaje_BD viaje = new viaje_BD();
         if (table.getSelectedRowCount() == 1) {
@@ -91,9 +111,3 @@ public class C_viaje {
     }
 
 }
-
-       
-
-   
-
-    

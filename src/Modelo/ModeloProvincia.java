@@ -111,4 +111,18 @@ public class ModeloProvincia extends Provincia{
         }
         return test;
     }
+    
+    public int getIdPro(String codigo){
+        int test = 0;
+        ConnectionG2 con=new ConnectionG2();
+        String sql="SELECT id_pro FROM PROVINCIA WHERE nombre_pro='"+codigo+"'";
+        try (ResultSet re = con.Consulta(sql)) {
+            while (re.next()) {
+                    test = re.getInt(1);
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModeloProvincia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return test;
+    }
 }

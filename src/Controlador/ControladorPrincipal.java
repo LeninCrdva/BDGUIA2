@@ -25,6 +25,7 @@ public class ControladorPrincipal {
         vp.getBtnPaquete().addActionListener(l->iniciarVistaPaquete());
         vp.getBtnProvincia().addActionListener(l->iniciarVistaProvincia());
         vp.getBtnPoblacion().addActionListener(l ->iniciarVistaPoblacion());
+        vp.getBtnViaje().addActionListener(l -> CrudEnvio());
     }
 
     public void CrudCamion() {
@@ -116,6 +117,17 @@ public class ControladorPrincipal {
         
         vista.setVisible(true);
         ControladorPoblacion control=new ControladorPoblacion(modelo,vista);
+        control.iniciarControl();
+    }
+    
+    private void CrudEnvio(){
+        VistaViaje vista=new VistaViaje();
+        viaje_BD modelo=new viaje_BD();
+        
+        vp.getdeskoptMain().add(vista);
+        
+        vista.setVisible(true);
+        C_viaje control=new C_viaje(modelo,vista);
         control.iniciarControl();
     }
 }
