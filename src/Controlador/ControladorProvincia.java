@@ -38,6 +38,11 @@ public class ControladorProvincia {
         vista.getBtnAceptar().addActionListener(l->ingresarModificarProvincia());
         vista.getBtnEliminar().addActionListener(l->eliminarProvincia());
         vista.getBtnBuscar().addActionListener(l->buscarProvincia());
+        vista.getTxtBuscar().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt){
+                buscarProvincia();
+            }
+        });
     }
     private void cargarProvincia(){
         List<Provincia> lista=modelo.listaProvincia();
@@ -101,6 +106,15 @@ public class ControladorProvincia {
                 JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NOMBRE DE MAXIMO 60 CARACTERES");
                 return;
             }
+            try{
+                if (modelo.buscarProvincia(vista.getTxtCodigo().getText())==true) {
+                    JOptionPane.showMessageDialog(null, "YA EXISTE UNA PROVINCIA CON ESE CODIGO");
+                return;
+                }
+            }catch (SQLException ex) {
+                Logger.getLogger(ModeloProvincia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             new ModeloProvincia(vista.getTxtCodigo().getText(),vista.getTxtNombre().getText()).grabarProvincia();
             cargarProvincia();
         }else{
