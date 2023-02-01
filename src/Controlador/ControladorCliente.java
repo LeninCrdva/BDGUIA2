@@ -8,6 +8,8 @@ import Modelo.ModeloProvincia;
 import Modelo.Poblacion;
 import Modelo.Provincia;
 import Vista.VistaPersona;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,6 +17,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 /**
  *
@@ -39,17 +43,23 @@ public class ControladorCliente {
         cargaClientes();
         cargarComboPoblacion();
         cargarComboProvincia();
+        validateCamps();
         vista.getBtnActualizar().addActionListener(l -> cargaClientes());
         vista.getBtnCrear().addActionListener(l -> abrirDialogo(1));
         vista.getBtnEditar().addActionListener(l -> abrirDialogo(2));
+        vista.getBtnEliminar().addActionListener(l -> eliminarCamionero(vista.getTblCamionero()));
         vista.getBtnAceptar().addActionListener(l -> crearEditarPersona());
-        vista.getTxtBuscar().addActionListener(l -> buscarCamionero());
-        vista.getBtnCancelar().addActionListener(l -> vista.getDigCamionero().dispose());
+        vista.getTxtBuscar().addActionListener(l -> buscarCliente());
+        vista.getBtnCancelar().addActionListener(l -> cancellOperation());
     }
 
     private void cargaClientes() {
         //Control para consultar a la BD/modelo y luego cargar en la vista
+        ModeloPoblacion mp = new ModeloPoblacion();
+        ModeloProvincia mpro = new ModeloProvincia();
         List<Cliente> listap = modelo.ListClientes();
+        List<Poblacion> listapob = mp.listaPoblacion();
+        List<Provincia> listapro = mpro.listaProvincia();
 
         DefaultTableModel mTabla;
         mTabla = new DefaultTableModel();
@@ -59,8 +69,17 @@ public class ControladorCliente {
         vista.getTblCamionero().setModel(mTabla);
 
         listap.stream().forEach(pe -> {
-            String[] filanueva = {String.valueOf(pe.getId_cli()), pe.getDni(), pe.getNombre(), pe.getApellido(), String.valueOf(pe.getCorreo()), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
-            mTabla.addRow(filanueva);
+            listapob.stream().forEach(pob -> {
+                listapro.stream().forEach(pro -> {
+                    if (pe.getDireccion() == pro.getId_pro() && pe.getId_pob() == pob.getId()) {
+                        String[] filanueva = {String.valueOf(pe.getId_cli()), pe.getDni(), pe.getNombre(),
+                            pe.getApellido(), pe.getCorreo(), pe.getTelefono(), 
+                            pro.getNombre_pro(),
+                            pob.getNombre()};
+                        mTabla.addRow(filanueva);
+                    };
+                });
+            });
         });
     }
 
@@ -86,6 +105,7 @@ public class ControladorCliente {
             vista.getDigCamionero().setLocationRelativeTo(vista.getBtnCrear());
             vista.getDigCamionero().setSize(500, 400);
             vista.getDigCamionero().setTitle(title);
+            vista.getLabelSalarioCorreo().setText("CORREO:");
             vista.getDigCamionero().setVisible(true);
 
             if (vista.getDigCamionero().getName().equals("crear")) {
@@ -148,12 +168,38 @@ public class ControladorCliente {
             persona.setId_pob(poblacion);
             persona.setCorreo(correo);
 
-            if (persona.GrabaClienteDB()== null) {
-                JOptionPane.showMessageDialog(null, "SE HA CREADO AL CAMIONERO CON ÉXITO");
+            if (allowCreateEdit()) {
+                if (!persona.isRepeat()) {
+                    if (validateCorreo()) {
+                        if (persona.GrabaClienteDB() == null) {
+                            JOptionPane.showMessageDialog(null, "SE HA CREADO AL CAMIONERO CON ÉXITO");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL CAMIONERO");
+                        }
+                    }
+                } else {
+                    int a = JOptionPane.showConfirmDialog(null, "CÉDULA YA INGRESADA, ¿QUIERE REGISTRAR A ESTA PERSONA COMO CLIENTE?");
+                    if (a == 0) {
+                        if (!persona.isRepeatCli()) {
+                            if (validateCorreo()) {
+                                persona.setId(persona.getID());
+                                if (persona.RegistrarClienteDB() == null) {
+                                    JOptionPane.showMessageDialog(null, "LA PERSONA HA SIDO REGISTRADA COMO CLIENTE ANTERIORMENTE");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "NO SE HA PODIDO REGISTRAR A LA PERSONA");
+                                }
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "ERROR, LA PERSONA YA HA SIDO REGISTRADA COMO CLIENTE");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "SE HA CANCELADO EL REGISTRO COMO CLIENTE");
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL CAMIONERO");
-                JOptionPane.showMessageDialog(null, persona.GrabaClienteDB());
+                JOptionPane.showMessageDialog(null, "ASEGÚRESE QUE TODOS LOS CAMPOS ESTÉN LLENOS");
             }
+
         } else if (vista.getDigCamionero().getName().equals("editar")) {
             //EDITAR
             vista.getIdlbl().setText((String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 0))));
@@ -163,8 +209,8 @@ public class ControladorCliente {
             String apellido = vista.getTxtApellido().getText();
             String telefono = vista.getTxtTelefono().getText();
             String correo = vista.getTxtSalario().getText();
-            int direccion = vista.getTxtDireccion().getSelectedIndex()+1;
-            int poblacion = vista.getTxtPoblacion().getSelectedIndex()+1;
+            int direccion = vista.getTxtDireccion().getSelectedIndex() + 1;
+            int poblacion = vista.getTxtPoblacion().getSelectedIndex() + 1;
 
             persona.setId_cli(Integer.parseInt(id_cam));
             per.setId(modelo.getIdPer(Integer.parseInt(id_cam)));
@@ -175,34 +221,52 @@ public class ControladorCliente {
             persona.setCorreo(correo);
             per.setDireccion(direccion);
             per.setId_pob(poblacion);
-            
-            if (persona.EditClienteDB()== null && per.EditPersonaDB() == null) {
-                JOptionPane.showMessageDialog(null, "SE HA EDITADO AL CAMIONERO CON ÉXITO");
-                vista.getDigCamionero().dispose();
+
+            if (allowCreateEdit()) {
+                if (validateCorreo()) {
+                    if (persona.EditClienteDB() == null && per.EditPersonaDB() == null) {
+                        JOptionPane.showMessageDialog(null, "SE HA EDITADO AL CLIENTE CON ÉXITO");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR AL CLIENTE");
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR AL CAMIONERO");
-                vista.getDigCamionero().dispose();
+                JOptionPane.showMessageDialog(null, "ASEGÚRESE DE QUE TODOS LOS CAMPOS ESTÉN LLENOS");
             }
         }
+        closeAndClean();
         cargaClientes();
     }
 
     private void eliminarCamionero(JTable table) {
+        int a;
         ModeloCliente persona = new ModeloCliente();
         if (table.getSelectedRowCount() == 1) {
             persona.setId_cli(Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0)));
+            if (persona.allowDelete() == 0) {
+                a = JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR AL CLIENTE");
+                switch (a) {
+                    case 0:
+                        if (persona.DeletePhisicPerson() == null) {
+                            JOptionPane.showMessageDialog(null, "SE HA ELIMNADO A LA PERSONA CON ÉXITO");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "NO SE HA PODIDO ELIMINAR AL CLIENTE");
+                        }
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA ELIMINACION");
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE PUEDE ELIMINAR AL CLIENTE, EL CLIENTE SE ENCUENTRA RELACIONADO");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "NECESITA SELECCIONAR UNA FILA PRIMERO");
         }
-
-        if (persona.DeletePhisicPerson() == null) {
-            JOptionPane.showMessageDialog(null, "SE HA ELIMNADO A LA PERSONA CON ÉXITO");
-        } else {
-            JOptionPane.showMessageDialog(null, "NO SE HA PODIDO ELIMINAR A LA PERSONA");
-        }
+        cargaClientes();
     }
 
-    private void buscarCamionero() {
+    private void buscarCliente() {
         ModeloCliente persona = new ModeloCliente();
         persona.setDni(String.valueOf(vista.getTxtBuscar().getText()));
         List<Cliente> listap = persona.SearchListClientes();
@@ -259,5 +323,83 @@ public class ControladorCliente {
         listap.stream().forEach(pe -> {
             vista.getTxtPoblacion().addItem(new Poblacion(pe.getId(), pe.getNombre()));
         });
+    }
+
+    private void closeAndClean() {
+        vista.getIdlbl().setText("");
+        vista.getTxtDni().setText("");
+        vista.getTxtNombre().setText("");
+        vista.getTxtApellido().setText("");
+        vista.getTxtTelefono().setText("");
+        vista.getTxtSalario().setText("");
+        vista.getTxtPoblacion().setSelectedItem(null);
+        vista.getTxtDireccion().setSelectedItem(null);
+        vista.getDigCamionero().dispose();
+    }
+
+    private void cancellOperation() {
+        closeAndClean();
+    }
+
+    private void validateCamps() {
+        vista.getTxtDni().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (!Character.isDigit(key) || vista.getTxtDni().getText().length() >= 10) {
+                    evt.consume();
+                }
+            }
+        });
+
+        vista.getTxtNombre().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (Character.isDigit(key) || vista.getTxtNombre().getText().length() >= 50 || key == KeyEvent.VK_SPACE) {
+                    evt.consume();
+                }
+            }
+        });
+
+        vista.getTxtApellido().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (Character.isDigit(key) || vista.getTxtApellido().getText().length() >= 10 || key == KeyEvent.VK_SPACE) {
+                    evt.consume();
+                }
+            }
+        });
+
+        vista.getTxtTelefono().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (!Character.isDigit(key) || vista.getTxtTelefono().getText().length() >= 10) {
+                    evt.consume();
+                }
+            }
+        });
+    }
+
+    private boolean validateCorreo() {
+        boolean a = false;
+        String email = vista.getTxtSalario().getText();
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+            a = true;
+        } catch (AddressException ex) {
+            JOptionPane.showMessageDialog(null, "El correo ingresado no es válido o no existe");
+        }
+        return a;
+    }
+
+    public boolean allowCreateEdit() {
+        boolean a = (!vista.getTxtApellido().getText().isEmpty() && !vista.getTxtNombre().getText().isEmpty()
+                && !vista.getTxtTelefono().getText().isEmpty() && !vista.getTxtSalario().getText().isEmpty()
+                && vista.getTxtDireccion().getSelectedItem() != null && vista.getTxtPoblacion().getSelectedItem() != null);
+        return a;
     }
 }

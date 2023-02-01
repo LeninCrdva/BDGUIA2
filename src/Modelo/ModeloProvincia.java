@@ -31,7 +31,7 @@ public class ModeloProvincia extends Provincia{
             ConnectionG2 con=new ConnectionG2();
             try (ResultSet rs = con.Consulta(sql)) {
                 while (rs.next()) {
-                    Provincia pr=new Provincia(rs.getString("codigo_pro"),rs.getString("nombre_pro"));
+                    Provincia pr=new Provincia(rs.getInt(1),rs.getString("codigo_pro"),rs.getString("nombre_pro"));
                     lista.add(pr);
                 }
             }
@@ -44,7 +44,7 @@ public class ModeloProvincia extends Provincia{
     public List<Provincia> buscaProvincia(String nombre){
         try{
             List<Provincia> lista=new ArrayList<>();
-            String sql="SELECT codigo_pro,nombre_pro FROM PROVINCIA WHERE nombre_pro LIKE '%"+nombre+"%' OR codigo_pro LIKE '%"+nombre+"%' ORDER BY 1";
+            String sql="SELECT codigo_pro,nombre_pro FROM PROVINCIA WHERE UPPER(nombre_pro) LIKE UPPER('%"+nombre+"%') OR codigo_pro LIKE '%"+nombre+"%' ORDER BY 1";
             ConnectionG2 con=new ConnectionG2();
             try (ResultSet rs = con.Consulta(sql)) {
                 while (rs.next()) {

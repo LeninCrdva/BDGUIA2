@@ -8,6 +8,8 @@ import Modelo.ModeloProvincia;
 import Modelo.Poblacion;
 import Modelo.Provincia;
 import Vista.VistaPersona;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,17 +40,23 @@ public class ControladorCamionero {
         cargaCamioneros();
         cargarComboPoblacion();
         cargarComboProvincia();
+        validateCamps();
         vista.getBtnActualizar().addActionListener(l -> cargaCamioneros());
         vista.getBtnCrear().addActionListener(l -> abrirDialogo(1));
         vista.getBtnEditar().addActionListener(l -> abrirDialogo(2));
+        vista.getBtnEliminar().addActionListener(l -> eliminarCamionero(vista.getTblCamionero()));
         vista.getBtnAceptar().addActionListener(l -> crearEditarPersona());
         vista.getTxtBuscar().addActionListener(l -> buscarCamionero());
-        vista.getBtnCancelar().addActionListener(l -> vista.getDigCamionero().dispose());
+        vista.getBtnCancelar().addActionListener(l -> cancellOperation());
     }
 
     private void cargaCamioneros() {
         //Control para consultar a la BD/modelo y luego cargar en la vista
+        ModeloPoblacion mp = new ModeloPoblacion();
+        ModeloProvincia mpro = new ModeloProvincia();
         List<Camionero> listap = modelo.ListCamioneros();
+        List<Poblacion> listapob = mp.listaPoblacion();
+        List<Provincia> listapro = mpro.listaProvincia();
 
         DefaultTableModel mTabla;
         mTabla = new DefaultTableModel();
@@ -58,8 +66,17 @@ public class ControladorCamionero {
         vista.getTblCamionero().setModel(mTabla);
 
         listap.stream().forEach(pe -> {
-            String[] filanueva = {String.valueOf(pe.getId_ca()), pe.getDni(), pe.getNombre(), pe.getApellido(), String.valueOf(pe.getSalario()), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
-            mTabla.addRow(filanueva);
+            listapob.stream().forEach(pob -> {
+                listapro.stream().forEach(pro -> {
+                    if (pe.getDireccion() == pro.getId_pro() && pe.getId_pob() == pob.getId()) {
+                        String[] filanueva = {String.valueOf(pe.getId_ca()), pe.getDni(), pe.getNombre(),
+                            pe.getApellido(), String.valueOf(pe.getSalario()), pe.getTelefono(), 
+                            pro.getNombre_pro(),
+                            pob.getNombre()};
+                        mTabla.addRow(filanueva);
+                    };
+                });
+            });
         });
     }
 
@@ -147,11 +164,33 @@ public class ControladorCamionero {
             persona.setId_pob(poblacion);
             persona.setSalario(Double.parseDouble(salario));
 
-            if (persona.GrabaPersonaDB() == null) {
-                JOptionPane.showMessageDialog(null, "SE HA CREADO AL CAMIONERO CON ÉXITO");
+            if (allowCreateEdit()) {
+                if (!persona.isRepeat()) {
+                    if (persona.GrabaPersonaDB() == null) {
+                        JOptionPane.showMessageDialog(null, "SE HA CREADO AL CAMIONERO CON ÉXITO");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL CAMIONERO");
+                    }
+
+                } else {
+                    int a = JOptionPane.showConfirmDialog(null, "CÉDULA YA INGRESADA, ¿QUIERE REGISTRAR A ESTA PERSONA COMO CAMIONERO?");
+                    if (a == 0) {
+                        if (!persona.isRepeatCa()) {
+                            persona.setId(persona.getID());
+                            if (persona.RegistrarCamioneroDB() == null) {
+                                JOptionPane.showMessageDialog(null, "LA PERSONA HA SIDO REGISTRADA COMO CAMIONERO");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO REGISTRAR A LA PERSONA");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "ERROR, LA PERSONA YA HA SIDO REGISTRADA COMO CAMIONERO ANTERIORMENTE");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "SE HA CANCELADO EL REGISTRO COMO CAMIONERO");
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR EL CAMIONERO");
-                JOptionPane.showMessageDialog(null, persona.GrabaPersonaDB());
+                JOptionPane.showMessageDialog(null, "ASEGÚRESE QUE TODOS LOS CAMPOS ESTÉN LLENOS");
             }
         } else if (vista.getDigCamionero().getName().equals("editar")) {
             //EDITAR
@@ -162,8 +201,8 @@ public class ControladorCamionero {
             String apellido = vista.getTxtApellido().getText();
             String telefono = vista.getTxtTelefono().getText();
             String salario = vista.getTxtSalario().getText();
-            int direccion = vista.getTxtDireccion().getSelectedIndex()+1;
-            int poblacion = vista.getTxtPoblacion().getSelectedIndex()+1;
+            int direccion = vista.getTxtDireccion().getSelectedIndex() + 1;
+            int poblacion = vista.getTxtPoblacion().getSelectedIndex() + 1;
 
             persona.setId_ca(Integer.parseInt(id_cam));
             per.setId(modelo.getIdPer(Integer.parseInt(id_cam)));
@@ -174,36 +213,54 @@ public class ControladorCamionero {
             persona.setSalario(Double.parseDouble(salario));
             per.setDireccion(direccion);
             per.setId_pob(poblacion);
-            
-            if (persona.EditCamioneroDB() == null && per.EditPersonaDB() == null) {
-                JOptionPane.showMessageDialog(null, "SE HA EDITADO AL CAMIONERO CON ÉXITO");
-                vista.getDigCamionero().dispose();
+
+            if (allowCreateEdit()) {
+                if (persona.EditCamioneroDB() == null && per.EditPersonaDB() == null) {
+                    JOptionPane.showMessageDialog(null, "SE HA EDITADO AL CAMIONERO CON ÉXITO");
+                    vista.getDigCamionero().dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR AL CAMIONERO");
+                    vista.getDigCamionero().dispose();
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "NO SE HA PODIDO CREAR AL CAMIONERO");
-                vista.getDigCamionero().dispose();
+                JOptionPane.showMessageDialog(null, "ASEGÚRESE QUE TODOS LOS CAMPOS SE ENCUENTREN LLENOS");
             }
         }
+        closeAndClean();
         cargaCamioneros();
     }
 
     private void eliminarCamionero(JTable table) {
+        int a;
         ModeloCamionero persona = new ModeloCamionero();
         if (table.getSelectedRowCount() == 1) {
             persona.setId_ca(Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0)));
+            if (persona.allowDelete() == 0) {
+                a = JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR AL CLIENTE");
+                switch (a) {
+                    case 0:
+                        if (persona.DeletePhisicPerson() == null) {
+                            JOptionPane.showMessageDialog(null, "SE HA ELIMNADO A LA PERSONA CON ÉXITO");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "NO SE HA PODIDO ELIMINAR AL CLIENTE");
+                        }
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA ELIMINACION");
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE PUEDE ELIMINAR AL CLIENTE, EL CLIENTE SE ENCUENTRA RELACIONADO");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "NECESITA SELECCIONAR UNA FILA PRIMERO");
         }
-
-        if (persona.DeletePhisicPerson() == null) {
-            JOptionPane.showMessageDialog(null, "SE HA ELIMNADO A LA PERSONA CON ÉXITO");
-        } else {
-            JOptionPane.showMessageDialog(null, "NO SE HA PODIDO ELIMINAR A LA PERSONA");
-        }
+        cargaCamioneros();
     }
 
     private void buscarCamionero() {
         ModeloCamionero persona = new ModeloCamionero();
-        persona.setDni(String.valueOf(vista.getTxtBuscar().getText()));
+        persona.setDni(vista.getTxtBuscar().getText());
         List<Camionero> listap = persona.SearchListCamioneros();
 
         if (!listap.isEmpty()) {
@@ -236,6 +293,7 @@ public class ControladorCamionero {
             vista.getTxtTelefono().setText(String.valueOf(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 5)));
             vista.getTxtDireccion().setSelectedIndex(Integer.parseInt(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 6).toString()) - 1);
             vista.getTxtPoblacion().setSelectedIndex(Integer.parseInt(vista.getTblCamionero().getValueAt(vista.getTblCamionero().getSelectedRow(), 7).toString()) - 1);
+            table.clearSelection();
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA DE LA TABLA");
         }
@@ -258,5 +316,80 @@ public class ControladorCamionero {
         listap.stream().forEach(pe -> {
             vista.getTxtPoblacion().addItem(new Poblacion(pe.getId(), pe.getNombre()));
         });
+    }
+
+    private void closeAndClean() {
+        vista.getIdlbl().setText("");
+        vista.getTxtDni().setText("");
+        vista.getTxtNombre().setText("");
+        vista.getTxtApellido().setText("");
+        vista.getTxtTelefono().setText("");
+        vista.getTxtSalario().setText("");
+        vista.getTxtPoblacion().setSelectedItem(null);
+        vista.getTxtDireccion().setSelectedItem(null);
+        vista.getDigCamionero().dispose();
+    }
+
+    private void cancellOperation() {
+        closeAndClean();
+    }
+
+    private void validateCamps() {
+        vista.getTxtDni().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (!Character.isDigit(key) || vista.getTxtDni().getText().length() >= 10) {
+                    evt.consume();
+                }
+            }
+        });
+
+        vista.getTxtNombre().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (Character.isDigit(key) || vista.getTxtNombre().getText().length() >= 50 || key == KeyEvent.VK_SPACE) {
+                    evt.consume();
+                }
+            }
+        });
+
+        vista.getTxtApellido().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (Character.isDigit(key) || vista.getTxtApellido().getText().length() >= 50 || key == KeyEvent.VK_SPACE) {
+                    evt.consume();
+                }
+            }
+        });
+
+        vista.getTxtTelefono().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (!Character.isDigit(key) || vista.getTxtTelefono().getText().length() >= 10) {
+                    evt.consume();
+                }
+            }
+        });
+
+        vista.getTxtSalario().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char key = evt.getKeyChar();
+                if (!Character.isDigit(key) || (key == '.' && !vista.getTxtSalario().getText().contains("."))) {
+                    evt.consume();
+                }
+            }
+        });
+    }
+
+    public boolean allowCreateEdit() {
+        boolean a = (!vista.getTxtApellido().getText().isEmpty() && !vista.getTxtNombre().getText().isEmpty()
+                && !vista.getTxtTelefono().getText().isEmpty() && !vista.getTxtSalario().getText().isEmpty()
+                && vista.getTxtDireccion().getSelectedItem() != null && vista.getTxtPoblacion().getSelectedItem() != null);
+        return a;
     }
 }

@@ -5,9 +5,13 @@
  */
 package Controlador;
 
+import Modelo.Cliente;
 import Modelo.ConnectionG2;
+import Modelo.ModeloCliente;
 import Modelo.ModeloPaquete;
 import Modelo.Paquete;
+import Modelo.viaje_BD;
+import Modelo.viaje_MD;
 import Vista.VistaPaquete;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +45,23 @@ public class ControladorPaquete {
         vista.getBtnBuscar().addActionListener(l->buscarPaquete());
         vista.getBtnElegirEnvio().addActionListener(l->elegirEnvio());
         vista.getBtnElegirCliente().addActionListener(l->elegirCliente());
+        vista.getTblCliente().addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                clickTblCliente();
+            }
+        });
+        vista.getTblEnvio().addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                clickTblEnvio();
+            }
+        });
+        vista.getTxtBuscar().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt){
+                buscarPaquete();
+            }
+        });
+        vista.getBtnSalirCliente().addActionListener(l->vista.getDigSeleccionarCliente().dispose());
+        vista.getBtnSalirEnvio().addActionListener(l->vista.getDigSeleccionarEnvio().dispose());
     }
     private void cargaPaquete(){
         List<Paquete> lista=modelo.listaPaquete();
@@ -116,7 +137,14 @@ public class ControladorPaquete {
                 JOptionPane.showMessageDialog(null, "DEBE DE ELEGIR UN CLIENTE");
                 return;
             }
-            
+            try{
+                if (modelo.buscarPaquete(vista.getTxtCodigo().getText())==true) {
+                    JOptionPane.showMessageDialog(null, "YA EXISTE UN PAQUETE CON ESE CODIGO");
+                    return;
+                }
+            }catch (SQLException ex) {
+                Logger.getLogger(ModeloPaquete.class.getName()).log(Level.SEVERE, null, ex);
+            }
             new ModeloPaquete(vista.getTxtCodigo().getText(),vista.getTxtDescripcion().getText(),Integer.parseInt(vista.getTxtIdEnvio().getText()),Integer.parseInt(vista.getTxtIdCliente().getText())).grabarPaquete();
             cargaPaquete();
         }else{
@@ -188,6 +216,16 @@ public class ControladorPaquete {
         vista.getDigSeleccionarEnvio().setTitle("SELECCIONAR ENVIO");
         vista.getDigSeleccionarEnvio().setSize(600,600);
         vista.getDigSeleccionarEnvio().setLocationRelativeTo(vista);
+        viaje_BD modeloC=new viaje_BD();
+        List<viaje_MD> lista=modeloC.lista_viaje();
+        DefaultTableModel mTabla=(DefaultTableModel) vista.getTblEnvio().getModel();
+        mTabla.setNumRows(0);   
+        String[] columnas={"ID VIA", "ID CAMION", "ID CAMIONERO", "FECHA CONDUCCION"};
+        mTabla.setColumnIdentifiers(columnas);
+        lista.stream().forEach(pe->{
+            Object[] registro={pe.getVia(), pe.getCam(), pe.getCa(), pe.getFecha_conduccion()};
+            mTabla.addRow(registro);
+        });
         vista.getDigSeleccionarEnvio().setVisible(true);
         
     }
@@ -195,8 +233,24 @@ public class ControladorPaquete {
         vista.getDigSeleccionarCliente().setTitle("SELECCIONAR CLIENTE");
         vista.getDigSeleccionarCliente().setSize(600,600);
         vista.getDigSeleccionarCliente().setLocationRelativeTo(vista);
+        ModeloCliente modeloC=new ModeloCliente();
+        List<Cliente> lista=modeloC.ListClientes();
+        DefaultTableModel mTabla=(DefaultTableModel) vista.getTblCliente().getModel();
+        mTabla.setNumRows(0);   
+        String[] columnas={"ID CLIENTE", "DNI", "NOMBRE", "APELLIDO", "CORREO", "TELEFONO", "DIRECCION", "POBLACION"};
+        mTabla.setColumnIdentifiers(columnas);
+        lista.stream().forEach(pe->{
+            Object[] registro={String.valueOf(pe.getId_cli()), pe.getDni(), pe.getNombre(), pe.getApellido(), String.valueOf(pe.getCorreo()), pe.getTelefono(), String.valueOf(pe.getDireccion()), String.valueOf(pe.getId_pob())};
+            mTabla.addRow(registro);
+        });
         vista.getDigSeleccionarCliente().setVisible(true);
-        
     }
-    
+    private void clickTblCliente(){
+        vista.getTxtIdCliente().setText(vista.getTblCliente().getValueAt(vista.getTblCliente().getSelectedRow(), 0).toString());
+        vista.getDigSeleccionarCliente().dispose();
+    }
+    private void clickTblEnvio(){
+        vista.getTxtIdEnvio().setText(vista.getTblEnvio().getValueAt(vista.getTblEnvio().getSelectedRow(), 0).toString());
+        vista.getDigSeleccionarEnvio().dispose();
+    }
 }

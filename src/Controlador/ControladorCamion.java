@@ -103,7 +103,7 @@ public class ControladorCamion {
                 ActivaCampos();
                 vc.getTxtmatricula().setValue(null);
                 vc.getTxtmodelo().setText(null);
-                vc.getCmbtipocam().setSelectedIndex(0);
+                vc.getCmbtipocam().setSelectedIndex(-1);
                 iscorrect = true;
                 break;
             case 2:
