@@ -7,23 +7,9 @@ package Controlador;
 
 import Modelo.*;
 import Vista.*;
-import java.awt.Image;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +38,8 @@ public class C_viaje {
         cargarComboCamion();
         cargarComboCamionero();
         cargarComboProvincia();
+        formatDate();
+        vista.getCalendar_llegada().getCalendarButton().setEnabled(true);
         vista.getBtnActualizar().addActionListener(l -> cargar());
         vista.getBtnCrear().addActionListener(l -> crearViaje());
         vista.getBtnEditar().addActionListener(l -> editarViaje());
@@ -182,5 +170,14 @@ public class C_viaje {
         listap.stream().forEach(pe -> {
             vista.getCombo_provincio().addItem(new Provincia(pe.getCodigo_pro(), pe.getNombre_pro()));
         });
+    }
+    
+    private void formatDate(){
+        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+        vista.getCalendar_conduccion().setDateFormatString(date.toPattern());
+        vista.getCalendar_conduccion().setEnabled(false);
+        vista.getCalendar_conduccion().getCalendarButton().setEnabled(true);
+        vista.getCalendar_llegada().setDateFormatString(date.toPattern());
+        vista.getCalendar_llegada().setEnabled(false);
     }
 }

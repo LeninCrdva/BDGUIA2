@@ -78,9 +78,9 @@ public class viaje_BD extends viaje_MD{
     }
 
     public SQLException GrabaViajeDB() {
-        String sql = "INSERT INTO VIAJE (id_viaje, id_ca, id_cam, id_pro, fecha_conduccion, "
-                + "fecha_llegada) VALUES ('" + getVia()+ "','" + getCa()+ "',"
-                + "'" + getCam()+ "','" + getPro()+ "','" + getFecha_conduccion()+ "','"
+        String sql = "INSERT INTO VIAJE (id_via, id_ca, id_cam, id_pro, fecha_conduccion, "
+                + "fecha_llegada) VALUES (" + getVia()+ "," + getCa()+ ","
+                + getCam()+ "," + getPro()+ ",'" + getFecha_conduccion()+ "','"
                 + getFecha_llegada()+ "')"; //REVISAR EL INSERT 
 
         ConnectionG2 con = new ConnectionG2();
