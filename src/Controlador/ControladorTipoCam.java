@@ -25,7 +25,6 @@ public class ControladorTipoCam {
         vtp.getBtncreartip().addActionListener(l -> AbrirDialogo(1));
         vtp.getBtneditartip().addActionListener(l -> AbrirDialogo(2));
         vtp.getBtneditartip().addActionListener(l -> mtp.ObtieneIdConsulta(vtp.getTxtnombretip().getText()));
-        vtp.getBtneditartip().addActionListener(l -> nana());
         vtp.getBtneliminartip().addActionListener(l -> AbrirDialogo(3));
         vtp.getBtnaceptartip().addActionListener(l -> CrearEditarEliminarTipoCam());
         vtp.getBtncanceltip().addActionListener(l -> vtp.getDlgCrudTip().setVisible(false));
@@ -43,9 +42,7 @@ public class ControladorTipoCam {
         });
     }
     
-    public void nana(){
-        System.out.println(vtp.getTxtnombretip().getText());
-    }
+
     
     public void ValidaCampotxt(java.awt.event.KeyEvent e) {
         char key = e.getKeyChar();

@@ -205,7 +205,6 @@ public class ControladorCamion {
         if (id_cam >= 1) {
             id_cam++;
         } else {
-            System.out.println("No se encontró ningún registro");
         }
         return id_cam;
     }
@@ -216,9 +215,7 @@ public class ControladorCamion {
         if (id_tip >= 1) {
             id_tip++;
         } else {
-            System.out.println("Una falla aquí");
-        }
-            
+        }            
         return id_tip;
     }
     //Permite usar la creación del Diálogo de Tipos
@@ -330,9 +327,7 @@ public class ControladorCamion {
                         int id_cam = mc.ObtieneID(matricula);
                         int id_tip = vc.getCmbtipocam().getItemAt(vc.getCmbtipocam().getSelectedIndex()).getId_tip();
                         Double potencia = Double.parseDouble(vc.getSpnpotencia().getValue().toString());
-                        System.out.println(matricula);
                         if (matricula.equalsIgnoreCase(vc.getTxtmatricula().getText().trim())) {
-                            System.out.println(id_cam);
                             ModeloCamion camion = new ModeloCamion();
                             camion.setMatricula_cam(matricula);
                             camion.setModelo_cam(modelo);
@@ -347,10 +342,7 @@ public class ControladorCamion {
                             }
                         } else {
                             if (mc.ObtieneMatricula(matricula)) {
-                                System.out.println("Repetido");
                             } else {
-                                System.out.println("pasa por aquí");
-                                System.out.println(id_cam);
                                 ModeloCamion camion = new ModeloCamion();
                                 camion.setMatricula_cam(matricula);
                                 camion.setModelo_cam(modelo);
